@@ -6,7 +6,6 @@ const models = require('../database/models.js');
 const csv = require('csv-parser')
 const fs = require('fs')
 const formidable = require('express-formidable');
-const { parseData } = require('./parseData.js');
 
 app.use(express.static('client/dist'));
 app.use(express.json());
