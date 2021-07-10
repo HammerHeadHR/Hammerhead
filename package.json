@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/HammerHeadHR/Hammerhead#readme",
   "dependencies": {
+    "axios": "^0.21.1",
+    "babel-loader": "^8.2.2",
     "express": "^4.17.1",
     "nodemon": "^2.0.11",
     "pg": "^8.6.0",
