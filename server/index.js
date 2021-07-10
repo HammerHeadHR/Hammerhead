@@ -1,49 +1,39 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const client = require('../database')
-const models = require('../database/models.js')
+const client = require('../database');
+const models = require('../database/models.js');
+const csv = require('csv-parser')
+const fs = require('fs')
+const formidable = require('express-formidable');
+const { parseData } = require('./parseData.js');
 
 app.use(express.static('client/dist'));
-
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use('/dataset', formidable());
 
-app.post('/dataset', async (req, res) => {
+app.post('/dataset', (req, res) => {
 
-  var body = Object.keys(req.body)[0];
-  var arr = body.split('\r\n');
-  var keys = arr[0].split(';');
-  var data = [];
-  for (var i = 1; i < arr.length; i++) {
-    var line = arr[i].split(';');
-    var obj = {};
-    for (var j = 0; j < line.length; j++) {
-      if (line[j]) {
-        obj[keys[j]] = line[j];
-      }
-    }
-    if (obj[keys[0]] !== undefined) {
-      data.push(obj);
-    }
-  }
+  const results = [];
+  let key = Object.keys(req.files)[0];
+  let path = req.files[key].path;
+  let dataName = req.fields.name;
 
-  // console.log(data)
-
-  await models.addDataset(data, 'bitcoin');
-
-  res.end();
+  fs.createReadStream(path)
+  .pipe(csv({ separator: ';' }))
+  .on('data', (data) => results.push(data))
+  .on('end', async () => {
+    let dbRes = await models.addDataset(results, dataName);
+    res.send(dbRes);
+  });
 
 });
 
-app.get('/dataset', async (req, res) => {
-
+app.get('/dataset/', async (req, res) => {
   let dataName = req.query.name;
-
   let dbRes = await models.getDataset(dataName);
-
   res.json(dbRes.rows[0].data);
-
 })
 
 app.listen(port, () => {
