@@ -65,6 +65,7 @@ module.exports = {
       "salary" : 20000,
       "password" : "abc123",
       "admin" : false
+
     },
   ]
 };
