@@ -9,8 +9,8 @@ const AddEmployee = () => {
       <input id="newUserUsername"type="text" name="username"/>
       <label htmlFor="password">Employee's Temporary Password:</label>
       <input id="newUserPassword" type="password" name="password"/>
-      <label htmlFor="salary">Employee's Salary:</label>
-      <input id="newUserSalary" type="text" name="salary"/>
+      <label htmlFor="isAdmin">Make admin?</label>
+      <input type="checkbox" id="isAdmin" name="isAdmin"/>
     </div>
   );
 
