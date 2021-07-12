@@ -7,6 +7,7 @@ import axios from 'axios';
 const EmployeeList = ({ employees, setEmployees }) => {
 
   const [addEmployee, setAddEmployee] = useState(false);
+  const [editEmployee, setEditEmployee] = useState(false);
 
   const addNewEmployee = () => {
     if (!addEmployee) return setAddEmployee(true);
@@ -39,12 +40,15 @@ const EmployeeList = ({ employees, setEmployees }) => {
   return (
     <div>
       <h3>Employees</h3>
-      {addEmployee ?
+      {editEmployee ?
+        <EditEmployeeForm editEmployee={setEditEmployee}/>
+        :
+      addEmployee ?
           <AddEmployeeForm />
         :
-          employees.map(employee => <Employee employee={employee} setEmployees={setEmployees}/>)
+          employees.map(employee => <Employee employee={employee} setEmployees={setEmployees} editEmployee={setEditEmployee}/>)
       }
-      <button onClick={addNewEmployee}>Add Employee</button>
+      {!editEmployee ? <button onClick={addNewEmployee}>Add Employee</button> : null}
     </div>
   );
 
