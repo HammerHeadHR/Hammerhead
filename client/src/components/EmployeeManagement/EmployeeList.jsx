@@ -8,6 +8,7 @@ const EmployeeList = ({ employees, setEmployees }) => {
 
   const [addEmployee, setAddEmployee] = useState(false);
   const [editEmployee, setEditEmployee] = useState(false);
+  const [employeeToEdit, setEmployeeToEdit] = useState(null);
 
   const addNewEmployee = () => {
     if (!addEmployee) return setAddEmployee(true);
@@ -31,24 +32,36 @@ const EmployeeList = ({ employees, setEmployees }) => {
     setAddEmployee(false);
   }
 
-  // const updateEmployeeInfo = (employee) => {
-  //   axios.put('/user', employee)
-  //     .then(response => console.log('update employee response: ', response))
-  //     .catch(error => console.error(error));
-  // };
+  const updateEmployeeInfo = (employee) => {
+    // axios.put('/user', employee)
+    //   .then(response => console.log('update employee response: ', response))
+    //   .catch(error => console.error(error));
+    showEditForm();
+  };
+
+  const showEditForm = (employee) => {
+    if (!editEmployee) {
+      setEditEmployee(true);
+      setEmployeeToEdit(employee);
+    } else {
+      setEditEmployee(false);
+      setEmployeeToEdit(null);
+    }
+  }
 
   return (
     <div>
       <h3>Employees</h3>
       {editEmployee ?
-        <EditEmployeeForm editEmployee={setEditEmployee}/>
+        <EditEmployeeForm employee={employeeToEdit} editEmployee={showEditForm} updateEmployee={updateEmployeeInfo}/>
         :
       addEmployee ?
           <AddEmployeeForm />
         :
-          employees.map(employee => <Employee employee={employee} setEmployees={setEmployees} editEmployee={setEditEmployee}/>)
+          employees.map(employee => <Employee employee={employee} setEmployees={setEmployees} editEmployee={showEditForm}/>)
       }
       {!editEmployee ? <button onClick={addNewEmployee}>Add Employee</button> : null}
+      {addEmployee ? <button onClick={() => setAddEmployee(false)}>Cancel</button> : null}
     </div>
   );
 
