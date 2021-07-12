@@ -4,7 +4,9 @@ const ImportData = () => {
 
   return (
     <div>
-      Import CSV Page Here
+      <CSVUpload />
+      <Graph />
+      <Submit />
     </div>
   );
 

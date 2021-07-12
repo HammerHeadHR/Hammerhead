@@ -2,6 +2,13 @@ import React, {useState, useEffect} from 'React';
 import { BarChart, Bar, Cell, AreaChart, Area, LineChart, Line, Legend, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 
+const DynamicGraphWrapper = (data) => {
+  return (
+    
+  )
+}
+
+
 
 const Graph = ({data, xAxis, keys}) => {
   // console.log(data.prices);
@@ -36,7 +43,7 @@ const Graph = ({data, xAxis, keys}) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey={keys[2]} stroke="#8884d8" activeDot={{ r: 8 }} />
+          {keys.map(key => { return <Line type="monotone" dataKey={keys[2]} stroke="#8884d8" activeDot={{ r: 8 }} /> })}
         </LineChart>
       </ResponsiveContainer>
     );
