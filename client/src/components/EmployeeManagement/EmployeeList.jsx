@@ -10,12 +10,11 @@ const EmployeeList = ({ employees, setEmployees }) => {
     if (!addEmployee) return setAddEmployee(prev => !prev);
     const employeeUsername = document.querySelector('#newUserUsername').value;
     const employeePassword = document.querySelector('#newUserPassword').value;
-    const employeeSalary = document.querySelector('#newUserSalary').value;
+    const isAdmin = document.querySelector('#isAdmin').checked;
     const newEmployee = {
       "name" : employeeUsername,
-      "salary" : Number(employeeSalary),
       "password" : employeePassword,
-      "admin" : false
+      "admin" : isAdmin
     }
     setEmployees(prev => [...prev, newEmployee]);
     setAddEmployee(prev => !prev);
