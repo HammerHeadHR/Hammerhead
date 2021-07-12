@@ -1,19 +1,19 @@
 module.exports = {
   "managers" : [
     {
-      "name" : "Ruby",
+      "name" : "Ruby Williams",
       "team" : "Agriculture"
     },
     {
-      "name" : "Samantha",
+      "name" : "Samantha Daggerton",
       "team" : "FinTech"
     },
     {
-      "name" : "Hilary",
+      "name" : "Hilary Newman",
       "team" : "Retails"
     },
     {
-      "name" : "Bob",
+      "name" : "Bob Franklin",
       "team" : "Healthcare"
     }
   ]

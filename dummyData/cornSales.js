@@ -1,7 +1,7 @@
 module.exports = {
   "title" : "Corn Sales",
   "category" : "Agriculture",
-  "data" : [
+  "datapoints" : [
     {
       "year" : "2010",
       "sales" : 6800000
