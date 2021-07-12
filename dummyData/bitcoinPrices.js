@@ -1,6 +1,7 @@
 module.exports = {
   "title" : "Bitcoin Price",
   "category" : "Finance",
+  "owner" : "Thomas",
   "datapoints" : [
     {
       "year" : "2012",
