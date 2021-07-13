@@ -14,12 +14,12 @@ const LoginForm = () => {
 
   return (
     <div>
-      <form >
+      <form>
         <label htmlFor="username">Username:</label>
-        <input type="text" name="username" id="username"/>
+        <input id='username' type="text" name="username"/>
         <label htmlFor="password">Password:</label>
-        <input type="password" name="password" id="password"/>
-        <input type="submit" value="Log In"/>
+        <input id='password' type="password" name="password"/>
+        <input type="submit" value="Log In" onClick={login}/>
       </form>
     </div>
   );

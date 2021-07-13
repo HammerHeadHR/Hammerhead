@@ -6,7 +6,8 @@ const addNote = async (datasetId, ownerId, body) => {
     INSERT INTO notes
       (dataset_id, owner_id, body)
     VALUES
-      ($1, $2, $3);
+      ($1, $2, $3)
+    RETURNING id;
   `;
 
   let dbRes = await client.query(sql, args);

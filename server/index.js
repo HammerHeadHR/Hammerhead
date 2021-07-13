@@ -10,6 +10,7 @@ const teamRoutes = require('./routes/teams.js');
 const datasetRoutes = require('./routes/datasets.js');
 const noteRoutes = require('./routes/notes.js');
 const notificationRoutes = require('./routes/notifications.js');
+const loginRoutes = require('./routes/login.js');
 
 app.use(express.static('client/dist'));
 app.use(express.json());
@@ -25,6 +26,8 @@ app.use('/datasets', datasetRoutes);
 app.use('/notes', noteRoutes);
 
 app.use('/notifications', notificationRoutes);
+
+app.use('/login', loginRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

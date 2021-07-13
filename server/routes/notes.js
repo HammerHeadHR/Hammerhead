@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
   try {
     let dbRes = await addNote(datasetId, ownerId, body);
     if (dbRes.rowCount === 1) {
-      res.status(201).send('Added note');
+      res.status(201).send(dbRes.rows[0]);
     } else {
       res.status(500).send('Add note failed');
     }
