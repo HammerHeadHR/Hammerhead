@@ -1,10 +1,14 @@
 import React from 'react';
+import DynamicGraphWrapper from '../SharedComponents/Graph.jsx';
 
-const ImportData = () => {
+
+const ImportData = ({data}) => {
 
   return (
     <div>
-      Import CSV Page Here
+      {/* <CSVUpload /> */}
+      <DynamicGraphWrapper data={data}/>
+      {/* <Submit /> */}
     </div>
   );
 

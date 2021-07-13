@@ -9,6 +9,7 @@ import HomeBar from '../HomeBar/index.jsx';
 
 import { managers } from '../../../../dummyData/managers.js';
 import { employees } from '../../../../dummyData/employees.js';
+import { datapoints } from '../../../../dummyData/bitcoinPrices.js';
 
 const Dashboard = () => {
 
@@ -25,7 +26,7 @@ const Dashboard = () => {
             <DataCharts />
           </Route>
           <Route path="/create-chart">
-            <ImportData />
+            <ImportData data={datapoints}/>
           </Route>
           <Route path="/admin-tables">
             <AdminTables />
