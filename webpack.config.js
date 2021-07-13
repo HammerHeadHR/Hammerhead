@@ -20,8 +20,5 @@ module.exports = {
         }
       }
     ]
-  },
-  node: {
-    crypto: false,
   }
 };
