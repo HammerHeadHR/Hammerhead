@@ -7,6 +7,7 @@ const addNotification = async (senderId, receiverId, datasetId) => {
       (sender_id, receiver_id, dataset_id)
     VALUES
       ($1, $2, $3)
+    RETURNING id;
   `;
 
   let dbRes = await client.query(sql, args);
