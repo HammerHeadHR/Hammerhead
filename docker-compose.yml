@@ -15,7 +15,7 @@ services:
 
   blueOcean-server:
     image: node:12-alpine
-    command: sh -c "npm install && npm start"
+    command: sh -c "npm install && npm run build && npm start"
     working_dir: /home/app
     volumes:
       - ./:/home/app
