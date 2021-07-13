@@ -7,6 +7,7 @@ const addTeam = async (name) => {
     INSERT INTO teams (name)
     VALUES ($1)
     ON CONFLICT (name) DO NOTHING
+    RETURNING id;
   `;
 
   let dbRes = await client.query(sql, args);

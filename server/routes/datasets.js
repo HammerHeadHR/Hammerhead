@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
       try {
         let dbRes = await addDataset(results, title, ownerId, teamId);
         if (dbRes.rowCount === 1) {
-          res.status(201).send('Added dataset');
+          res.status(201).send(dbRes.rows[0]);
         } else {
           res.status(400).send('Add dataset failed');
         }
@@ -64,7 +64,7 @@ router.put('/', (req, res) => {
       try {
         let dbRes = await updateDataset(datasetId, results, title, owner);
         if (dbRes.rowCount === 1) {
-          res.status(201).send('Updated dataset');
+          res.status(201).send(dbRes.rows);
         } else {
           res.status(400).send('Update dataset failed');
         }
