@@ -1,10 +1,13 @@
 import React from 'react';
+import Alert from './Alert.jsx';
+import Avatar from './Avatar.jsx';
 
 const HomeBar = () => {
 
   return (
     <div>
-      HomeBar
+      <Alert />
+      <Avatar />
     </div>
   );
 
