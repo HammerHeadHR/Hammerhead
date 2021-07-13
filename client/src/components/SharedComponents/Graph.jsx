@@ -1,31 +1,38 @@
-import React, {useState, useEffect} from 'React';
+import React, {useState, useEffect} from 'react';
 import { BarChart, Bar, Cell, AreaChart, Area, LineChart, Line, Legend, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 
 
-const GraphKey = ({propertyName}) => {
-  const [current, setCurrent] = useState('');
+const GraphKey = ({propertyName, addData, deleteData, addToColorKey}) => {
+  const [isData, setIsData] = useState(false);
   const [color, setColor] = useState('');
 
   const handleChange = (e) => {
-    console.log(e.target.name);
+    if (!isData) {
+      addData(propertyName);
+    } else {
+      deleteData(propertyName);
+    }
+    setIsData(!isData);
   };
+
+  const handleColorChange = (e) => {
+    addToColorKey(propertyName, e.target.value);
+  }
 
   return (
     <>
       <p>{propertyName}</p>
-      <label>X Axis</label>
-      <input type="radio" name="xAxis" onChange={handleChange}></input>
       <label>Rendered Data</label>
-      <input type="radio" name="data" onChange={handleChange}></input>
-      {current === 'data' ? <input type="color"></input> : null}
+      <input type="checkbox" name="graph-placement" value="data" onChange={handleChange}></input>
+      {isData ? <input type="color" onChange={handleColorChange}></input> : null}
     </>
   )
 };
 
 
 
-const Graph = ({data, xAxis, keys}) => {
+const Graph = ({data, xAxis, keys, colorKey}) => {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -45,7 +52,7 @@ const Graph = ({data, xAxis, keys}) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        {keys.map(key => { return <Line type="monotone" dataKey={key} stroke="#8884d8" activeDot={{ r: 8 }} /> })}
+        {keys.map((key, i) => { return <Line key={i} type="monotone" dataKey={key} stroke={colorKey[key]} activeDot={{ r: 8 }} /> })}
       </LineChart>
     </ResponsiveContainer>
   );
@@ -53,25 +60,56 @@ const Graph = ({data, xAxis, keys}) => {
 
 const DynamicGraphWrapper = ({data}) => {
 
-
-  const [xAxis, setXAxis] = useState('year');
-  const [keys, setKeys] = useState(['price']);
+  const [xAxis, setXAxis] = useState('');
+  const [keys, setKeys] = useState(['']);
   const [dataKeys, setDataKeys] = useState([]);
+  const [colorKey, setColorKey] = useState({});
 
 
-  for (let key in data[0]) {
-    setDataKeys(prev => {
-      return [...prev, key];
-    })
+  useEffect(() => {
+    let result = [];
+    for (let key in data[0]) {
+      result.push(key);
+    }
+    setDataKeys(result);
+    setXAxis(result[0]);
+
+    let resultCopy = result.slice(0);
+    setKeys(resultCopy.splice(1));
+    setColorKey({[result[1]]: '#843592'})
+
+  }, []);
+
+
+  const addData = (name) => {
+    if (!keys.includes(name)) {
+      setKeys([...keys, name]);
+    }
+  }
+
+  const deleteData = (name) => {
+    let index = keys.indexOf(name);
+    let keysCopy = keys.slice(0);
+    console.log(keysCopy.splice(index, 1));
+    keysCopy.splice(index, 1);
+    setKeys(keysCopy);
+  }
+
+  const addToColorKey = (name, color) => {
+    let tempColorKey = {
+      ...colorKey
+    };
+    tempColorKey[name] = color;
+    setColorKey(tempColorKey);
   }
 
   return (
     <div>
       <div>
-        {dataKeys.map((property, i) => { return <GraphKey propertyName={property} key={i}/>})}
+        {dataKeys.map((property, i) => { return <GraphKey propertyName={property} key={i} addData={addData} deleteData={deleteData} addToColorKey={addToColorKey}/>})}
       </div>
-      <div style={{height: '40vh', width: '30vw'}}>
-        <Graph xAxis={dataKeys[0]} keys={dataKeys.slice(1)} data={data}/>
+      <div style={{height: '50vh', width: '30vw'}}>
+        {dataKeys.length ? <Graph xAxis={xAxis} keys={keys} data={data} colorKey={colorKey}/> : null}
       </div>
     </div>
   )
