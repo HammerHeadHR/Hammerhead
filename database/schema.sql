@@ -103,7 +103,6 @@ INSERT INTO notes (dataset_id, owner_id, body) VALUES (3, 10, 'Another fantastic
 INSERT INTO notes (dataset_id, owner_id, body) VALUES (4, 11, 'My name is Thomas.');
 INSERT INTO notes (dataset_id, owner_id, body) VALUES (4, 12, 'You should all work harder!');
 
-
 INSERT INTO notifications (sender_id, receiver_id, dataset_id) VALUES (1, 3, 1);
 INSERT INTO notifications (sender_id, receiver_id, dataset_id) VALUES (1, 3, 1);
 INSERT INTO notifications (sender_id, receiver_id, dataset_id) VALUES (2, 4, 2);
