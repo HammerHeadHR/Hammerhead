@@ -14,7 +14,6 @@ const EditEmployeeForm = ({ employee, editEmployee, updateEmployee, teams }) => 
     setUpdatedInfo(prev => {
       let newDeets = {...prev};
       newDeets[event.target.id] = event.target.value;
-      console.log(newDeets);
       return newDeets;
     });
   };
@@ -32,8 +31,8 @@ const EditEmployeeForm = ({ employee, editEmployee, updateEmployee, teams }) => 
       let newDeets = {...prev};
       newDeets.team = event.target.value;
       return newDeets;
-    })
-  }
+    });
+  };
 
   return (
     <div>

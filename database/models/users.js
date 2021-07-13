@@ -52,7 +52,7 @@ const deleteUser = async (userId) => {
   const sql = `
   UPDATE users
   SET
-    active = false
+    active = NOT active
   WHERE users.id = $1;
   `;
 
