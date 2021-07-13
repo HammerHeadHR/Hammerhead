@@ -55,3 +55,59 @@ CREATE TABLE notifications (
 ALTER TABLE notifications ADD CONSTRAINT notifications_sender_id_fkey FOREIGN KEY (sender_id) REFERENCES users(id);
 ALTER TABLE notifications ADD CONSTRAINT notifications_receiver_id_fkey FOREIGN KEY (receiver_id) REFERENCES users(id);
 ALTER TABLE notifications ADD CONSTRAINT notifications_dataset_id_fkey FOREIGN KEY (dataset_id) REFERENCES datasets(id);
+
+
+INSERT INTO teams (name) VALUES ('Agriculture');
+INSERT INTO teams (name) VALUES ('Crypto');
+INSERT INTO teams (name) VALUES ('Admin');
+
+
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('AlfredSmith', 1, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('BobFranklin', 2, 'password', true);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('RachelJones', 1, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('SamanthDaggerton', 2, 'password', true);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('IanJenkins', 1, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('WebsterMcClaren', 1, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('JayRobertson', 2, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('HilaryNewman', 1, 'password', true);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('RubyWilliams', 2, 'password', true);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('JosephWright', 1, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('ThomasPhillips', 2, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('RaymondRaymonds', 2, 'password', true);
+
+INSERT INTO datasets
+  (title, datapoints, owner_id, team_id)
+VALUES
+  ('Soybeans', '[{"Year":"2011","Bushels (Billion)":"3.1"},{"Year":"2012","Bushels (Billion)":"3.04"},{"Year":"2013","Bushels (Billion)":"3.36"},{"Year":"2014","Bushels (Billion)":"3.93"},{"Year":"2015","Bushels (Billion)":"3.93"},{"Year":"2016","Bushels (Billion)":"4.3"},{"Year":"2017","Bushels (Billion)":"4.41"},{"Year":"2018","Bushels (Billion)":"4.43"},{"Year":"2019","Bushels (Billion)":"3.55"},{"Year":"2020","Bushels (Billion)":"4.14"}]', 1, 1);
+
+INSERT INTO datasets
+  (title, datapoints, owner_id, team_id)
+VALUES
+  ('Bitcoin', '[{"Year":"2012","Bitcoin Price ($)":"5.27"},{"Year":"2013","Bitcoin Price ($)":"13.3"},{"Year":"2014","Bitcoin Price ($)":"770.44"},{"Year":"2015","Bitcoin Price ($)":"313.92"},{"Year":"2016","Bitcoin Price ($)":"434.46"},{"Year":"2017","Bitcoin Price ($)":"997.69"},{"Year":"2018","Bitcoin Price ($)":"13412.44"},{"Year":"2019","Bitcoin Price ($)":"3869.47"},{"Year":"2020","Bitcoin Price ($)":"7188.46"},{"Year":"2021","Bitcoin Price ($)":"29391.78"}]', 2, 2);
+
+INSERT INTO datasets
+  (title, datapoints, owner_id, team_id)
+VALUES
+  ('Employees', '[{"Employee":"Alfred Smith","Salary":"45000"},{"Employee":"Bob Franklin","Salary":"65000"},{"Employee":"Rachel Jones","Salary":"63000"},{"Employee":"Samantha Daggerton","Salary":"70000"},{"Employee":"Ian Jenkins","Salary":"65000"},{"Employee":"Webster McClaren","Salary":"58000"},{"Employee":"Jay Robertson","Salary":"61000"},{"Employee":"Hilary Newman","Salary":"68000"},{"Employee":"Ruby Williams","Salary":"90000"},{"Employee":"Joseph Wright","Salary":"54000"},{"Employee":"Thomas Phillips","Salary":"20000"}]', 12, 3);
+
+INSERT INTO datasets
+  (title, datapoints, owner_id, team_id)
+VALUES
+  ('Managers', '[{"Research Field":"Agriculture","Team Lead":"Ruby"},{"Research Field":"FinTech","Team Lead":"Samantha"},{"Research Field":"Retail","Team Lead":"Hilary"},{"Research Field":"Healthcare","Team Lead":"Bob"}]', 12, 3);
+
+INSERT INTO notes (dataset_id, owner_id, body) VALUES (1, 12, 'Love this chart!');
+INSERT INTO notes (dataset_id, owner_id, body) VALUES (1, 1, 'Soybeans rock!');
+INSERT INTO notes (dataset_id, owner_id, body) VALUES (2, 3, 'Nice chart!');
+INSERT INTO notes (dataset_id, owner_id, body) VALUES (2, 4, 'Bitcoin prices are directly related to increase in soybean sales.');
+INSERT INTO notes (dataset_id, owner_id, body) VALUES (3, 7, 'I want a raise!');
+INSERT INTO notes (dataset_id, owner_id, body) VALUES (3, 10, 'Another fantastic chart.');
+INSERT INTO notes (dataset_id, owner_id, body) VALUES (4, 11, 'My name is Thomas.');
+INSERT INTO notes (dataset_id, owner_id, body) VALUES (4, 12, 'You should all work harder!');
+
+
+INSERT INTO notifications (sender_id, receiver_id, dataset_id) VALUES (1, 3, 1);
+INSERT INTO notifications (sender_id, receiver_id, dataset_id) VALUES (1, 3, 1);
+INSERT INTO notifications (sender_id, receiver_id, dataset_id) VALUES (2, 4, 2);
+INSERT INTO notifications (sender_id, receiver_id, dataset_id) VALUES (2, 4, 2);
+INSERT INTO notifications (sender_id, receiver_id, dataset_id) VALUES (12, 2, 3);
+INSERT INTO notifications (sender_id, receiver_id, dataset_id) VALUES (12, 4, 3);

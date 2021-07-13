@@ -1,12 +1,12 @@
-Employee;Salary
-Alfred Smith;45000
-Bob Franklin;65000
-Rachel Jones;63000
-Samantha Daggerton;70000
-Ian Jenkins;65000
-Webster McClaren;58000
-Jay Robertson;61000
-Hilary Newman;68000
-Ruby Williams;90000
-Joseph Wright;54000
-Thomas Phillips;20000
+Employee,Salary
+Alfred Smith,45000
+Bob Franklin,65000
+Rachel Jones,63000
+Samantha Daggerton,70000
+Ian Jenkins,65000
+Webster McClaren,58000
+Jay Robertson,61000
+Hilary Newman,68000
+Ruby Williams,90000
+Joseph Wright,54000
+Thomas Phillips,20000
