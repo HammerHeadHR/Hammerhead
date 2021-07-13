@@ -25,13 +25,14 @@ const styles = {
   section: {
     height: '500px',
     backgroundColor: 'rgb(211, 225, 227)',
-    padding: '20px'
+    padding: '20px',
+    borderRadius: '0 0 15px 15px '
   },
   result: {
     backgroundColor: 'white',
     width: '96%',
     margin: '10px auto',
-    borderRadius: '5px',
+    borderRadius: '15px',
     height: '80px'
   },
   info: {
@@ -54,33 +55,41 @@ const DataCharts = () => {
     title: 'Corn prices over time',
     author: 'Thomas Johnson',
     dates: '03/16/20-03/16/21',
-    team: 'Agriculture'
+    team: 'Agriculture',
+    id: 1
   }, {
     title: 'Corn prices over bitcoins',
     author: 'Thomas Johnson',
     dates: '03/16/21-01/16/21',
-    team: 'Agriculture'
+    team: 'Agriculture',
+    id: 1
   }
   ]);
+
+  const generateCharts = () => {
+    var numbo = 0;
+    return results.map((result) => {
+      numbo++;
+      return (
+        <div key={result+numbo} style={styles.result}>
+          <div style={styles.interiorDiv}>
+            <h3 key={result.title}>{result.title}</h3>
+            <p>{result.author}</p>
+          </div>
+          <div style={styles.interiorDiv}>
+            <p>{result.dates}</p>
+            <p>{result.team}</p>
+          </div>
+        </div>
+      )
+    })
+  }
 
   return (
     <div style={styles.container}>
       <SortBar setResults={setResults} />
       <section style={styles.section}>
-        {results.map((result) => {
-          return (
-            <div style={styles.result}>
-              <div style={styles.interiorDiv}>
-                <h3>{result.title}</h3>
-                <p>{result.author}</p>
-              </div>
-              <div style={styles.interiorDiv}>
-                <p>{result.dates}</p>
-                <p>{result.team}</p>
-              </div>
-            </div>
-          )
-        })}
+        {generateCharts()}
 
       </section>
 
