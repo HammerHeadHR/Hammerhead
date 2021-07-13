@@ -1,13 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const { createHash, createRandom32String } = require('../hashUtil.js');
 const { addUser, updateUser, updatePassword, deleteUser, getUsers } = require('../../database/models/users.js');
 
 router.post('/create', async (req, res) => {
   let { username, password, team, admin } = req.body;
+
+  let salt = createRandom32String();
+  let hashed = createHash(password, salt);
+
   try {
-    let dbRes = await addUser(username, team, password, admin);
+    let dbRes = await addUser(username, team, hashed, salt, admin);
     if (dbRes.rowCount === 1) {
-      res.status(201).send('Added user');
+      res.status(201).send(dbRes.rows[0]);
     } else {
       res.status(500).send('Add user failed');
     }
@@ -22,7 +27,7 @@ router.put('/update', async (req, res) => {
   try {
     let dbRes = await updateUser(userId, username, team, password, admin);
     if (dbRes.rowCount === 1) {
-      res.status(201).send('Updated user');
+      res.status(201).send(dbRes.rows[0]);
     } else {
       res.status(500).send('Update user failed');
     }
@@ -36,7 +41,7 @@ router.put('/password', async (req, res) => {
   try {
     let dbRes = await updatePassword(userId, password);
     if (dbRes.rowCount === 1) {
-      res.status(201).send('Updated password');
+      res.status(201).send(dbRes.rows[0]);
     } else {
       res.status(500).send('Update password failed');
     }
@@ -50,11 +55,12 @@ router.put('/remove', async (req, res) => {
   try {
     let dbRes = await deleteUser(userId);
     if (dbRes.rowCount === 1) {
-      res.status(201).send('Removed user');
+      res.status(201).send(dbRes.rows[0]);
     } else {
       res.status(500).send('Remove user failed');
     }
   } catch (error) {
+    console.log(error);
     res.status(500).send(error);
   }
 });

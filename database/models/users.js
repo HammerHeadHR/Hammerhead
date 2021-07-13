@@ -1,13 +1,14 @@
 const { client } = require('../index.js');
 
-const addUser = async (username, team, password, admin) => {
+const addUser = async (username, team, password, salt, admin) => {
 
-  const args = [username, team, password, admin];
+  const args = [username, team, password, salt, admin];
   const sql = `
     INSERT INTO USERS
-      (username, team_id, password, admin)
+      (username, team_id, password, salt, admin)
     VALUES
-      ($1, (SELECT id FROM teams WHERE name = $2), $3, $4);
+      ($1, (SELECT id FROM teams WHERE name = $2), $3, $4, $5);
+    RETURNING id;
     `;
 
   let dbRes = await client.query(sql, args);
@@ -52,7 +53,7 @@ const deleteUser = async (userId) => {
   const sql = `
   UPDATE users
   SET
-    active = false
+    active = NOT active
   WHERE users.id = $1;
   `;
 
