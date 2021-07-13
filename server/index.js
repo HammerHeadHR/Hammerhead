@@ -2,39 +2,31 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const client = require('../database');
-const models = require('../database/models.js');
-const csv = require('csv-parser')
-const fs = require('fs')
+const csv = require('csv-parser');
+const fs = require('fs');
 const formidable = require('express-formidable');
+const userRoutes = require('./routes/users.js');
+const teamRoutes = require('./routes/teams.js');
+const datasetRoutes = require('./routes/datasets.js');
+const noteRoutes = require('./routes/notes.js');
+const notificationRoutes = require('./routes/notifications.js');
 
 app.use(express.static('client/dist'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use('/dataset', formidable());
+app.use('/datasets', formidable());
 
-app.post('/dataset', (req, res) => {
+app.use('/users', userRoutes);
 
-  const results = [];
-  let key = Object.keys(req.files)[0];
-  let path = req.files[key].path;
-  let dataName = req.fields.name;
+app.use('/teams', teamRoutes);
 
-  fs.createReadStream(path)
-  .pipe(csv({ separator: ';' }))
-  .on('data', (data) => results.push(data))
-  .on('end', async () => {
-    let dbRes = await models.addDataset(results, dataName);
-    res.send(dbRes);
-  });
+app.use('/datasets', datasetRoutes);
 
-});
+app.use('/notes', noteRoutes);
 
-app.get('/dataset/', async (req, res) => {
-  let dataName = req.query.name;
-  let dbRes = await models.getDataset(dataName);
-  res.json(dbRes.rows[0].data);
-})
+app.use('/notifications', notificationRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
+
