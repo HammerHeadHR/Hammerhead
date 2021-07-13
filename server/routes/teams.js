@@ -27,9 +27,9 @@ router.get('/', async (req, res) => {
 });
 
 router.put('/', async (req, res) => {
-  let { id, name } = req.body;
+  let { teamId, name } = req.body;
   try {
-    let dbRes = await updateTeam(id, name);
+    let dbRes = await updateTeam(teamId, name);
     if (dbRes.rowCount === 1) {
       res.status(201).send('Updated Team');
     } else {

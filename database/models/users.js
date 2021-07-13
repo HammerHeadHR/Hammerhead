@@ -14,9 +14,9 @@ const addUser = async (username, team, password, admin) => {
   return dbRes;
 };
 
-const updateUser = async (id, username, team, password, admin) => {
+const updateUser = async (userId, username, team, password, admin) => {
 
-  const args = [id, username, team, password, admin];
+  const args = [userId, username, team, password, admin];
   const sql = `
   UPDATE users
   SET
@@ -32,9 +32,9 @@ const updateUser = async (id, username, team, password, admin) => {
   return dbRes;
 };
 
-const updatePassword = async (id, password) => {
+const updatePassword = async (userId, password) => {
 
-  const args = [id, password];
+  const args = [userId, password];
   const sql = `
   UPDATE users
   SET
@@ -46,9 +46,9 @@ const updatePassword = async (id, password) => {
   return dbRes;
 };
 
-const deleteUser = async (id) => {
+const deleteUser = async (userId) => {
 
-  const args = [id];
+  const args = [userId];
   const sql = `
   UPDATE users
   SET
