@@ -38,8 +38,22 @@ const updateNotification = async (notificationId) => {
   return dbRes;
 };
 
+const updateAllNotifications = async (userId) => {
+  const args = [userId];
+  const sql = `
+    UPDATE notifications
+    SET
+      viewed = true
+    WHERE receiver_id = $1;
+  `;
+
+  let dbRes = await client.query(sql, args);
+  return dbRes;
+};
+
 module.exports = {
   addNotification,
   getNotifications,
-  updateNotification
-}
+  updateNotification,
+  updateAllNotifications
+};
