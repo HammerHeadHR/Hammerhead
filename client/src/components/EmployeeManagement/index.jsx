@@ -5,39 +5,72 @@ import axios from 'axios';
 
 const EmployeeManagement = ({ employees, managers }) => {
 
-  const [employeeList, setEmployeeList] = useState(employees);
-  const [teamList, setTeamList] = useState(managers);
+  const [employeeList, setEmployeeList] = useState([]);
+  const [teamList, setTeamList] = useState([]);
 
 
-  // const getEmployees = () => {
-  //   axios.get('/employees')
-  //     .then(({ data }) => {
-  //       setEmployeeList(data);
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // }
+  const getEmployees = () => {
+    axios.get('/users/')
+      .then(({ data }) => {
+        setEmployeeList(data);
+        getTeams();
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
-  // const getTeams = () => {
-  //   axios.get('/teams')
-  //   .then(({ data }) => {
-  //     setTeamList(data);
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //   });
-  // }
+  const getTeams = () => {
+    axios.get('/teams/')
+    .then(({ data }) => {
+      setTeamList(data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
 
-  // useEffect(() => {
-  //   getEmployees();
-  //   getTeams();
-  // }, []);
+  // put team name at employee.team instead of just having team id @ employee.team_id
+  const addTeamNames = () => {
+    console.log('addingTeamNames');
+    setEmployeeList(prev => {
+      console.log(prev, teamList);
+      return prev.map(employee => {
+        for (let i = 0; i < teamList.length; i++) {
+          const team = teamList[i];
+          if (employee.team_id === team.id) {
+            employee.team = team.name;
+            break;
+          }
+        }
+        return employee;
+      });
+    });
+  }
+
+  useEffect(() => {
+    getEmployees();
+  }, []);
+
+  useEffect(() => {
+    addTeamNames();
+  }, [teamList]);
+
+
 
   return (
     <div>
-      <TeamList teams={teamList}/>
-      <EmployeeList employees={employeeList} setEmployees={setEmployeeList}/>
+      <TeamList
+        teams={teamList}
+        setTeams={setTeamList}
+        getTeams={getTeams}
+      />
+      <EmployeeList
+        employees={employeeList}
+        setEmployees={setEmployeeList}
+        getEmployees={getEmployees}
+        teamList={teamList}
+      />
     </div>
   );
 

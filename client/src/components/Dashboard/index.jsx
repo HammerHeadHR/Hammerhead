@@ -20,7 +20,7 @@ const Dashboard = () => {
         <Sidebar/>
         <Switch>
           <Route path="/management">
-            <EmployeeManagement managers={managers} employees={employees}/>
+            <EmployeeManagement />
           </Route>
           <Route path="/data-charts">
             <DataCharts />
