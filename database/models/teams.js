@@ -22,8 +22,8 @@ const getTeams = async () => {
   return dbRes.rows;
 };
 
-const updateTeam = async (id, name) => {
-  let args = [id, name];
+const updateTeam = async (teamId, name) => {
+  let args = [teamId, name];
   let sql = `
     UPDATE teams
     SET

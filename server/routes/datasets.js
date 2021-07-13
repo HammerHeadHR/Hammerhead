@@ -9,14 +9,14 @@ router.post('/', (req, res) => {
   const results = [];
   let key = Object.keys(req.files)[0];
   let path = req.files[key].path;
-  let { title, owner_id, team_id } = req.fields;
+  let { title, ownerId, teamId } = req.fields;
 
   fs.createReadStream(path)
     .pipe(csv({ separator: ',' }))
     .on('data', (data) => results.push(data))
     .on('end', async () => {
       try {
-        let dbRes = await addDataset(results, title, owner_id, team_id);
+        let dbRes = await addDataset(results, title, ownerId, teamId);
         if (dbRes.rowCount === 1) {
           res.status(201).send('Added dataset');
         } else {
@@ -29,10 +29,10 @@ router.post('/', (req, res) => {
     });
 });
 
-router.get('/:id', async (req, res) => {
-  let id = req.params.id;
+router.get('/:datasetId', async (req, res) => {
+  let datasetId = req.params.datasetId;
   try {
-    let dbRes = await getDataset(id);
+    let dbRes = await getDataset(datasetId);
     res.send(dbRes.rows[0]);
   } catch (error) {
     console.log(error);
@@ -54,14 +54,14 @@ router.put('/', (req, res) => {
   const results = [];
   let key = Object.keys(req.files)[0];
   let path = req.files[key].path;
-  let { id, title, owner_id } = req.fields;
+  let { datasetId, title, owner } = req.fields;
 
   fs.createReadStream(path)
     .pipe(csv({ separator: ',' }))
     .on('data', (data) => results.push(data))
     .on('end', async () => {
       try {
-        let dbRes = await updateDataset(id, results, title, owner_id);
+        let dbRes = await updateDataset(datasetId, results, title, owner);
         if (dbRes.rowCount === 1) {
           res.status(201).send('Updated dataset');
         } else {
@@ -74,10 +74,10 @@ router.put('/', (req, res) => {
     });
 });
 
-router.delete('/:id', async (req, res) => {
-  let id = req.params.id;
+router.delete('/:datasetId', async (req, res) => {
+  let datasetId = req.params.datasetId;
   try {
-    let dbRes = await deleteDataset(id);
+    let dbRes = await deleteDataset(datasetId);
     res.status(201).send(dbRes);
   } catch (error) {
     console.log(error);

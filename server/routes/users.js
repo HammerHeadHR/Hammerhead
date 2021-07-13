@@ -18,9 +18,9 @@ router.post('/create', async (req, res) => {
 });
 
 router.put('/update', async (req, res) => {
-  let { id, username, team, password, admin } = req.body;
+  let { userId, username, team, password, admin } = req.body;
   try {
-    let dbRes = await updateUser(id, username, team, password, admin);
+    let dbRes = await updateUser(userId, username, team, password, admin);
     if (dbRes.rowCount === 1) {
       res.status(201).send('Updated user');
     } else {
@@ -32,9 +32,9 @@ router.put('/update', async (req, res) => {
 });
 
 router.put('/password', async (req, res) => {
-  let { id, password } = req.body;
+  let { userId, password } = req.body;
   try {
-    let dbRes = await updatePassword(id, password);
+    let dbRes = await updatePassword(userId, password);
     if (dbRes.rowCount === 1) {
       res.status(201).send('Updated password');
     } else {
@@ -46,9 +46,9 @@ router.put('/password', async (req, res) => {
 });
 
 router.put('/remove', async (req, res) => {
-  let { id } = req.body;
+  let { userId } = req.body;
   try {
-    let dbRes = await deleteUser(id);
+    let dbRes = await deleteUser(userId);
     if (dbRes.rowCount === 1) {
       res.status(201).send('Removed user');
     } else {

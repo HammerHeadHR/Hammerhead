@@ -1,10 +1,10 @@
 const { client } = require('../index.js');
 
-const addDataset = async (data, title, owner, team) => {
+const addDataset = async (data, title, ownerId, team) => {
 
   data = JSON.stringify(data);
 
-  const args = [title, data, owner, team];
+  const args = [title, data, ownerId, team];
   const sql = `
     INSERT INTO datasets
       (title, datapoints, owner_id, team_id)
@@ -17,8 +17,8 @@ const addDataset = async (data, title, owner, team) => {
   return dbRes;
 };
 
-const getDataset = async (id) => {
-  const args = [id];
+const getDataset = async (datasetId) => {
+  const args = [datasetId];
   const sql = `
   SELECT
     d.title, d.datapoints, u.username AS owner, t.name AS team
@@ -43,10 +43,10 @@ const getAllDatasets = async () => {
   return dbRes;
 };
 
-const updateDataset = async (id, data, title, owner) => {
+const updateDataset = async (datasetId, data, title, owner) => {
   data = JSON.stringify(data);
 
-  const args = [id, title, data, owner];
+  const args = [datasetId, title, data, owner];
   const sql = `
     UPDATE datasets
     SET
@@ -61,8 +61,8 @@ const updateDataset = async (id, data, title, owner) => {
   return dbRes;
 };
 
-const deleteDataset = async (id) => {
-  const args = [id];
+const deleteDataset = async (datasetId) => {
+  const args = [datasetId];
   const sql = `
     DELETE FROM datasets
     WHERE id = $1;
