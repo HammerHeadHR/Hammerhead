@@ -8,7 +8,7 @@ const Login = () => {
   return (
     <div>
       <SiteHeader />
-      <LoginForm handleLogin={ handleLogin } handleChange={ handleChange }/>
+      <LoginForm />
     </div>
   );
 
