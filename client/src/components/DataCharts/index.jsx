@@ -26,6 +26,7 @@ const styles = {
     height: '500px',
     backgroundColor: 'rgb(211, 225, 227)',
     padding: '20px',
+    borderRadius: '0 0 15px 15px '
   },
   result: {
     backgroundColor: 'white',
