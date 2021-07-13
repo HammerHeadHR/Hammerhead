@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
   try {
     let dbRes = await addTeam(name);
     if (dbRes.rowCount === 1) {
-      res.status(201).send('Added Team');
+      res.status(201).send(dbRes.rows[0]);
     } else {
       res.status(400).send('Add Team failed');
     }
@@ -31,7 +31,7 @@ router.put('/', async (req, res) => {
   try {
     let dbRes = await updateTeam(teamId, name);
     if (dbRes.rowCount === 1) {
-      res.status(201).send('Updated Team');
+      res.status(201).send(dbRes.rows[0]);
     } else {
       res.status(400).send('Update Team failed');
     }

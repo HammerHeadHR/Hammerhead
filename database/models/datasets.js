@@ -5,12 +5,14 @@ const addDataset = async (data, title, ownerId, team) => {
   data = JSON.stringify(data);
 
   const args = [title, data, ownerId, team];
+
   const sql = `
     INSERT INTO datasets
       (title, datapoints, owner_id, team_id)
     VALUES
       ($1, $2, $3, $4)
-    ON CONFLICT (title) DO NOTHING;
+    ON CONFLICT (title) DO NOTHING
+    RETURNING id;
   `;
 
   let dbRes = await client.query(sql, args);
@@ -35,8 +37,10 @@ const getDataset = async (datasetId) => {
 const getAllDatasets = async () => {
   const sql = `
     SELECT
-      id, title, owner_id, team_id, created_at
-    FROM datasets;
+      d.id, d.title, u.username AS owner, t.name AS team, d.created_at
+    FROM datasets d
+    LEFT JOIN users u ON u.id = d.owner_id
+    LEFT JOIN teams t ON t.id = d.team_id
   `;
 
   let dbRes = await client.query(sql);
