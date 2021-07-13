@@ -1,32 +1,30 @@
 import React from 'react';
+import axios from 'axios';
 
-const Employee = ({ employee, setEmployees }) => {
+const Employee = ({ employee, setEmployees, editEmployee}) => {
 
   const terminateEmployee = () => {
     setEmployees(prev => {
       const prevCopy = [...prev];
       for (let i = 0; i < prevCopy.length; i++) {
-        const element = prevCopy[i];
-        if (element.name === employee.name) {
+        if (prevCopy[i].name === employee.name) {
           prevCopy.splice(i, 1);
           break;
         }
       }
       return prevCopy;
     });
+    // consider running above loop to remove employee from current empList after removing
+    // send id
+    // axios.put('/user/delete', { userId: employee.id})
+    //   .then(response => console.log('delete user response: ', response))
+    //   .catch(error => console.error(error));
   }
-
-  const toggleAdmin = () => {
-    // PUT emp.admin = !emp.admin
-    console.log(employee);
-    employee.admin = !employee.admin;
-  };
 
   return (
     <div>
       <p key={employee.name}>{employee.name}</p>
-      <button onClick={toggleAdmin}>Toggle Admin</button>
-      <button>Update Employee</button>
+      <button onClick={() => editEmployee(employee)}>Update Employee</button>
       <button onClick={terminateEmployee}>Terminate</button>
     </div>
   );

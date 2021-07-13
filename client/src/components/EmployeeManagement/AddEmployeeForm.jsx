@@ -1,19 +1,19 @@
 import React from 'react';
 
-const AddEmployee = () => {
+const AddEmployeeForm = () => {
 
   return (
     <div>
       <h3>Add Employee Form</h3>
-      <label htmlFor="username">New Employee Name:</label>
+      <label htmlFor="username">Employee Name:</label>
       <input id="newUserUsername"type="text" name="username"/>
       <label htmlFor="password">Employee's Temporary Password:</label>
       <input id="newUserPassword" type="password" name="password"/>
-      <label htmlFor="salary">Employee's Salary:</label>
-      <input id="newUserSalary" type="text" name="salary"/>
+      <label htmlFor="isAdmin">Make admin?</label>
+      <input type="checkbox" id="isAdmin" name="isAdmin"/>
     </div>
   );
 
 };
 
-export default AddEmployee;
+export default AddEmployeeForm;
