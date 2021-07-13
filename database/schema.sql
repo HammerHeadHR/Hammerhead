@@ -55,3 +55,33 @@ CREATE TABLE notifications (
 ALTER TABLE notifications ADD CONSTRAINT notifications_sender_id_fkey FOREIGN KEY (sender_id) REFERENCES users(id);
 ALTER TABLE notifications ADD CONSTRAINT notifications_receiver_id_fkey FOREIGN KEY (receiver_id) REFERENCES users(id);
 ALTER TABLE notifications ADD CONSTRAINT notifications_dataset_id_fkey FOREIGN KEY (dataset_id) REFERENCES datasets(id);
+
+
+INSERT INTO teams (name) VALUES ('Agriculture');
+INSERT INTO teams (name) VALUES ('Crypto');
+
+
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('AlfredSmith', 1, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('BobFranklin', 2, 'password', true);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('RachelJones', 1, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('SamanthDaggerton', 2, 'password', true);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('IanJenkins', 1, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('WebsterMcClaren', 1, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('JayRobertson', 2, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('HilaryNewman', 1, 'password', true);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('RubyWilliams', 2, 'password', true);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('JosephWright', 1, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('ThomasPhillips', 2, 'password', false);
+INSERT INTO USERS (username, team_id, password, admin) VALUES ('RaymondRaymonds', 2, 'password', true);
+
+
+
+
+
+
+
+
+
+
+
+

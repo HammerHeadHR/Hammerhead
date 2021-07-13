@@ -4,6 +4,8 @@ const addDataset = async (data, title, ownerId, team) => {
 
   data = JSON.stringify(data);
 
+  console.log(data);
+
   const args = [title, data, ownerId, team];
   const sql = `
     INSERT INTO datasets
