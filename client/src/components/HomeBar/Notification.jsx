@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import axios from 'axios';
-
 let style = {
   border: 'solid 1px black',
   position: 'relative'
@@ -32,10 +32,12 @@ const Notification = ({ notification, markAsRead }) => {
   }
 
   return (
-    <div className='notification' style={style} onMouseEnter={markRead}>
-      { renderUnread() }
-      <p>{notification.dataset} | Sent by: {notification.sender}</p>
-    </div>
+    <Link to='data-charts' params={{datasetId: notification.dataset_id}}>
+      <div className='notification' style={style} onMouseEnter={markRead}>
+        { renderUnread() }
+        <p>{notification.dataset} | Sent by: {notification.sender}</p>
+      </div>
+    </Link>
   )
 }
 
