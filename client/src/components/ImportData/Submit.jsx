@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import {shareData} from '../utilFunctions.js';
+import {UserContext} from '../../App.jsx';
 
 const Share = ({datasetId}) => {
+  let user = useContext(UserContext);
+
   const [employees, setEmployees] = useState([]);
   const [receivers, setReceivers] = useState([]);
 
@@ -10,7 +13,6 @@ const Share = ({datasetId}) => {
   useEffect(() => {
     axios.get('/users/')
     .then((users) => {
-      console.log(users.data);
       setEmployees(users.data);
     })
   }, []);
@@ -30,7 +32,7 @@ const Share = ({datasetId}) => {
 
   const handleShare = () => {
     let requests = receivers.map((employeeId) => {
-      shareData((userId), employeeId, (datasetId))
+      shareData(user.user.id, employeeId, datasetId)
     })
 
     Promise.all(requests)

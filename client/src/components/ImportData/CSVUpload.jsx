@@ -1,14 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import {UserContext} from '../../App.jsx';
 
 
 const CSVUpload = ({handleData, handleDatasetId}) => {
+  let user = useContext(UserContext);
+
   const [title, setTitle] = useState('');
-  const [ownerId, setOwnerId] = useState(1);
-  const [teamId, setTeamId] = useState(4);
+  const [teamId, setTeamId] = useState(1);
+  const [teams, setTeams] = useState([]);
+
+  useEffect(() => {
+    axios.get('/teams')
+    .then((teams) => {
+      setTeams(teams.data);
+    })
+  }, []);
 
   const handleChange = (e) => {
     setTitle(e.target.value);
+  }
+
+  const handleTeamChange = (e) => {
+    setTeamId(e.target.value);
   }
 
   const handleSubmit = (e) => {
@@ -17,7 +31,7 @@ const CSVUpload = ({handleData, handleDatasetId}) => {
     const formData = new FormData();
     formData.append('csv', file.files[0]);
     formData.append('title', title);
-    formData.append('ownerId', ownerId);
+    formData.append('ownerId', user.user.id);
     formData.append('teamId', teamId);
     console.log(formData);
     const res = axios.post(`/datasets/`, formData, {
@@ -31,7 +45,7 @@ const CSVUpload = ({handleData, handleDatasetId}) => {
       return axios.get(`/datasets/${res.data.id}`)
     })
     .then(dataset => {
-      handleData(dataset.data.datapoint);
+      handleData(dataset.data.datapoints);
     })
   }
 
@@ -39,10 +53,19 @@ const CSVUpload = ({handleData, handleDatasetId}) => {
     <form>
       <input type='file' id='file'></input>
       <input type='text' value={ title } onChange={ handleChange }></input>
+      <select onChange={handleTeamChange} value={teamId}>
+        {teams.map((team, i) => { return <Team teamName={team.name} teamId={team.id} key={i}/>})}
+      </select>
       <button onClick={ handleSubmit }>Submit</button>
     </form>
   )
 }
+
+const Team = ({teamName, teamId}) => {
+  return (
+    <option value={teamId}>{teamName}</option>
+  );
+};
 
 
 
