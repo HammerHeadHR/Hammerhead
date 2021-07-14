@@ -5,7 +5,7 @@ import axios from 'axios';
 const CSVUpload = () => {
   const [title, setTitle] = useState('');
   const [ownerId, setOwnerId] = useState('4');
-  const [teamId, setTeamId] = useState('agriculture');
+  const [teamId, setTeamId] = useState('3');
 
   const handleChange = (e) => {
     setTitle(e.target.value);

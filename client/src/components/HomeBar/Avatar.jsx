@@ -4,7 +4,8 @@ let style = {
   height: '10px',
   width: '10px',
   borderRadius: '50%',
-  backgroundColor: 'gray'
+  backgroundColor: 'gray',
+  marginLeft: '82%'
 };
 
 

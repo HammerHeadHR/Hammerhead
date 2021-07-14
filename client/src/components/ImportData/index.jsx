@@ -11,7 +11,7 @@ const ImportData = ({data}) => {
     <div>
       <CSVUpload />
       <DynamicGraphWrapper data={data}/>
-      {/* <Share /> */}
+      <Share />
     </div>
   );
 

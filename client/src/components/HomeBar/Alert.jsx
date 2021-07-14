@@ -1,10 +1,11 @@
 import React from 'react';
 
 let style = {
-  height: '5px',
-  width: '5px',
+  height: '10px',
+  width: '10px',
   borderRadius: '50%',
-  backgroundColor: 'gray'
+  backgroundColor: 'gray',
+  marginLeft: '80%'
 };
 
 const Alert = () => {

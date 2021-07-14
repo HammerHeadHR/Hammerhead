@@ -67,10 +67,8 @@ const DynamicGraphWrapper = ({data}) => {
 
 
   useEffect(() => {
-    let result = [];
-    for (let key in data[0]) {
-      result.push(key);
-    }
+    let result = Object.keys(data[0]);
+   
     setDataKeys(result);
     setXAxis(result[0]);
 
