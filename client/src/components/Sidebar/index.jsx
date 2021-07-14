@@ -12,7 +12,6 @@ const Sidebar = () => {
         <br/>
         <Link to="/create-chart">Upload Data</Link>
         <br/>
-        <Link to="/admin-tables">Admin Tables</Link>
     </div>
   );
 
