@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const EditEmployeeForm = ({ employee, editEmployee, updateEmployee, teams }) => {
 
@@ -9,6 +10,7 @@ const EditEmployeeForm = ({ employee, editEmployee, updateEmployee, teams }) => 
     "team" : employee.team,
     "admin" : false
   });
+
 
   const updateInfo = (event) => {
     setUpdatedInfo(prev => {
@@ -34,10 +36,14 @@ const EditEmployeeForm = ({ employee, editEmployee, updateEmployee, teams }) => 
     });
   };
 
+  const updateUsername = () => {
+
+  }
+
   return (
     <div>
-      <label htmlFor="username">Current Name: {employee.username} - New Employee Name: </label>
-      <input id="username"type="text" name="username" onChange={(event) => updateInfo(event)}/>
+      <label htmlFor="username">Employee Name: </label>
+      <input id="username"type="text" name="username" onChange={(event) => updateInfo(event)} placeholder={employee.username}/>
       <label htmlFor="password">New Password: </label>
       <input id="password" type="password" name="password" onChange={(event) => updateInfo(event)}/>
       <label htmlFor="team">Current Team: {employee.team} - New Team: </label>

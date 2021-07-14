@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Employee = ({ employee, setEmployees, editEmployee, getEmployees }) => {
 
-  const terminateEmployee = () => {
+  const toggleEmployeeAccess = () => {
     axios.put('/users/remove', { userId: employee.id })
       .then(response => {
         getEmployees();
@@ -15,7 +15,7 @@ const Employee = ({ employee, setEmployees, editEmployee, getEmployees }) => {
     <div>
       <p>{employee.username} - {employee.team}</p>
       {employee.active && <button onClick={() => editEmployee(employee)}>Update Employee</button>}
-      <button onClick={terminateEmployee}>{employee.active ? 'Revoke Access' : 'Grant Access'}</button>
+      <button onClick={toggleEmployeeAccess}>{employee.active ? 'Revoke Access' : 'Grant Access'}</button>
     </div>
   );
 
