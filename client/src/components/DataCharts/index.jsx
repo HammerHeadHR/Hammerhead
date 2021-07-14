@@ -79,7 +79,6 @@ const DataCharts = () => {
     setChartId(id);
   }
 
-
   return (
     <>
     {chartShowing ?
@@ -96,9 +95,7 @@ const DataCharts = () => {
       </div>
     }
     </>
-
   );
-
 };
 
 export default DataCharts;
