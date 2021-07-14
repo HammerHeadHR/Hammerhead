@@ -8,13 +8,16 @@ const LoginForm = ({ setUser, setAuthed }) => {
     const username = document.querySelector('#username').value;
     const password = document.querySelector('#password').value;
     if (!username || !password) return alert('Please enter a username and password.');
-    axios.post('/login/', { username: username, password: password })
+    axios.post('/login', { username: username, password: password })
       .then(response => {
         console.log(response)
         setUser(response.data);
         setAuthed(true);
       })
-      .catch(error => console.error(error))
+      .catch(error => {
+        console.error(error);
+        return alert('An error occured. You may have entered the wrong username or password. Please try again.')
+      })
   };
 
   return (

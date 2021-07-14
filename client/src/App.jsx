@@ -16,7 +16,7 @@ const App = () => {
           {!authed ?
             <Login setUser={setUser} setAuthed={setAuthed}/>
           :
-            <Dashboard user={user}/>
+            <Dashboard user={user} setAuthed={setAuthed}/>
           }
         </Route>
       </Switch>

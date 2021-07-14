@@ -11,7 +11,11 @@ import { managers } from '../../../../dummyData/managers.js';
 import { employees } from '../../../../dummyData/employees.js';
 import { datapoints } from '../../../../dummyData/bitcoinPrices.js';
 
-const Dashboard = () => {
+const Dashboard = ({ setAuthed }) => {
+
+  const logout = () => {
+    setAuthed(false);
+  }
 
   return (
     <div>
@@ -32,6 +36,7 @@ const Dashboard = () => {
             <AdminTables />
           </Route>
         </Switch>
+          <button onClick={logout}>Logout</button>
       </Router>
     </div>
   );
