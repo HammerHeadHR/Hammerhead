@@ -59,8 +59,8 @@ const EmployeeList = ({ employees, setEmployees, getEmployees, teamList }) => {
   }
 
   return (
-    <div>
-      <h3>Employees</h3>
+    <div id="employee-management">
+      <h2 id="employee-heading">Employees</h2>
       {editEmployee ?
         <EditEmployeeForm
           getEmployees={getEmployees}
