@@ -6,7 +6,6 @@ const Employee = ({ employee, setEmployees, editEmployee, getEmployees }) => {
   const terminateEmployee = () => {
     axios.put('/users/remove', { userId: employee.id })
       .then(response => {
-        console.log('user deleted: ', employee.username);
         getEmployees();
       })
       .catch(error => console.error(error));
