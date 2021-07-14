@@ -1,0 +1,31 @@
+#login {
+  width: fit-content;
+  padding: 5em 5em;
+  margin: auto;
+  border: 1px solid black;
+  border-radius: 5%;
+
+  h1 {
+    text-align: center;
+  }
+
+  #form-div {
+    width: fit-content;
+    margin: auto;
+
+    input, label {
+      display: block;
+    }
+
+    input[type="text"] {
+      margin-bottom: 1em;
+    }
+
+    input[type="submit"] {
+
+      margin: 1em auto;
+    }
+
+  }
+
+}

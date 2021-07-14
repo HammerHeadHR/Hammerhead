@@ -21,7 +21,7 @@ const LoginForm = ({ setUser, setAuthed }) => {
   };
 
   return (
-    <div>
+    <div id="form-div">
       <form>
         <label htmlFor="username">Username:</label>
         <input type="text" name="username" id="username"/>

@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 const Login = ({ setUser, setAuthed}) => {
 
   return (
-    <div>
+    <div id="login">
       <SiteHeader />
       <LoginForm setUser={setUser} setAuthed={setAuthed}/>
     </div>
