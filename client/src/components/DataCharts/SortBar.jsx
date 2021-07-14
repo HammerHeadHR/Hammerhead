@@ -54,27 +54,6 @@ const SortBar = (props) => {
   }
 
   const filterResults = (results) => {
-    //Swap this out with results later
-    //Restructuring data:
-    // var newResults = [];
-    // for (var i = 0; i < results.length; i++) {
-    //   var recentYear = 0;
-    //   for (var j = 0; j < results[i].datapoints.length; j++) {
-    //     var entryYear = parseInt(results[i].datapoints[j].year);
-    //     if (entryYear > recentYear) {
-    //       recentYear = entryYear;
-    //     }
-    //   }
-    //   var resultObj = {
-    //     'year': recentYear,
-    //     'title': results[i].title,
-    //     'owner': results[i].owner,
-    //     'team': results[i].team
-    //   }
-    //   newResults.push(resultObj);
-    // }
-    // results = newResults;
-    //Running through filters:
     var filteredResults = [];
     var finalResults = [];
     if (selectedCategory === 'none') {
@@ -90,12 +69,14 @@ const SortBar = (props) => {
       finalResults = filteredResults;
     } else {
       for (var i = 0; i < filteredResults.length; i++) {
-        // console.log('ownerid: ', filteredResults[i].owner_id);
-        // console.log('selectedmployee: ', selectedEmployee);
-        if (filteredResults[i].owner_id === parseInt(selectedEmployee)) {
+        if (filteredResults[i].owner === selectedEmployee) {
           finalResults.push(filteredResults[i]);
         }
       }
+    }
+    for (var i = 0; i < finalResults.length; i++) {
+      var formatDate = new Date(finalResults[i].created_at);
+      finalResults[i].created_at = formatDate;
     }
     if (sortBy === 'newest') {
       finalResults.sort((a, b) => {
@@ -105,6 +86,13 @@ const SortBar = (props) => {
       finalResults.sort((a, b) => {
         return b.created_at - a.created_at;
       });
+    }
+    // var postFormattedResults = [];
+    for (var i = 0; i < finalResults.length; i++) {
+      var preDate = finalResults[i].created_at.toString();
+      var dateArr = preDate.split(' ');
+      var finDate = dateArr[1] + ' ' + dateArr[2] + ', ' + dateArr[3];
+      finalResults[i].created_at = finDate;
     }
     props.setResults(finalResults);
   }
