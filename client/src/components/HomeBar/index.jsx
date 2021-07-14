@@ -8,7 +8,7 @@ const HomeBar = () => {
   const [notifications, setNotifications] = useState([]);
 
   let receiverId = 1;
-  
+
   useEffect(() => {
     axios.get(`/notifications/${receiverId}`)
     .then((notifications) => {
@@ -17,7 +17,7 @@ const HomeBar = () => {
   }, []);
 
   return (
-    <div>
+    <div id="homebar">
       <Alert count={notificationCount} notifications={notifications}/>
       <Avatar />
     </div>

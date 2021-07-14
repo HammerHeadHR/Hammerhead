@@ -2,45 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 
-const styles = {
-  nav: {
-    height: '30px',
-    backgroundColor: 'whitesmoke',
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '0px 15px',
-    borderRadius: '15px 15px 0 0'
-
-  },
-  headers: {
-    display: 'inline',
-    textAlign: 'center',
-    fontSize: '22px'
-  },
-  downArrow: {
-    border: 'solid black',
-    borderWidth: '0 3px 3px 0',
-    display: 'inline-block',
-    padding: '3px'
-  },
-  rightArrow: {
-    border: 'solid black',
-    borderWidth: '0 3px 3px 0',
-    display: 'inline-block',
-    padding: '3px',
-    transform: 'rotate(-45deg)'
-  },
-  option: {
-    appearance: 'none',
-    border: 'none',
-    overflow: 'hidden',
-    backgroundColor: 'rgba(0, 0, 0, 0)',
-    fontWeight: 'bold',
-    fontSize: '18px',
-    color:'black'
-  }
-}
-
 const SortBar = (props) => {
   const [categories, setCategories] = useState(['Agriculture', 'Bitcoin', 'dogs']);
   const [selectedCategory, setSelectedCategory] = useState('none');
@@ -170,23 +131,23 @@ const SortBar = (props) => {
   }, [selectedCategory, selectedEmployee, sortBy]);
 
   return (
-    <nav style={styles.nav}>
+    <nav>
         <div>
           <form>
             <label>
-              <h4 style={styles.headers}>category: </h4>
-                <select style={styles.option}   value={selectedCategory} onChange={changeCategories}>
+              <h4>category: </h4>
+                <select value={selectedCategory} onChange={changeCategories}>
                 <option key={'nonecat'} value='none'>None</option>
                   {makeCategories()}
                 </select>
             </label>
           </form>
         </div>
-        <div style={{float: 'right'}}>
-          <form style={{display: 'inline'}}>
+        <div>
+          <form>
             <label>
-              <h4 style={styles.headers}>filter: </h4>
-                <select style={styles.option} value={selectedEmployee} onChange={changeEmployee}>
+              <h4>filter: </h4>
+                <select value={selectedEmployee} onChange={changeEmployee}>
                   <option key={'nonedog'} value='none'>None</option>
 
                   {employees.map((employee) => {
@@ -198,10 +159,10 @@ const SortBar = (props) => {
             </label>
           </form>
           <span>    </span>
-          <form style={{display: 'inline'}}>
+          <form>
             <label>
-              <h4 style={styles.headers}>sort by: </h4>
-                <select style={styles.option} value={sortBy} onChange={setSort}>
+              <h4>sort by: </h4>
+                <select value={sortBy} onChange={setSort}>
                   <option key={'newest'} value='newest'>newest</option>
                   <option key={'oldest'} value='oldest'>oldest</option>
                 </select>

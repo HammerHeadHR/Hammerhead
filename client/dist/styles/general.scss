@@ -1,3 +1,14 @@
 body {
   font-size: 16px;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  #app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
 }

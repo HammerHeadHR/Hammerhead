@@ -1,0 +1,9 @@
+$example-color: red;
+
+@mixin button {
+  height: 2em;
+}
+
+@mixin border {
+  border: 1px solid black;
+}
