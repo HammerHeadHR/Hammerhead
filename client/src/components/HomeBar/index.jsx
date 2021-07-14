@@ -18,6 +18,8 @@ const HomeBar = () => {
       .then(() => setUnread(unread - 1))
   }
 
+  let receiverId = 3;
+
   useEffect(() => {
     axios.get(`/notifications/${receiverId}`)
     .then((notifications) => {

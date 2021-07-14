@@ -1,0 +1,59 @@
+#container {
+  width: '70%';
+  float: 'right';
+
+  nav {
+    height: 2em;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 15px;
+    border-radius: 15px 15px 0 0;
+
+    h4 {
+      display: inline;
+      text-align: center;
+      font-size: 1.5em;
+    }
+
+    div:nth-of-type(2) {
+      float: right;
+
+      form {
+        display: inline;
+      }
+    }
+
+    select {
+      appearance: none;
+      border: none;
+      overflow: hidden;
+      background-color: rgba(0, 0, 0, 0);
+      font-weight: bold;
+      font-size: 1.2em;
+      color: black;
+    }
+  }
+
+  section {
+    height: 500px;
+    background-color: rgb(211, 225, 227);
+    padding: 20px;
+    border-radius: 0 0 15px 15px;
+
+    .result {
+      background-color: white;
+      width: 96%;
+      margin: 10px auto;
+      border-radius: 15px;
+      height: 80px;
+
+      .interior-div {
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 15px;
+        height: 35px;
+      }
+    }
+  }
+}
