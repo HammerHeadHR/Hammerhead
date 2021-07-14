@@ -11,7 +11,7 @@ const EmployeeList = ({ employees, setEmployees, getEmployees, teamList }) => {
   const [employeeToEdit, setEmployeeToEdit] = useState(null);
 
   const addNewEmployee = () => {
-    if (!teamList[0]) return window.alert('Please add a team to add employees to before adding employees');
+    if (!teamList[0]) return window.alert('Please add a team to add employees to before adding employees.');
     if (!addEmployee) return setAddEmployee(true);
     const employeeUsername = document.querySelector('#newUserUsername').value;
     const employeePassword = document.querySelector('#newUserPassword').value;
@@ -63,6 +63,7 @@ const EmployeeList = ({ employees, setEmployees, getEmployees, teamList }) => {
       <h3>Employees</h3>
       {editEmployee ?
         <EditEmployeeForm
+          getEmployees={getEmployees}
           employee={employeeToEdit}
           editEmployee={showEditForm}
           updateEmployee={updateEmployeeInfo}
