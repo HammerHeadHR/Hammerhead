@@ -38,7 +38,7 @@ const Example = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    let salt = createRandom32String();
+    // let salt = createRandom32String();
 
     console.log(salt);
 

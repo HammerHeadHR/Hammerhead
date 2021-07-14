@@ -2,79 +2,12 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 
-const styles = {
-  nav: {
-    height: '30px',
-    backgroundColor: 'whitesmoke',
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '0px 15px',
-    borderRadius: '15px 15px 0 0'
-
-  },
-  headers: {
-    display: 'inline',
-    textAlign: 'center',
-    fontSize: '22px'
-  },
-  downArrow: {
-    border: 'solid black',
-    borderWidth: '0 3px 3px 0',
-    display: 'inline-block',
-    padding: '3px'
-  },
-  rightArrow: {
-    border: 'solid black',
-    borderWidth: '0 3px 3px 0',
-    display: 'inline-block',
-    padding: '3px',
-    transform: 'rotate(-45deg)'
-  },
-  option: {
-    appearance: 'none',
-    border: 'none',
-    /* needed for Firefox: */
-    overflow: 'hidden',
-    backgroundColor: 'rgba(0, 0, 0, 0)',
-    fontWeight: 'bold',
-    fontSize: '18px',
-    color:'black'
-  }
-}
-
-const SortBar = () => {
+const SortBar = (props) => {
   const [categories, setCategories] = useState(['Agriculture', 'Bitcoin', 'dogs']);
-  const [selectedCategory, setSelectedCategory] = useState('Agriculture');
-  const [employees, setEmployees] = useState(['Thomas Johnson', 'Jane Janison']);
-  const [selectedEmployee, setSelectedEmployee] = useState('Thomas Johnson');
+  const [selectedCategory, setSelectedCategory] = useState('none');
+  const [employees, setEmployees] = useState(['']);
+  const [selectedEmployee, setSelectedEmployee] = useState('none');
   const [sortBy, setSortBy] = useState('newest');
-  //Temp data to work on filtering
-  const [preResults, preSetResults] = useState([{
-    title: 'Corn prices over time',
-    author: 'Thomas Johnson',
-    dates: '03/16/20-03/16/21',
-    team: 'Agriculture',
-    id: 1
-  }, {
-    title: 'Corn prices over bitcoins',
-    author: 'Thomas Johnson',
-    dates: '03/16/21-01/16/21',
-    team: 'Agriculture',
-    id: 1
-  }, {
-    title: 'Bitcoin over years',
-    author: 'Jane Washburry',
-    dates: '03/16/02-01/16/21',
-    team: 'Bitcoin',
-    id: 1
-  }, {
-    title: 'Bitcoin over months',
-    author: 'Jane Washburry',
-    dates: '03/16/02-01/16/14',
-    team: 'Bitcoin',
-    id: 1
-  }
-  ]);
 
   const changeCategories = (e) => {
     setSelectedCategory(e.target.value);
@@ -88,7 +21,6 @@ const SortBar = () => {
         <option key={category + numby} value={category}>{category}</option>
       )
     });
-
   };
 
   const changeEmployee = (e) => {
@@ -103,93 +35,110 @@ const SortBar = () => {
     //MAKE QUERY in here, and then sort and edit in here.
     var options = {
       method: 'get',
-      url: '/users'
+      url: '/datasets'
     };
     axios(options).then((results) => {
-      //filterResults(results.data);
+      var users = {};
+      for (var i = 0; i < results.data.length; i++) {
+        users[results.data[i].owner] = true;
+      }
+      var newEmp = Object.keys(users);
+      setEmployees(Object.keys(users));
+      return results;
+    }).then((results) => {
+
+      filterResults(results.data);
     }).catch((err) => {
+      console.log(err);
     })
   }
 
   const filterResults = (results) => {
-    //Swap this out with results later
-    //Restructuring data:
-    var newResults = [];
-    for (var i = 0; i < results.length; i++) {
-      var recentYear = 0;
-      for (var j = 0; j < results[i].datapoints.length; j++) {
-        var entryYear = parseInt(results[i].datapoints[j].year);
-        if (entryYear > recentYear) {
-          recentYear = entryYear;
-        }
-      }
-      var resultObj = {
-        'year': recentYear,
-        'title': results[i].title,
-        'owner': results[i].owner,
-        'team': results[i].team
-      }
-      newResults.push(resultObj);
-    }
-    results = newResults;
-    //Running through filters:
     var filteredResults = [];
     var finalResults = [];
     if (selectedCategory === 'none') {
       filteredResults = results;
     } else {
       for (var i = 0; i < results.length; i++) {
-        if (results[i] === selectedCategory) {
+        if (results[i].team === selectedCategory) {
           filteredResults.push(results[i]);
         }
       }
     }
     if (selectedEmployee === 'none') {
-      return filteredResults;
+      finalResults = filteredResults;
     } else {
       for (var i = 0; i < filteredResults.length; i++) {
-        if (filteredResults[i].author === selectedEmployee) {
+        if (filteredResults[i].owner === selectedEmployee) {
           finalResults.push(filteredResults[i]);
         }
       }
     }
+    for (var i = 0; i < finalResults.length; i++) {
+      var formatDate = new Date(finalResults[i].created_at);
+      finalResults[i].created_at = formatDate;
+    }
     if (sortBy === 'newest') {
-      return newResults.sort((a, b) => {
-        return a - b;
+      finalResults.sort((a, b) => {
+        return a.created_at - b.created_at;
       });
     } else {
-      return newResults.sort((a, b) => {
-        return b - a;
+      finalResults.sort((a, b) => {
+        return b.created_at - a.created_at;
       });
     }
-
-    // props.setResults();
+    // var postFormattedResults = [];
+    for (var i = 0; i < finalResults.length; i++) {
+      var preDate = finalResults[i].created_at.toString();
+      var dateArr = preDate.split(' ');
+      var finDate = dateArr[1] + ' ' + dateArr[2] + ', ' + dateArr[3];
+      finalResults[i].created_at = finDate;
+    }
+    props.setResults(finalResults);
   }
 
+  useEffect(() => {
+    var options = {
+      method: 'get',
+      url: '/teams'
+    };
+    axios(options).then((result) => {
+      console.log('teams request: ', result);
+      var teams = {};
+      for (var i = 0; i < result.data.length; i++) {
+        teams[result.data[i].name] = true;
+      }
+      var finTeams = Object.keys(teams);
+      setCategories(finTeams);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, []);
 
-  // useEffect(() => {
-  //   yieldResults();
-
-  // }, [selectedCategory, selectedEmployee, sortBy]);
+  useEffect(() => {
+    yieldResults();
+  }, [selectedCategory, selectedEmployee, sortBy]);
 
   return (
-    <nav style={styles.nav}>
+    <nav>
         <div>
           <form>
             <label>
-              <h4 style={styles.headers}>category: </h4>
-                <select style={styles.option}   value={selectedCategory} onChange={changeCategories}>
+              <h4>category: </h4>
+                <select value={selectedCategory} onChange={changeCategories}>
                 <option key={'nonecat'} value='none'>None</option>
                   {makeCategories()}
                 </select>
             </label>
           </form>
         </div>
-        <div style={{float: 'right'}}>
-          <form style={{display: 'inline'}}>
+        <div>
+          <form>
             <label>
-              <h4 style={styles.headers}>filter: </h4>
-                <select style={styles.option} value={selectedEmployee} onChange={changeEmployee}>
+              <h4>filter: </h4>
+                <select value={selectedEmployee} onChange={changeEmployee}>
+                  <option key={'nonedog'} value='none'>None</option>
+
                   {employees.map((employee) => {
                     return (
                       <option key={employee} value={employee}>{employee}</option>
@@ -199,10 +148,10 @@ const SortBar = () => {
             </label>
           </form>
           <span>    </span>
-          <form style={{display: 'inline'}}>
+          <form>
             <label>
-              <h4 style={styles.headers}>sort by: </h4>
-                <select style={styles.option} value={sortBy} onChange={setSort}>
+              <h4>sort by: </h4>
+                <select value={sortBy} onChange={setSort}>
                   <option key={'newest'} value='newest'>newest</option>
                   <option key={'oldest'} value='oldest'>oldest</option>
                 </select>

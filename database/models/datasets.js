@@ -3,9 +3,7 @@ const { client } = require('../index.js');
 const addDataset = async (data, title, ownerId, team) => {
 
   data = JSON.stringify(data);
-
-  console.log(data);
-
+  console.log(title);
   const args = [title, data, ownerId, team];
 
   const sql = `

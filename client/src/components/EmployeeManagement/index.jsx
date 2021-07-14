@@ -8,7 +8,6 @@ const EmployeeManagement = ({ employees, managers }) => {
   const [employeeList, setEmployeeList] = useState([]);
   const [teamList, setTeamList] = useState([]);
 
-
   const getEmployees = () => {
     axios.get('/users/')
       .then(({ data }) => {
@@ -32,9 +31,7 @@ const EmployeeManagement = ({ employees, managers }) => {
 
   // put team name at employee.team instead of just having team id @ employee.team_id
   const addTeamNames = () => {
-    console.log('addingTeamNames');
     setEmployeeList(prev => {
-      console.log(prev, teamList);
       return prev.map(employee => {
         for (let i = 0; i < teamList.length; i++) {
           const team = teamList[i];

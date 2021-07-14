@@ -1,0 +1,39 @@
+#login {
+  width: fit-content;
+  padding: 2em 5em 5em 5em;
+  margin: auto;
+  border: 1px solid $accent;
+  border-radius: 5%;
+  background-color: $secondary;
+  color: white;
+
+  h1, h3 {
+    text-align: center;
+    margin: 0;
+  }
+
+  img {
+    height: 8em;
+  }
+
+  #form-div {
+    width: fit-content;
+    padding-top: 2em;
+    margin: auto;
+    text-align: center;
+
+    input, label {
+      display: block;
+    }
+
+    input[type="text"] {
+      margin-bottom: 1em;
+    }
+
+    input[type="submit"] {
+      margin: 1em auto;
+      @include button;
+    }
+  }
+
+}

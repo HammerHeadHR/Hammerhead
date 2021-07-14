@@ -1,0 +1,25 @@
+body {
+  font-size: 16px;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $primary;
+  background-image: url("https://www.transparenttextures.com/patterns/dark-mosaic.png");
+  font-family: $body;
+
+  h1 {
+    font-family: $header;
+  }
+
+  h2, h3, h4, h5, h6 {
+    font-family: $subheader;
+  }
+
+  #app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+}

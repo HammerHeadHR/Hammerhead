@@ -3,12 +3,12 @@ import LoginForm from './LoginForm.jsx';
 import SiteHeader from './SiteHeader.jsx';
 import { useParams } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setUser, setAuthed}) => {
 
   return (
-    <div>
+    <div id="login">
       <SiteHeader />
-      <LoginForm />
+      <LoginForm setUser={setUser} setAuthed={setAuthed}/>
     </div>
   );
 

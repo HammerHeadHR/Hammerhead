@@ -28,8 +28,12 @@ const deleteNote = async (noteId) => {
 const getNotes = async (datasetId) => {
   const args = [datasetId];
   const sql = `
-    SELECT * FROM notes
-    WHERE dataset_id = $1;
+    SELECT
+      n.id, u.username AS owner, n.body, n.created_at
+    FROM notes n
+    LEFT JOIN users u ON u.id = n.owner_id
+    WHERE dataset_id = $1
+    ORDER BY n.created_at DESC;
   `;
 
   let dbRes = await client.query(sql, args);
@@ -40,4 +44,4 @@ module.exports = {
   addNote,
   deleteNote,
   getNotes
-}
+};
