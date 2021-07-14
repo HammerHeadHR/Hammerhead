@@ -4,6 +4,7 @@ import {shareData} from '../utilFunctions.js';
 import {UserContext} from '../../App.jsx';
 
 const Share = ({datasetId}) => {
+
   let user = useContext(UserContext);
 
   const [employees, setEmployees] = useState([]);
@@ -32,7 +33,7 @@ const Share = ({datasetId}) => {
 
   const handleShare = () => {
     let requests = receivers.map((employeeId) => {
-      shareData(user.user.id, employeeId, datasetId)
+      shareData(Number(user.user.id), Number(employeeId), Number(datasetId))
     })
 
     Promise.all(requests)

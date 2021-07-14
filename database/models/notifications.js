@@ -11,7 +11,7 @@ const addNotification = async (senderId, receiverId, datasetId) => {
   `;
 
   let dbRes = await client.query(sql, args);
-  return dbRes.rows;
+  return dbRes;
 };
 
 const getNotifications = async (receiverId) => {

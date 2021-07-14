@@ -18,7 +18,7 @@ const ImportData = () => {
 
 
   return (
-    <div>
+    <div id="import">
       <CSVUpload handleData={handleData} handleDatasetId={handleDatasetId}/>
       {data.length ?
       <>
