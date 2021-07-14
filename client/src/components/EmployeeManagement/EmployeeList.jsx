@@ -97,13 +97,13 @@ const EmployeeList = ({ employees, setEmployees, getEmployees, teamList }) => {
           <AddEmployeeForm teams={teamList}/>
         :
         <>
-          <label htmlFor="team-select"></label>
+          <label htmlFor="team-select">Team Filter</label>
           <select name="team-select" id="team-select" defaultValue="none" onChange={({ target }) => setTeam(target.value)}>
             <option value="none">None</option>
             {teamList.map(team => <option key={team.id} value={team.name}>{team.name}</option> )}
           </select>
 
-          <label htmlFor="sort-select"></label>
+          <label htmlFor="sort-select">Sort By</label>
           <select name="sort-select" id="sort-select" defaultValue={sort} onChange={({ target }) => setSort(target.value)}>
             <option value="A -> Z">A -> Z</option>
             <option value="Z -> A">Z -> A</option>
