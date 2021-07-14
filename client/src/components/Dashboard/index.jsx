@@ -4,7 +4,6 @@ import Sidebar from '../Sidebar/index.jsx';
 import EmployeeManagement from '../EmployeeManagement/index.jsx';
 import DataCharts from '../DataCharts/index.jsx';
 import ImportData from '../ImportData/index.jsx';
-import AdminTables from '../AdminTables/index.jsx';
 import HomeBar from '../HomeBar/index.jsx';
 
 import { managers } from '../../../../dummyData/managers.js';
@@ -35,9 +34,6 @@ const Dashboard = ({ setAuthed }) => {
               </Route>
               <Route path="/create-chart">
                 <ImportData data={datapoints}/>
-              </Route>
-              <Route path="/admin-tables">
-                <AdminTables />
               </Route>
             </div>
           </Switch>
