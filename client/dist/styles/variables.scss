@@ -1,4 +1,12 @@
-$example-color: red;
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@300&family=Merriweather:wght@300&family=Telex&display=swap');
+
+$header: 'Exo', sans-serif;
+$subheader: 'Merriweather', serif;
+$body: 'Telex', sans-serif;
+
+$primary: #2b2d42;
+$secondary: #028090;
+$accent: #eee1b3;
 
 @mixin button {
   height: 2em;

@@ -9,6 +9,13 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    button {
+      background-color: $primary;
+      color: $accent;
+    }
+
   }
+
 
 }
