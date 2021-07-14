@@ -1,7 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:wght@300&family=Merriweather:wght@300&family=Telex&display=swap');
+
 $header: 'Exo', sans-serif;
 $subheader: 'Merriweather', serif;
 $body: 'Telex', sans-serif;
+
 $primary: #028090;
 $secondary: #2b2d42;
 $accent: #eee1b3;
+
+@mixin button {
+  border: 2px solid $accent;
+  text-transform: uppercase;
+  background-color: rgba(0,0,0,0);
+  color: white;
+  padding: 1em 2em;
+  cursor: pointer;
+}
+
+@mixin hover {
+
+}
+
+@mixin border {
+  border: 1px solid black;
+}
