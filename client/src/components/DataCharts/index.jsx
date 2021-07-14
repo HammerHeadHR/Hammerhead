@@ -39,13 +39,21 @@ const DataCharts = () => {
 
   return (
     <div id="container">
-      <SortBar setResults={setResults} />
-      <section>
-        {generateCharts()}
-      </section>
+    {chartShowing ?
+      <>
+        <button onClick={()=> setId(null)}>back</button>
+        <ViewChart datasetId={chartId}/>
+      </>
+    :
+      <div style={styles.container}>
+        <SortBar setResults={setResults} />
+        <section style={styles.section}>
+          {generateCharts()}
+        </section>
+      </div>
+    }
     </div>
   );
-
 };
 
 export default DataCharts;
