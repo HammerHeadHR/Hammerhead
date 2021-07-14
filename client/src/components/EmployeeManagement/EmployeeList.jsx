@@ -63,6 +63,7 @@ const EmployeeList = ({ employees, setEmployees, getEmployees, teamList }) => {
       <h3>Employees</h3>
       {editEmployee ?
         <EditEmployeeForm
+          getEmployees={getEmployees}
           employee={employeeToEdit}
           editEmployee={showEditForm}
           updateEmployee={updateEmployeeInfo}
