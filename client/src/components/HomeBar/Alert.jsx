@@ -21,8 +21,7 @@ const Alert = ({ count, unread, notifications, markAsRead}) => {
 
   return opened ? (
     <>
-      <div>
-        <div style={style} onClick={() => setOpened(!opened)}></div>
+      <div style={style} onClick={() => setOpened(!opened)}>
         {getUnread()}
         <NotificationList notifications={notifications} markAsRead={markAsRead}/>
       </div>
