@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-const CSVUpload = () => {
+const CSVUpload = ({handleData, handleDatasetId}) => {
   const [title, setTitle] = useState('');
-  const [ownerId, setOwnerId] = useState('4');
-  const [teamId, setTeamId] = useState('3');
+  const [ownerId, setOwnerId] = useState(1);
+  const [teamId, setTeamId] = useState(4);
 
   const handleChange = (e) => {
     setTitle(e.target.value);
@@ -25,7 +25,14 @@ const CSVUpload = () => {
         'Content-Type': 'multipart/form-data'
       }
     })
-    .then(res => console.log(res));
+    .then(res => {
+      console.log(res.data.id);
+      handleDatasetId(res.data.id);
+      return axios.get(`/datasets/${res.data.id}`)
+    })
+    .then(dataset => {
+      handleData(dataset.data.datapoint);
+    })
   }
 
   return (
