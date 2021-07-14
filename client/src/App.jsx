@@ -6,14 +6,19 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 const App = () => {
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [authed, setAuthed] = useState(false);
+  const [user, setUser] = useState(null);
 
   return (
     <Router>
-      <Link to={loggedIn ? "/" : "/dashboard"} onClick={() => setLoggedIn(prev => !prev)}>{loggedIn ? <span>Logout</span> : <span>Dashboard</span>}</Link>
       <Switch>
-        <Route exact path="/" component={Login}/>
-        <Route path="/dashboard" component={Dashboard}/>
+        <Route exact path="/">
+          {!authed ?
+            <Login setUser={setUser} setAuthed={setAuthed}/>
+          :
+            <Dashboard user={user}/>
+          }
+        </Route>
       </Switch>
     </Router>
   );
