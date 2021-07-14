@@ -4,7 +4,6 @@ import Sidebar from '../Sidebar/index.jsx';
 import EmployeeManagement from '../EmployeeManagement/index.jsx';
 import DataCharts from '../DataCharts/index.jsx';
 import ImportData from '../ImportData/index.jsx';
-import AdminTables from '../AdminTables/index.jsx';
 import HomeBar from '../HomeBar/index.jsx';
 
 import { managers } from '../../../../dummyData/managers.js';
@@ -18,25 +17,26 @@ const Dashboard = ({ setAuthed }) => {
   }
 
   return (
-    <div>
+    <div id="dashboard">
       <Router>
-        <HomeBar/>
-        <Sidebar/>
-        <Switch>
-          <Route path="/management">
-            <EmployeeManagement />
-          </Route>
-          <Route path="/data-charts">
-            <DataCharts />
-          </Route>
-          <Route path="/create-chart">
-            <ImportData data={datapoints}/>
-          </Route>
-          <Route path="/admin-tables">
-            <AdminTables />
-          </Route>
-        </Switch>
+        <div id="menu">
+          <HomeBar/>
+          <Sidebar/>
           <button onClick={logout}>Logout</button>
+        </div>
+        <Switch>
+            <div id="inner">
+              <Route path="/management">
+                <EmployeeManagement />
+              </Route>
+              <Route path="/data-charts">
+                <DataCharts />
+              </Route>
+              <Route path="/create-chart">
+                <ImportData data={datapoints}/>
+              </Route>
+            </div>
+          </Switch>
       </Router>
     </div>
   );
