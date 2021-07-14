@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Alert from './Alert.jsx';
 import Avatar from './Avatar.jsx';
+import logo from '../../../dist/img/hammerhead.svg';
 
 const HomeBar = () => {
   const [notificationCount, setNotificationCount] = useState(0);
@@ -34,7 +35,8 @@ const HomeBar = () => {
   }, []);
 
   return (
-    <div>
+    <div id="homebar">
+      <img src={logo} alt="Hammerhead Logo"/>
       <Alert count={notificationCount} notifications={notifications} unread={unread} markAsRead={markAsRead}/>
       <Avatar />
     </div>
