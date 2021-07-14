@@ -1,0 +1,25 @@
+#dashboard {
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: 10% 90%;
+
+  #menu {
+    display: grid;
+    grid-column: 1;
+    padding: 2em;
+    border-right: 1px solid black;
+    grid-template-rows: 20% 60% 20%;
+
+    #homebar {
+      grid-row: 1;
+    }
+
+    #sidebar {
+      grid-row: 2;
+    }
+
+    button {
+      grid-row: 3
+    }
+  }
+}

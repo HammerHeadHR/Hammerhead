@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 const Sidebar = () => {
 
   return (
-    <div>
+    <div id="sidebar">
         <Link to="/management">Employee Management</Link>
         <br/>
         <Link to="/data-charts">Data Tables</Link>

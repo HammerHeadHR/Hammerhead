@@ -3,8 +3,8 @@ import React from 'react';
 const HomeBar = () => {
 
   return (
-    <div>
-      HomeBar
+    <div id="homebar">
+      Hammerhead
     </div>
   );
 

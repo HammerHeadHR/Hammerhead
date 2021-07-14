@@ -18,25 +18,27 @@ const Dashboard = ({ setAuthed }) => {
   }
 
   return (
-    <div>
+    <div id="dashboard">
       <Router>
-        <HomeBar/>
-        <Sidebar/>
-        <Switch>
-          <Route path="/management">
-            <EmployeeManagement />
-          </Route>
-          <Route path="/data-charts">
-            <DataCharts />
-          </Route>
-          <Route path="/create-chart">
-            <ImportData data={datapoints}/>
-          </Route>
-          <Route path="/admin-tables">
-            <AdminTables />
-          </Route>
-        </Switch>
-          <button onClick={logout}>Logout</button>
+        <div id="menu">
+          <HomeBar/>
+          <Sidebar/>
+          <Switch>
+            <Route path="/management">
+              <EmployeeManagement />
+            </Route>
+            <Route path="/data-charts">
+              <DataCharts />
+            </Route>
+            <Route path="/create-chart">
+              <ImportData data={datapoints}/>
+            </Route>
+            <Route path="/admin-tables">
+              <AdminTables />
+            </Route>
+          </Switch>
+            <button onClick={logout}>Logout</button>
+        </div>
       </Router>
     </div>
   );
