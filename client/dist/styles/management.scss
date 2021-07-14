@@ -1,6 +1,10 @@
 #management {
-  text-align: center;
+  align-self: center;
   color: $accent;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 96%;
 
   div {
 
