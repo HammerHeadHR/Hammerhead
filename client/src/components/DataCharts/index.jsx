@@ -56,7 +56,6 @@ const DataCharts = () => {
     var numbo = 0;
     return results.map((result) => {
       numbo++;
-      console.log('result in genchart: ', result)
       return (
         <div onClick={() => setId(result.id)}  key={result+numbo} style={styles.result}>
           <div style={styles.interiorDiv}>

@@ -146,7 +146,6 @@ const SortBar = (props) => {
         return b.created_at - a.created_at;
       });
     }
-    console.log('RESULTS: ', finalResults);
     props.setResults(finalResults);
   }
 
