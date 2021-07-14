@@ -22,8 +22,7 @@ const GraphKey = ({propertyName, addData, deleteData, addToColorKey, colorKey}) 
 
   return (
     <>
-      <p>{propertyName}</p>
-      <label>Rendered Data</label>
+      <label>{propertyName}</label>
       <input type="checkbox" name="graph-placement" value="data" onChange={handleChange}></input>
       {isData ? <input type="color" value={colorKey[propertyName]} onChange={handleColorChange}></input> : null}
     </>
@@ -68,7 +67,7 @@ const DynamicGraphWrapper = ({data}) => {
 
   useEffect(() => {
     let result = Object.keys(data[0]);
-   
+
     setDataKeys(result);
     setXAxis(result[0]);
 
