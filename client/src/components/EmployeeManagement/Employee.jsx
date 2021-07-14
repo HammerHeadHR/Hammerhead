@@ -16,7 +16,7 @@ const Employee = ({ employee, setEmployees, editEmployee, getEmployees }) => {
     <div>
       <p>{employee.username} - {employee.team}</p>
       {employee.active && <button onClick={() => editEmployee(employee)}>Update Employee</button>}
-      <button onClick={terminateEmployee}>{employee.active ? 'Revoke Access' : 'Terminated'}</button>
+      <button onClick={terminateEmployee}>{employee.active ? 'Revoke Access' : 'Grant Access'}</button>
     </div>
   );
 
