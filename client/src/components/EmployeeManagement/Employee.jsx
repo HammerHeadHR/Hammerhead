@@ -3,8 +3,6 @@ import axios from 'axios';
 
 const Employee = ({ employee, setEmployees, editEmployee, getEmployees }) => {
 
-  const user = useContext(UserContext);
-
   const toggleEmployeeAccess = () => {
     axios.put('/users/remove', { userId: employee.id })
       .then(response => {
