@@ -45,6 +45,7 @@ router.put('/password', async (req, res) => {
   let hashed = createHash(password, salt);
 
   try {
+    
     let dbRes = await updatePassword(userId, hashed, salt);
 
     if (dbRes.rowCount === 1) {
