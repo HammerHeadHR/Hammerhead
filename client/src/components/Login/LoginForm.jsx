@@ -12,11 +12,11 @@ const login = (event) => {
 
 const LoginForm = () => {
   return (
-    <div>
-      <form >
-        <label htmlFor="username">Username:</label>
+    <div id="form-div">
+      <form autocomplete="off">
+        <label htmlFor="username" for="username">Username:</label>
         <input id='username' type="text" name="username"/>
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password" for="password">Password:</label>
         <input id='password' type="password" name="password"/>
         <input type="submit" value="Log In" onClick={login}/>
       </form>
