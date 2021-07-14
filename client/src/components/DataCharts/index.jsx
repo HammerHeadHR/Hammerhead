@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import SortBar from './SortBar.jsx';
+import ViewChart from '../ViewChart/index.jsx';
 
 const styles = {
   container: {
@@ -48,32 +49,54 @@ const DataCharts = () => {
   }
   ]);
 
+  const [chartShowing, setChartShowing] = useState(false);
+  const [chartId, setChartId] = useState(null);
+
   const generateCharts = () => {
     var numbo = 0;
     return results.map((result) => {
       numbo++;
       return (
-        <div key={result+numbo} style={styles.result}>
+        <div onClick={() => setId(result.id)}  key={result+numbo} style={styles.result}>
           <div style={styles.interiorDiv}>
             <h3 key={result.title}>{result.title}</h3>
-            <p>{result.author}</p>
+            <p>{result.owner}</p>
           </div>
           <div style={styles.interiorDiv}>
-            <p>{result.dates}</p>
+            <p>{result.created_at}</p>
             <p>{result.team}</p>
           </div>
         </div>
-      )
+      );
     })
+  };
+
+  const setId = (id) => {
+    setChartShowing(prev => !prev);
+    if (!id) {
+      return setChartId(null);
+    }
+    setChartId(id);
   }
 
+
   return (
-    <div style={styles.container}>
-      <SortBar setResults={setResults} />
-      <section style={styles.section}>
-        {generateCharts()}
-      </section>
-    </div>
+    <>
+    {chartShowing ?
+      <>
+        <button onClick={()=> setId(null)}>back</button>
+        <ViewChart datasetId={chartId}/>
+      </>
+    :
+      <div style={styles.container}>
+        <SortBar setResults={setResults} />
+        <section style={styles.section}>
+          {generateCharts()}
+        </section>
+      </div>
+    }
+    </>
+
   );
 
 };
