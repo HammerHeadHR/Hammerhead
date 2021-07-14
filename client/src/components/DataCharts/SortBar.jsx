@@ -171,7 +171,7 @@ const SortBar = (props) => {
 
   return (
     <nav style={styles.nav}>
-        <div>
+        <div id="sort">
           <form>
             <label>
               <h4 style={styles.headers}>category: </h4>

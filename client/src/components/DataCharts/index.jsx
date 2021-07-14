@@ -68,7 +68,7 @@ const DataCharts = () => {
   }
 
   return (
-    <div style={styles.container}>
+    <div id="data-chart" style={styles.container}>
       <SortBar setResults={setResults} />
       <section style={styles.section}>
         {generateCharts()}
