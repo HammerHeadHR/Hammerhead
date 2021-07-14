@@ -6,7 +6,7 @@ CREATE DATABASE hammerhead;
 
 CREATE TABLE users (
  id SERIAL NOT NULL PRIMARY KEY,
- username VARCHAR(50) NOT NULL,
+ username VARCHAR(50) UNIQUE NOT NULL,
  password VARCHAR(64) NOT NULL,
  salt VARCHAR(64) NOT NULL,
  team_id INTEGER NOT NULL,
@@ -57,11 +57,9 @@ ALTER TABLE notifications ADD CONSTRAINT notifications_sender_id_fkey FOREIGN KE
 ALTER TABLE notifications ADD CONSTRAINT notifications_receiver_id_fkey FOREIGN KEY (receiver_id) REFERENCES users(id);
 ALTER TABLE notifications ADD CONSTRAINT notifications_dataset_id_fkey FOREIGN KEY (dataset_id) REFERENCES datasets(id);
 
-
 INSERT INTO teams (name) VALUES ('Agriculture');
 INSERT INTO teams (name) VALUES ('Crypto');
 INSERT INTO teams (name) VALUES ('Admin');
-
 
 INSERT INTO USERS (username, team_id, password, salt, admin) VALUES ('AlfredSmith', 1, '7cde366c4fb70278890699be263196d75d1892d052766b8015fe9197419f86ac', '8ef18a08397f7d5bf21928270f0bf447e7439ce8e4a5c9566586979f647b1f1e', false);
 INSERT INTO USERS (username, team_id, password, salt, admin) VALUES ('BobFranklin', 2, '7cde366c4fb70278890699be263196d75d1892d052766b8015fe9197419f86ac', '8ef18a08397f7d5bf21928270f0bf447e7439ce8e4a5c9566586979f647b1f1e', true);
@@ -74,7 +72,7 @@ INSERT INTO USERS (username, team_id, password, salt, admin) VALUES ('HilaryNewm
 INSERT INTO USERS (username, team_id, password, salt, admin) VALUES ('RubyWilliams', 2, '7cde366c4fb70278890699be263196d75d1892d052766b8015fe9197419f86ac', '8ef18a08397f7d5bf21928270f0bf447e7439ce8e4a5c9566586979f647b1f1e', true);
 INSERT INTO USERS (username, team_id, password, salt, admin) VALUES ('JosephWright', 1, '7cde366c4fb70278890699be263196d75d1892d052766b8015fe9197419f86ac', '8ef18a08397f7d5bf21928270f0bf447e7439ce8e4a5c9566586979f647b1f1e', false);
 INSERT INTO USERS (username, team_id, password, salt, admin) VALUES ('ThomasPhillips', 2, '7cde366c4fb70278890699be263196d75d1892d052766b8015fe9197419f86ac', '8ef18a08397f7d5bf21928270f0bf447e7439ce8e4a5c9566586979f647b1f1e', false);
-INSERT INTO USERS (username, team_id, password, salt, admin) VALUES ('RaymondRaymonds', 2, '7cde366c4fb70278890699be263196d75d1892d052766b8015fe9197419f86ac', '8ef18a08397f7d5bf21928270f0bf447e7439ce8e4a5c9566586979f647b1f1e', true);
+INSERT INTO USERS (username, team_id, password, salt, admin) VALUES ('RaymondRaymonds', 3, '7cde366c4fb70278890699be263196d75d1892d052766b8015fe9197419f86ac', '8ef18a08397f7d5bf21928270f0bf447e7439ce8e4a5c9566586979f647b1f1e', true);
 
 INSERT INTO datasets
   (title, datapoints, owner_id, team_id)
@@ -104,7 +102,6 @@ INSERT INTO notes (dataset_id, owner_id, body) VALUES (3, 7, 'I want a raise!');
 INSERT INTO notes (dataset_id, owner_id, body) VALUES (3, 10, 'Another fantastic chart.');
 INSERT INTO notes (dataset_id, owner_id, body) VALUES (4, 11, 'My name is Thomas.');
 INSERT INTO notes (dataset_id, owner_id, body) VALUES (4, 12, 'You should all work harder!');
-
 
 INSERT INTO notifications (sender_id, receiver_id, dataset_id) VALUES (1, 3, 1);
 INSERT INTO notifications (sender_id, receiver_id, dataset_id) VALUES (1, 3, 1);
