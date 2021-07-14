@@ -4,7 +4,7 @@ import logo from '../../../dist/img/hammerhead.svg';
 const SiteHeader = () => {
   return (
     <div>
-      <img src={logo} alt="My Happy SVG"/>
+      <img src={logo} alt="Hammerhead Logo"/>
       <h1>Hammerhead</h1>
       <h3>for DataTech</h3>
     </div>
