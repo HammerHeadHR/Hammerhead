@@ -15,8 +15,8 @@ const LoginForm = ({ setUser, setAuthed }) => {
       })
       .catch(error => {
         console.error(error);
-        return alert('An error occured. You may have entered the wrong username or password. Please try again.')
-      })
+        return alert('An error occured. You may have entered the wrong username or password. Please try again.');
+      });
   };
 
   return (
