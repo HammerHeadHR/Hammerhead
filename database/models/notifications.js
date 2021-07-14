@@ -11,14 +11,18 @@ const addNotification = async (senderId, receiverId, datasetId) => {
   `;
 
   let dbRes = await client.query(sql, args);
-  return dbRes.rows;
+  return dbRes;
 };
 
 const getNotifications = async (receiverId) => {
   const args = [receiverId];
   const sql = `
-    SELECT * FROM notifications
-    WHERE receiver_id = $1;
+    SELECT n.*, d.title AS dataset, u.username AS sender
+    FROM notifications n
+    LEFT JOIN datasets d ON d.id = n.dataset_id
+    LEFT JOIN users u ON u.id = n.sender_id
+    WHERE receiver_id = $1
+    ORDER BY n.created_at DESC;
   `;
 
   let dbRes = await client.query(sql, args);

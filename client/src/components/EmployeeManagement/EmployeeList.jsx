@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AddEmployeeForm from './AddEmployeeForm.jsx';
 import EditEmployeeForm from './EditEmployeeForm.jsx';
 import Employee from './Employee.jsx';
@@ -9,6 +9,9 @@ const EmployeeList = ({ employees, setEmployees, getEmployees, teamList }) => {
   const [addEmployee, setAddEmployee] = useState(false);
   const [editEmployee, setEditEmployee] = useState(false);
   const [employeeToEdit, setEmployeeToEdit] = useState(null);
+  const [employeesToRender, setEmployeesToRender] = useState(employees);
+  const [team, setTeam] = useState('none');
+  const [sort, setSort] = useState('Active -> Inactive');
 
   const addNewEmployee = () => {
     if (!teamList[0]) return window.alert('Please add a team to add employees to before adding employees.');
@@ -58,6 +61,25 @@ const EmployeeList = ({ employees, setEmployees, getEmployees, teamList }) => {
     }
   }
 
+  const subSort = () => {
+    let copy = employees.slice();
+    return copy.sort((empA, empB) => {
+      if (sort === 'A -> Z') {
+        return empA.username.toLowerCase().charCodeAt(0) - empB.username.toLowerCase().charCodeAt(0);
+      } else if (sort === 'Z -> A') {
+        return empB.username.toLowerCase().charCodeAt(0) - empA.username.toLowerCase().charCodeAt(0);
+      } else if (sort === 'Active -> Inactive') {
+        return empA.active === empB.active ? 0 : empA.active ? -1 : 1;
+      } else if (sort === 'Inactive -> Active') {
+        return empA.active === empB.active ? 0 : empA.active ? 1 : -1;
+      }
+    });
+  }
+
+  useEffect(() => {
+    setEmployeesToRender(subSort())
+  }, [employees, sort]);
+
   return (
     <div id="employee-management">
       <h2 id="employee-heading">Employees</h2>
@@ -74,15 +96,39 @@ const EmployeeList = ({ employees, setEmployees, getEmployees, teamList }) => {
       addEmployee ?
           <AddEmployeeForm teams={teamList}/>
         :
-        employees.map(employee => {
-          return <Employee
-            key={employee.id}
-            employee={employee}
-            getEmployees={getEmployees}
-            editEmployee={showEditForm}
-          />
-          // sort to show active employees at top
-        }).sort((a, b) => a.props.employee.active === b.props.employee.active ? 0 : a.props.employee.active ? -1 : 1)
+        <>
+          <label htmlFor="team-select">Team Filter</label>
+          <select name="team-select" id="team-select" defaultValue="none" onChange={({ target }) => setTeam(target.value)}>
+            <option value="none">None</option>
+            {teamList.map(team => <option key={team.id} value={team.name}>{team.name}</option> )}
+          </select>
+
+          <label htmlFor="sort-select">Sort By</label>
+          <select name="sort-select" id="sort-select" defaultValue={sort} onChange={({ target }) => setSort(target.value)}>
+            <option value="A -> Z">A -> Z</option>
+            <option value="Z -> A">Z -> A</option>
+            <option value="Active -> Inactive">Active -> Inactive</option>
+            <option value="Inactive -> Active">Inactive -> Active</option>
+          </select>
+
+          {employeesToRender.map(employee => {
+            if (team !== 'none' && employee.team === team) {
+              return <Employee
+              key={employee.id}
+              employee={employee}
+              getEmployees={getEmployees}
+              editEmployee={showEditForm}
+              />
+            } else if (team === 'none') {
+              return <Employee
+              key={employee.id}
+              employee={employee}
+              getEmployees={getEmployees}
+              editEmployee={showEditForm}
+              />
+            }
+          })}
+        </>
       }
       {!editEmployee ? <button onClick={addNewEmployee}>Add Employee</button> : null}
       {addEmployee ? <button onClick={() => setAddEmployee(false)}>Cancel</button> : null}
