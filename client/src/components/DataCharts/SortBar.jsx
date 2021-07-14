@@ -40,7 +40,7 @@ const SortBar = (props) => {
     axios(options).then((results) => {
       var users = {};
       for (var i = 0; i < results.data.length; i++) {
-        users[results.data[i].owner_id] = true;
+        users[results.data[i].owner] = true;
       }
       var newEmp = Object.keys(users);
       setEmployees(Object.keys(users));
@@ -60,7 +60,7 @@ const SortBar = (props) => {
       filteredResults = results;
     } else {
       for (var i = 0; i < results.length; i++) {
-        if (results[i].team_id === parseInt(selectedCategory)) {
+        if (results[i].team === selectedCategory) {
           filteredResults.push(results[i]);
         }
       }
@@ -103,9 +103,10 @@ const SortBar = (props) => {
       url: '/teams'
     };
     axios(options).then((result) => {
+      console.log('teams request: ', result);
       var teams = {};
       for (var i = 0; i < result.data.length; i++) {
-        teams[result.data[i].id] = true;
+        teams[result.data[i].name] = true;
       }
       var finTeams = Object.keys(teams);
       setCategories(finTeams);
