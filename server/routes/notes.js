@@ -34,6 +34,7 @@ router.get('/:datasetId', async (req, res) => {
     let dbRes = await getNotes(datasetId);
     res.send(dbRes);
   } catch (error) {
+    console.log(error);
     res.status(500).send(error);
   }
 });

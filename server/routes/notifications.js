@@ -9,6 +9,7 @@ router.post('/', async (req, res) => {
     if (dbRes.rowCount === 1) {
       res.status(201).send(dbRes.rows[0]);
     } else {
+      console.log(dbRes);
       res.status(500).send('Add notification failed');
     }
   } catch (error) {
@@ -29,6 +30,8 @@ router.get('/:receiverId', async (req, res) => {
 
 router.put('/', async (req, res) => {
   let { notificationId } = req.body;
+
+  console.log(notificationId);
   try {
     let dbRes = await updateNotification(notificationId);
     if (dbRes.rowCount === 1) {
