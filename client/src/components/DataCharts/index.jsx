@@ -6,22 +6,7 @@ const styles = {
   container: {
     width: '70%',
     float: 'right',
-    // padding: '20px 0px',
-    // margin: '20px 0px'
   },
-  // nav: {
-  //   height: '30px',
-  //   backgroundColor: 'whitesmoke',
-  //   display: 'flex',
-  //   justifyContent: 'space-between',
-  //   padding: '0px 15px',
-
-  // },
-  // headers: {
-  //   display: 'inline',
-  //   textAlign: 'center',
-  //   fontSize: '22px'
-  // },
   section: {
     height: '500px',
     backgroundColor: 'rgb(211, 225, 227)',
@@ -48,9 +33,6 @@ const styles = {
 
 
 const DataCharts = () => {
-
-
-
   const [results, setResults] = useState([{
     title: 'Corn prices over time',
     author: 'Thomas Johnson',
@@ -90,9 +72,7 @@ const DataCharts = () => {
       <SortBar setResults={setResults} />
       <section style={styles.section}>
         {generateCharts()}
-
       </section>
-
     </div>
   );
 

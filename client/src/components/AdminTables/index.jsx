@@ -4,7 +4,7 @@ const AdminTables = () => {
 
   return (
     <div>
-      Admin Tables Here
+      Admin Tables
     </div>
   );
 

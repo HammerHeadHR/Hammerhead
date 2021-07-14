@@ -33,7 +33,6 @@ const styles = {
   option: {
     appearance: 'none',
     border: 'none',
-    /* needed for Firefox: */
     overflow: 'hidden',
     backgroundColor: 'rgba(0, 0, 0, 0)',
     fontWeight: 'bold',
@@ -42,39 +41,12 @@ const styles = {
   }
 }
 
-const SortBar = () => {
+const SortBar = (props) => {
   const [categories, setCategories] = useState(['Agriculture', 'Bitcoin', 'dogs']);
-  const [selectedCategory, setSelectedCategory] = useState('Agriculture');
-  const [employees, setEmployees] = useState(['Thomas Johnson', 'Jane Janison']);
-  const [selectedEmployee, setSelectedEmployee] = useState('Thomas Johnson');
+  const [selectedCategory, setSelectedCategory] = useState('none');
+  const [employees, setEmployees] = useState(['']);
+  const [selectedEmployee, setSelectedEmployee] = useState('none');
   const [sortBy, setSortBy] = useState('newest');
-  //Temp data to work on filtering
-  const [preResults, preSetResults] = useState([{
-    title: 'Corn prices over time',
-    author: 'Thomas Johnson',
-    dates: '03/16/20-03/16/21',
-    team: 'Agriculture',
-    id: 1
-  }, {
-    title: 'Corn prices over bitcoins',
-    author: 'Thomas Johnson',
-    dates: '03/16/21-01/16/21',
-    team: 'Agriculture',
-    id: 1
-  }, {
-    title: 'Bitcoin over years',
-    author: 'Jane Washburry',
-    dates: '03/16/02-01/16/21',
-    team: 'Bitcoin',
-    id: 1
-  }, {
-    title: 'Bitcoin over months',
-    author: 'Jane Washburry',
-    dates: '03/16/02-01/16/14',
-    team: 'Bitcoin',
-    id: 1
-  }
-  ]);
 
   const changeCategories = (e) => {
     setSelectedCategory(e.target.value);
@@ -88,7 +60,6 @@ const SortBar = () => {
         <option key={category + numby} value={category}>{category}</option>
       )
     });
-
   };
 
   const changeEmployee = (e) => {
@@ -103,35 +74,45 @@ const SortBar = () => {
     //MAKE QUERY in here, and then sort and edit in here.
     var options = {
       method: 'get',
-      url: '/users'
+      url: '/datasets'
     };
     axios(options).then((results) => {
-      //filterResults(results.data);
+      var users = {};
+      for (var i = 0; i < results.data.length; i++) {
+        users[results.data[i].owner_id] = true;
+      }
+      var newEmp = Object.keys(users);
+      setEmployees(Object.keys(users));
+      return results;
+    }).then((results) => {
+
+      filterResults(results.data);
     }).catch((err) => {
+      console.log(err);
     })
   }
 
   const filterResults = (results) => {
     //Swap this out with results later
     //Restructuring data:
-    var newResults = [];
-    for (var i = 0; i < results.length; i++) {
-      var recentYear = 0;
-      for (var j = 0; j < results[i].datapoints.length; j++) {
-        var entryYear = parseInt(results[i].datapoints[j].year);
-        if (entryYear > recentYear) {
-          recentYear = entryYear;
-        }
-      }
-      var resultObj = {
-        'year': recentYear,
-        'title': results[i].title,
-        'owner': results[i].owner,
-        'team': results[i].team
-      }
-      newResults.push(resultObj);
-    }
-    results = newResults;
+    // var newResults = [];
+    // for (var i = 0; i < results.length; i++) {
+    //   var recentYear = 0;
+    //   for (var j = 0; j < results[i].datapoints.length; j++) {
+    //     var entryYear = parseInt(results[i].datapoints[j].year);
+    //     if (entryYear > recentYear) {
+    //       recentYear = entryYear;
+    //     }
+    //   }
+    //   var resultObj = {
+    //     'year': recentYear,
+    //     'title': results[i].title,
+    //     'owner': results[i].owner,
+    //     'team': results[i].team
+    //   }
+    //   newResults.push(resultObj);
+    // }
+    // results = newResults;
     //Running through filters:
     var filteredResults = [];
     var finalResults = [];
@@ -139,38 +120,54 @@ const SortBar = () => {
       filteredResults = results;
     } else {
       for (var i = 0; i < results.length; i++) {
-        if (results[i] === selectedCategory) {
+        if (results[i].team_id === parseInt(selectedCategory)) {
           filteredResults.push(results[i]);
         }
       }
     }
     if (selectedEmployee === 'none') {
-      return filteredResults;
+      finalResults = filteredResults;
     } else {
       for (var i = 0; i < filteredResults.length; i++) {
-        if (filteredResults[i].author === selectedEmployee) {
+        // console.log('ownerid: ', filteredResults[i].owner_id);
+        // console.log('selectedmployee: ', selectedEmployee);
+        if (filteredResults[i].owner_id === parseInt(selectedEmployee)) {
           finalResults.push(filteredResults[i]);
         }
       }
     }
     if (sortBy === 'newest') {
-      return newResults.sort((a, b) => {
-        return a - b;
+      finalResults.sort((a, b) => {
+        return a.created_at - b.created_at;
       });
     } else {
-      return newResults.sort((a, b) => {
-        return b - a;
+      finalResults.sort((a, b) => {
+        return b.created_at - a.created_at;
       });
     }
-
-    // props.setResults();
+    props.setResults(finalResults);
   }
 
+  useEffect(() => {
+    var options = {
+      method: 'get',
+      url: '/teams'
+    };
+    axios(options).then((result) => {
+      var teams = {};
+      for (var i = 0; i < result.data.length; i++) {
+        teams[result.data[i].id] = true;
+      }
+      var finTeams = Object.keys(teams);
+      setCategories(finTeams);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, []);
 
-  // useEffect(() => {
-  //   yieldResults();
-
-  // }, [selectedCategory, selectedEmployee, sortBy]);
+  useEffect(() => {
+    yieldResults();
+  }, [selectedCategory, selectedEmployee, sortBy]);
 
   return (
     <nav style={styles.nav}>
@@ -190,6 +187,8 @@ const SortBar = () => {
             <label>
               <h4 style={styles.headers}>filter: </h4>
                 <select style={styles.option} value={selectedEmployee} onChange={changeEmployee}>
+                  <option key={'nonedog'} value='none'>None</option>
+
                   {employees.map((employee) => {
                     return (
                       <option key={employee} value={employee}>{employee}</option>
