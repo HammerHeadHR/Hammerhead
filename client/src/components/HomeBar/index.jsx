@@ -32,7 +32,7 @@ const HomeBar = () => {
       })
       setUnread(count);
     })
-  }, []);
+  }, [unread]);
 
   return (
     <div id="homebar">
