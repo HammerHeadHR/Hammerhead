@@ -6,11 +6,11 @@ const Sidebar = () => {
 
   return (
     <div id="sidebar">
-        <Link to="/management">Employee Management</Link>
+        <Link to="/dashboard/management">Employee Management</Link>
         <br/>
-        <Link to="/data-charts">Data Tables</Link>
+        <Link to="/dashboard/data-charts">Data Tables</Link>
         <br/>
-        <Link to="/create-chart">Upload Data</Link>
+        <Link to="/dashboard/create-chart">Upload Data</Link>
         <br/>
     </div>
   );

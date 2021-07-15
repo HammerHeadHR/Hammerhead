@@ -110,24 +110,25 @@ const EmployeeList = ({ employees, setEmployees, getEmployees, teamList }) => {
             <option value="Active -> Inactive">Active -> Inactive</option>
             <option value="Inactive -> Active">Inactive -> Active</option>
           </select>
-
-          {employeesToRender.map(employee => {
-            if (team !== 'none' && employee.team === team) {
-              return <Employee
-              key={employee.id}
-              employee={employee}
-              getEmployees={getEmployees}
-              editEmployee={showEditForm}
-              />
-            } else if (team === 'none') {
-              return <Employee
-              key={employee.id}
-              employee={employee}
-              getEmployees={getEmployees}
-              editEmployee={showEditForm}
-              />
-            }
-          })}
+          <div id="employee-list">
+            {employeesToRender.map(employee => {
+              if (team !== 'none' && employee.team === team) {
+                return <Employee
+                key={employee.id}
+                employee={employee}
+                getEmployees={getEmployees}
+                editEmployee={showEditForm}
+                />
+              } else if (team === 'none') {
+                return <Employee
+                key={employee.id}
+                employee={employee}
+                getEmployees={getEmployees}
+                editEmployee={showEditForm}
+                />
+              }
+            })}
+          </div>
         </>
       }
       {!editEmployee ? <button onClick={addNewEmployee}>Add Employee</button> : null}

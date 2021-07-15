@@ -45,11 +45,13 @@ const TeamList = ({ teams, setTeams, getTeams }) => {
           <button onClick={() => setEditTeam(false)}>Cancel</button>
         </>
       :
-        teams.map(team =>
-          <div key={team.id}>
-            <span>{team.name}</span>
-            <button onClick={() => updateTeam(team)}>Edit Team Name</button>
-          </div>)
+        <div id="teams-container">
+          {teams.map(team =>
+            <div key={team.id}>
+              <span>{team.name}</span>
+              <button onClick={() => updateTeam(team)}>Edit Team Name</button>
+            </div>)}
+        </div>
       }
       {addTeam &&
         <>
