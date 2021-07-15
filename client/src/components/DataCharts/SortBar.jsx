@@ -103,7 +103,6 @@ const SortBar = (props) => {
       url: '/teams'
     };
     axios(options).then((result) => {
-      console.log('teams request: ', result);
       var teams = {};
       for (var i = 0; i < result.data.length; i++) {
         teams[result.data[i].name] = true;
