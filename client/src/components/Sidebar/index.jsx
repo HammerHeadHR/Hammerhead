@@ -9,12 +9,12 @@ const Sidebar = () => {
   return (
     <div id="sidebar">
       {user.user.admin ?
-        <Link to="/management">Employee Management</Link>
+        <Link to="/dashboard/management">Employee Management</Link>
         :
         null
       }
-        <Link to="/data-charts">Data Tables</Link>
-        <Link to="/create-chart">Upload Data</Link>
+        <Link to="/dashboard/data-charts">Data Tables</Link>
+        <Link to="/dashboard/create-chart">Upload Data</Link>
     </div>
   );
 
