@@ -11,6 +11,9 @@
   form {
     grid-row: 1 / 2;
     padding: 2em;
+    display: grid;
+
+
 
     select {
       margin: 2em;
@@ -18,10 +21,12 @@
       padding: 0.5em;
       border: $secondary;
       border-radius: 10px;
+      grid-row: 2 / 3;
     }
 
     input {
       margin: 0.5em;
+      grid-row: 2 / 3;
     }
 
     #csvName {
@@ -34,6 +39,7 @@
     button {
       margin: 1em;
       @include secondaryButton;
+      grid-row: 2 / 3;
     }
   }
 
@@ -78,7 +84,7 @@
       width: 14em;
       overflow-y: scroll;
       color: white;
-      
+
 
       #employee {
         display: grid;
