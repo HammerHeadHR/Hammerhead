@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { UserContext } from '../../App.jsx';
 
 const Sidebar = () => {
-  
+
   const user = useContext(UserContext);
 
   return (
     <div id="sidebar">
-      {user.user.admim ?
+      {user.user.admin ?
         <Link to="/management">Employee Management</Link>
         :
         null
