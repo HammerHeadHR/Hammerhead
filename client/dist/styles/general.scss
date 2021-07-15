@@ -22,8 +22,9 @@ body {
     justify-content: center;
 
     button {
-      background-color: $primary;
-      color: $accent;
+      border: 1px solid $accent;
+      background-color: $secondary;
+      color: white;
     }
 
   }
