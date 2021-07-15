@@ -5,6 +5,43 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
 
+  @include mobile {
+    grid-template-columns: 1fr;
+    grid-template-rows: 5% 95%
+  }
+
+  header {
+    display: none;
+    grid-row: 1;
+
+    @include mobile {
+      display: block;
+    }
+
+    #header {
+      background-color: $secondary;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      color: white;
+      height: 2.5em;
+      border-bottom: 1px solid $accent;
+
+      .burger div{
+        margin: 5px;
+        height: 3px;
+        width: 25px;
+        background-color: #fff;
+        transition: all 0.3s ease;
+      }
+
+      .burger{
+        padding: .5em 0 0 .5em;
+        cursor: pointer;
+      }
+    }
+  }
+
   #menu {
     display: grid;
     grid-column: 1;
@@ -13,21 +50,14 @@
     grid-template-rows: 20% 60% 20%;
     background-color: $secondary;
     color: white;
+    transition: 1s;
 
-    #homebar {
-      grid-row: 1;
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-
-      img {
-        grid-row: 1;
-        width: 100%;
-      }
-
-      div {
-        grid-row: 2;
-      }
-
+    @include mobile {
+      height: 100vh;
+      top: 2.55em;
+      transform: translateX(-100%);
+      position: absolute;
+      grid-template-rows: 1fr 1fr 1fr;
     }
 
     #sidebar {
@@ -52,11 +82,21 @@
 
     button {
       height: fit-content;
-      grid-row: 3
+      grid-row: 3;
+      @include button;
     }
+  }
+
+  .show {
+    transform: translateX(0) !important;
   }
 
   #inner {
     grid-column: 2;
+
+    @include mobile {
+      grid-column: 1;
+      grid-row:2;
+    }
   }
 }

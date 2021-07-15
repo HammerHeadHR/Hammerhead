@@ -7,6 +7,11 @@ body {
   background-color: $primary;
   background-image: url("https://www.transparenttextures.com/patterns/dark-mosaic.png");
   font-family: $body;
+  margin: 0;
+
+  @include mobile {
+    font-size: 14px;
+  }
 
   h1 {
     font-family: $header;
@@ -28,5 +33,4 @@ body {
     }
 
   }
-
 }

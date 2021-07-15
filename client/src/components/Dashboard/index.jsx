@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useHistory } from 'react-router-dom';
+import Header from '../Header/index.jsx';
 import Sidebar from '../Sidebar/index.jsx';
 import EmployeeManagement from '../EmployeeManagement/index.jsx';
 import DataCharts from '../DataCharts/index.jsx';
@@ -14,6 +15,7 @@ const Dashboard = ({ setAuthed }) => {
 
   const history = useHistory();
   const match = useRouteMatch();
+  const [slide, setSlide] = useState(false);
 
   const logout = () => {
     setAuthed(false);
@@ -22,9 +24,10 @@ const Dashboard = ({ setAuthed }) => {
 
   return (
     <div id="dashboard">
+      <Header slide={slide} setSlide={setSlide} />
       <div id="menu">
         <HomeBar/>
-        <Sidebar/>
+        <Sidebar setSlide={setSlide} />
         <button onClick={logout}>Logout</button>
       </div>
       <Switch>

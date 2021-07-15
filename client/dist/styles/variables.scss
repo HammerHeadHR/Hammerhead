@@ -19,6 +19,16 @@ $secondaryBack: #2b2d4298;
   color: white;
   padding: 1em 2em;
   cursor: pointer;
+  transition: .2s;
+
+  &:hover {
+    background-color: $accent;
+    color: black;;
+  }
+
+  &:active {
+    transform: translateY(.2em)
+  }
 }
 
 @mixin secondaryButton {

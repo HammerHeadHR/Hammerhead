@@ -10,8 +10,11 @@ const LoginForm = ({ setUser, setAuthed }) => {
     if (!username || !password) return alert('Please enter a username and password.');
     axios.post('/login/', { username: username, password: password })
       .then(response => {
-        setUser(response.data);
-        setAuthed(true);
+        document.getElementById('login').classList.add('hidden')
+        setTimeout(() => {
+          setUser(response.data);
+          setAuthed(true);
+        }, 600);
       })
       .catch(error => {
         console.error(error);
