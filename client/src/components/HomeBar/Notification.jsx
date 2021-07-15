@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-let style = {
-  border: 'solid 1px black',
-  position: 'relative'
-}
-
 let icon = {
   background: 'red',
   borderRadius: '5px',
@@ -32,9 +27,10 @@ const Notification = ({ notification, markAsRead }) => {
   }
 
   return (
-    <div className='notification' style={style} onMouseEnter={markRead}>
+    <div className='notification' onMouseEnter={markRead}>
       { renderUnread() }
-      <p>{notification.dataset} | Sent by: {notification.sender}</p>
+      <p>{notification.dataset}</p>
+      <p>Sent by: {notification.sender}</p>
     </div>
   )
 }
