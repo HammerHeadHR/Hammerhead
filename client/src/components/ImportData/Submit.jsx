@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import {shareData} from '../utilFunctions.js';
+import {UserContext} from '../../App.jsx';
 
 const Share = ({datasetId}) => {
+
+  let user = useContext(UserContext);
+
   const [employees, setEmployees] = useState([]);
   const [receivers, setReceivers] = useState([]);
 
@@ -10,7 +14,6 @@ const Share = ({datasetId}) => {
   useEffect(() => {
     axios.get('/users/')
     .then((users) => {
-      console.log(users.data);
       setEmployees(users.data);
     })
   }, []);
@@ -24,13 +27,13 @@ const Share = ({datasetId}) => {
   const takeFromShareList = (id) => {
     let index = receivers.indexOf(id);
     let tempReceivers = [...receivers];
-    tempReceivers.splice(index, 0);
+    tempReceivers.splice(index, 1);
     setReceivers(tempReceivers);
   }
 
   const handleShare = () => {
     let requests = receivers.map((employeeId) => {
-      shareData((userId), employeeId, (datasetId))
+      shareData(Number(user.user.id), Number(employeeId), Number(datasetId))
     })
 
     Promise.all(requests)
@@ -39,8 +42,8 @@ const Share = ({datasetId}) => {
 
   if (employees.length) {
     return (
-      <div>
-        <div>
+      <div id="share">
+        <div id="employees">
           {employees.map((employee, i) => {return <Employee employee={employee} key={i} share={makeShareList} dontShare={takeFromShareList}/>})}
         </div>
         <button type='button' onClick={handleShare}>Share</button>
@@ -64,7 +67,7 @@ const Employee = ({employee, share, dontShare}) => {
   }
 
   return (
-    <div>
+    <div id="employee">
       <p>{employee.username}</p>
       <input type="checkbox" onChange={handleChange}></input>
     </div>
