@@ -8,7 +8,7 @@ const LoginForm = ({ setUser, setAuthed }) => {
     const username = document.querySelector('#username').value;
     const password = document.querySelector('#password').value;
     if (!username || !password) return alert('Please enter a username and password.');
-    axios.post('/login', { username: username, password: password })
+    axios.post('/login/', { username: username, password: password })
       .then(response => {
         setUser(response.data);
         setAuthed(true);
