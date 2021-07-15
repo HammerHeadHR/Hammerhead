@@ -1,5 +1,41 @@
 #homebar {
   justify-items: center;
+  color: black;
+  background-color: rgba(0,0,0,0);
+
+  h3 {
+    text-align: center;
+  }
+
+  span {
+    background-color: red;
+  }
+
+  #icon {
+    background: red;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+  }
+
+  #notification-list {
+    width: fit-content;
+    height: 20em;
+    border: solid 1px black;
+    background: white;
+    overflow-y: scroll;
+    padding: .5em;
+
+    .notification {
+      padding: 2em;
+      position: relative;
+      background-color: rgba(0,0,0,0.2);
+      border: solid 1px black;
+    }
+  }
 
   color: black;
 
@@ -8,6 +44,11 @@
     width: 30px;
     border-radius: 50%;
     background-color: gray;
+    cursor: pointer;
+
+    &:hover {
+      background-color: red;
+    }
   };
 
   #avatar {

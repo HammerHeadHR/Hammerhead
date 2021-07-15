@@ -7,11 +7,8 @@ const Sidebar = () => {
   return (
     <div id="sidebar">
         <Link to="/management">Employee Management</Link>
-        <br/>
         <Link to="/data-charts">Data Tables</Link>
-        <br/>
         <Link to="/create-chart">Upload Data</Link>
-        <br/>
     </div>
   );
 

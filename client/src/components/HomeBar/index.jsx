@@ -38,7 +38,7 @@ const HomeBar = () => {
     <div id="homebar">
       <img src={logo} alt="Hammerhead Logo"/>
       <Alert count={notificationCount} notifications={notifications} unread={unread} markAsRead={markAsRead}/>
-      <Avatar />
+      {/* <Avatar /> */}
     </div>
   );
 

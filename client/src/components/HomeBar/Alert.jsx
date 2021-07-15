@@ -7,7 +7,7 @@ const Alert = ({ count, unread, notifications, markAsRead}) => {
 
   const getUnread = () => {
     return unread > 0
-      ? <span style={{backgroundColor: 'red'}}>{unread}</span>
+      ? <span>{unread}</span>
       : null;
   }
 
