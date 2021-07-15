@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useHistory } from 'react-router-dom';
 import Sidebar from '../Sidebar/index.jsx';
 import EmployeeManagement from '../EmployeeManagement/index.jsx';
 import DataCharts from '../DataCharts/index.jsx';
@@ -12,10 +12,12 @@ import { datapoints } from '../../../../dummyData/bitcoinPrices.js';
 
 const Dashboard = ({ setAuthed }) => {
 
+  const history = useHistory();
   const match = useRouteMatch();
 
   const logout = () => {
     setAuthed(false);
+    history.push('/');
   }
 
   return (
