@@ -11,6 +11,16 @@
     background-color: red;
   }
 
+  #icon {
+    background: red;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+  }
+
   #notification-list {
     width: fit-content;
     height: 20em;
@@ -26,6 +36,8 @@
       border: solid 1px black;
     }
   }
+
+  color: black;
 
   .alert {
     height: 30px;
