@@ -101,11 +101,11 @@ const DynamicGraphWrapper = ({data}) => {
   }
 
   return (
-    <div>
-      <div>
+    <div id="graph">
+      <div id="graphWrapperDiv">
         {dataKeys.map((property, i) => { return <GraphKey propertyName={property} key={i} addData={addData} deleteData={deleteData} addToColorKey={addToColorKey} colorKey={colorKey}/>})}
       </div>
-      <div style={{height: '50vh', width: '30vw'}}>
+      <div id="graphDiv">
         {dataKeys.length ? <Graph xAxis={xAxis} keys={keys} data={data} colorKey={colorKey}/> : null}
       </div>
     </div>

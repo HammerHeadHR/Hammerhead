@@ -27,7 +27,7 @@ const Share = ({datasetId}) => {
   const takeFromShareList = (id) => {
     let index = receivers.indexOf(id);
     let tempReceivers = [...receivers];
-    tempReceivers.splice(index, 0);
+    tempReceivers.splice(index, 1);
     setReceivers(tempReceivers);
   }
 
@@ -42,8 +42,8 @@ const Share = ({datasetId}) => {
 
   if (employees.length) {
     return (
-      <div>
-        <div>
+      <div id="share">
+        <div id="employees">
           {employees.map((employee, i) => {return <Employee employee={employee} key={i} share={makeShareList} dontShare={takeFromShareList}/>})}
         </div>
         <button type='button' onClick={handleShare}>Share</button>
@@ -67,7 +67,7 @@ const Employee = ({employee, share, dontShare}) => {
   }
 
   return (
-    <div>
+    <div id="employee">
       <p>{employee.username}</p>
       <input type="checkbox" onChange={handleChange}></input>
     </div>

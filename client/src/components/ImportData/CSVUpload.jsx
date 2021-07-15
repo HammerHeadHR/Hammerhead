@@ -51,8 +51,8 @@ const CSVUpload = ({handleData, handleDatasetId}) => {
 
   return (
     <form>
-      <input type='file' id='file'></input>
-      <input type='text' value={ title } onChange={ handleChange }></input>
+      <input id='csvButton' type='file' id='file'></input>
+      <input id="csvName" type='text' value={ title } onChange={ handleChange } placeholder="Data Title"></input>
       <select onChange={handleTeamChange} value={teamId}>
         {teams.map((team, i) => { return <Team teamName={team.name} teamId={team.id} key={i}/>})}
       </select>
