@@ -45,7 +45,7 @@ router.put('/password', async (req, res) => {
   let hashed = createHash(password, salt);
 
   try {
-    
+
     let dbRes = await updatePassword(userId, hashed, salt);
 
     if (dbRes.rowCount === 1) {
@@ -106,6 +106,17 @@ router.put('/remove', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     let dbRes = await getUsers();
+    dbRes.forEach((user) => {
+      let username = user.username;
+      for (let i = 1; i < username.length; i++) {
+        if (username[i] === username[i].toUpperCase()) {
+          let firstName = username.slice(0, i);
+          let lastName = username.slice(i, username.length)
+          user.username = firstName + ' ' + lastName;
+        }
+      }
+    })
+
     res.send(dbRes);
   } catch (error) {
     res.status(500).send(error);
