@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import SortBar from './SortBar.jsx';
 import ViewChart from '../ViewChart/index.jsx';
 
-const DataCharts = () => {
+const DataCharts = ({datasetId}) => {
   const [results, setResults] = useState([{
     title: 'Corn prices over time',
     author: 'Thomas Johnson',
@@ -20,6 +20,8 @@ const DataCharts = () => {
   ]);
 
 
+
+
   const [chartShowing, setChartShowing] = useState(false);
   const [chartId, setChartId] = useState(null);
   const generateCharts = () => {
@@ -27,12 +29,12 @@ const DataCharts = () => {
     return results.map((result) => {
       numbo++;
       return (
-        <div onClick={() => setId(result.id)}  key={result+numbo}>
-          <div>
+        <div className="result" onClick={() => setId(result.id)}  key={result+numbo}>
+          <div className="interior-div">
             <h3 key={result.title}>{result.title}</h3>
             <p>{result.owner}</p>
           </div>
-          <div >
+          <div className="interior-div">
             <p>{result.created_at}</p>
             <p>{result.team}</p>
           </div>
@@ -40,6 +42,12 @@ const DataCharts = () => {
       );
     })
   };
+
+  if (datasetId !== undefined) {
+    setChartId(datasetId);
+    setChartShowing(true);
+  }
+
   const setId = (id) => {
     setChartShowing(prev => !prev);
     if (!id) {

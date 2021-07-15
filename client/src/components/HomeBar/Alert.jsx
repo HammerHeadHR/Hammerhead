@@ -7,13 +7,13 @@ const Alert = ({ count, unread, notifications, markAsRead}) => {
 
   const getUnread = () => {
     return unread > 0
-      ? <span style={{backgroundColor: 'red'}}>{unread}</span>
+      ? <span>{unread}</span>
       : null;
   }
 
   return opened ? (
     <>
-      <div class="alert" onClick={() => setOpened(!opened)}>
+      <div className="alert" onClick={() => setOpened(!opened)}>
         {getUnread()}
         <NotificationList notifications={notifications} markAsRead={markAsRead}/>
       </div>
@@ -21,7 +21,7 @@ const Alert = ({ count, unread, notifications, markAsRead}) => {
   )
   : (
     <>
-      <div class="alert" onClick={() => setOpened(!opened)}>
+      <div className="alert" onClick={() => setOpened(!opened)}>
         {getUnread()}
       </div>
     </>

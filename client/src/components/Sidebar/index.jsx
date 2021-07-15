@@ -1,17 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
+import { UserContext } from '../../App.jsx';
 
 const Sidebar = () => {
+  
+  const user = useContext(UserContext);
 
   return (
     <div id="sidebar">
+      {user.user.admim ?
         <Link to="/management">Employee Management</Link>
-        <br/>
+        :
+        null
+      }
         <Link to="/data-charts">Data Tables</Link>
-        <br/>
         <Link to="/create-chart">Upload Data</Link>
-        <br/>
     </div>
   );
 

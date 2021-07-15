@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const shareData = (senderId, receiverId, datasetId) => {
   let body = {
     senderId: senderId,
@@ -7,4 +9,4 @@ export const shareData = (senderId, receiverId, datasetId) => {
 
   return axios.post('/notifications/', body)
   .then(() => console.log('Notified'));
-}
+};

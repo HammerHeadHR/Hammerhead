@@ -35,8 +35,8 @@ const TeamList = ({ teams, setTeams, getTeams }) => {
   };
 
   return (
-    <div>
-      <h3>Teams</h3>
+    <div id="team-management">
+      <h2 id="team-heading">Teams</h2>
       {editTeam ?
         <>
           <label htmlFor="update-team">Updated name for "{teamToEdit.name}": </label>
@@ -45,11 +45,13 @@ const TeamList = ({ teams, setTeams, getTeams }) => {
           <button onClick={() => setEditTeam(false)}>Cancel</button>
         </>
       :
-        teams.map(team =>
-          <div key={team.id}>
-            <span>{team.name}</span>
-            <button onClick={() => updateTeam(team)}>Edit Name</button>
-          </div>)
+        <div id="teams-container">
+          {teams.map(team =>
+            <div key={team.id}>
+              <span>{team.name}</span>
+              <button onClick={() => updateTeam(team)}>Edit Team Name</button>
+            </div>)}
+        </div>
       }
       {addTeam &&
         <>
@@ -58,7 +60,6 @@ const TeamList = ({ teams, setTeams, getTeams }) => {
           <button onClick={() => setAddTeam(false)}>Cancel</button>
         </>
       }
-      <br/>
       {!editTeam && <button onClick={createTeam}>Add Team</button>}
     </div>
   );
