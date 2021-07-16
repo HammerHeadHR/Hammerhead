@@ -33,23 +33,45 @@ const SortBar = (props) => {
 
   const yieldResults = () => {
     //MAKE QUERY in here, and then sort and edit in here.
+    var adminOptions = {
+      method: 'get',
+      url: '/users/current/'
+    };
     var options = {
       method: 'get',
       url: '/datasets'
     };
-    axios(options).then((results) => {
+    const dataRequest = axios(options);
+    const userRequest = axios(adminOptions);
+    axios.all([dataRequest, userRequest]).then((responses) => {
+      const dataReq = responses[0];
+      const userReq = responses[1];
+      console.log('userReq: ', userReq);
+      console.log('dataReq: ', dataReq);
       var users = {};
-      for (var i = 0; i < results.data.length; i++) {
-        users[results.data[i].owner] = true;
+      for (var i = 0; i < dataReq.data.length; i++) {
+        users[dataReq.data[i].owner] = true;
       }
       var newEmp = Object.keys(users);
       setEmployees(Object.keys(users));
-      return results;
-    }).then((results) => {
-
-      filterResults(results.data);
-    }).catch((err) => {
-      console.log(err);
+      return [dataReq, userReq];
+    }).then((responses) => {
+      const dataReq = responses[0];
+      const userReq = responses[1];
+      console.log('userReq2: ', userReq.data);
+      console.log('dataReq2: ', dataReq);
+      if (userReq.data.admin) {
+        filterResults(dataReq.data);
+      }
+      var adminFilteredResults = [];
+      for (var i = 0; i < dataReq.data.length; i++) {
+        if (dataReq.data[i].team !== "Admin") {
+          adminFilteredResults.push(dataReq.data[i]);
+        }
+      }
+      filterResults(adminFilteredResults);
+    }).catch((error) => {
+      console.log(error);
     })
   }
 
@@ -100,7 +122,7 @@ const SortBar = (props) => {
   useEffect(() => {
     var options = {
       method: 'get',
-      url: '/teams'
+      url: '/teams/'
     };
     axios(options).then((result) => {
       var teams = {};
