@@ -18,11 +18,6 @@ const Dashboard = ({ setAuthed }) => {
   const match = useRouteMatch();
   const [slide, setSlide] = useState(false);
 
-  useEffect(() => {
-    const audioEl = document.getElementsByClassName("audio-element")[0]
-    audioEl.play()
-  });
-
   const logout = () => {
     setAuthed(false);
     history.push('/');
