@@ -4,9 +4,11 @@ import NotificationList from './NotificationList.jsx';
 const Alert = ({ count, unread, notifications, markAsRead}) => {
 
   const [opened, setOpened] = useState(false);
+  const [played, setPlayed] = useState(false);
 
   const getUnread = () => {
-    if (unread > 0) {
+    if (unread > 0 && played === false) {
+      setPlayed(true);
       const audioEl = document.getElementsByClassName("audio-element")[0]
       audioEl.play()
     }

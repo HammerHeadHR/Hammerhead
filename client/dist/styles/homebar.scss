@@ -21,7 +21,11 @@
   }
 
   span {
-    background-color: red;
+    color: white;
+    position: absolute;
+    top: 15%;
+    left: 33%;;
+    font-weight: bold;
   }
 
   #icon {
@@ -75,6 +79,7 @@
     background-color: gray;
     cursor: pointer;
     z-index: 10;
+    position: relative;
 
     @include mobile {
       justify-self: baseline;
