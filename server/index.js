@@ -25,15 +25,15 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
 app.use('/login', loginRoutes, createSession);
-// app.use('/login', createSession, loginRoutes);
-app.use(verifySession)
+
+app.use(verifySession);
 
 app.use('/datasets', formidable());
 app.use('/datasets', datasetRoutes);
 
-app.use('/users', verifyAdmin, userRoutes);
+app.use('/users', userRoutes);
 
-app.use('/teams', verifyAdmin, teamRoutes);
+app.use('/teams', teamRoutes);
 
 app.use('/notes', noteRoutes);
 

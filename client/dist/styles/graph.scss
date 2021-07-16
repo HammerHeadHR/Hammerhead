@@ -4,6 +4,10 @@
   align-self: stretch;
   padding: 2em;
 
+  @include mobile {
+    padding: 0;
+  }
+
   #graphWrapperDiv {
     display: flex;
     flex-direction: row;
@@ -42,6 +46,10 @@
         }
       }
 
+      @include mobile {
+        margin: auto;
+      }
+
       input {
         margin-right: 1.5em;
       }
@@ -67,6 +75,10 @@
   #graphDiv {
     width: 90%;
     height: 100%;
+
+    @include mobile {
+      width: 90vw;
+    }
   }
 
 

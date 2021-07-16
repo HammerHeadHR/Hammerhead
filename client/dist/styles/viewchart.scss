@@ -9,8 +9,6 @@
   justify-content: center;
   text-shadow: .5px .2px $primary;
 
-
-
   nav {
     height: 2.2em;
     background-color:$accent;
@@ -23,6 +21,23 @@
     border-bottom: .3em solid $secondary;
     border-radius: .3em .3em 0 0;
 
+    @include mobile {
+      display: grid;
+      font-size: .8em;
+      height: unset;
+    }
+
+    div:nth-of-type(1) {
+      grid-column: 1;
+    }
+
+    div:nth-of-type(2) {
+      grid-column: 2;
+    }
+
+    div:nth-of-type(3) {
+      grid-column: 3;
+    }
 
     h4 {
       display: inline;
@@ -33,13 +48,13 @@
 
     }
 
-    div:nth-of-type(2) {
-      float: right;
+    // div:nth-of-type(2) {
+    //   float: right;
 
-      form {
-        display: inline;
-      }
-    }
+    //   form {
+    //     display: inline;
+    //   }
+    // }
 
     select {
       appearance: none;
@@ -52,6 +67,10 @@
       color: black;
       text-shadow: .5px .2px $primary;
 
+      @include mobile {
+        appearance: auto;
+        border: 1px solid black;
+      }
 
       &:hover {
         background-color:$secondary;

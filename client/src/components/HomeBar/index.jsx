@@ -9,8 +9,6 @@ const HomeBar = () => {
   const [notifications, setNotifications] = useState([]);
   const [unread, setUnread] = useState(0);
 
-  let receiverId = 3;
-
   const markAsRead = (notificationId) => {
     let data = {
       notificationId: notificationId
@@ -20,18 +18,22 @@ const HomeBar = () => {
   }
 
   useEffect(() => {
-    axios.get(`/notifications/${receiverId}`)
-    .then((notifications) => {
-      setNotifications(notifications.data);
-      setNotificationCount(notifications.data.length);
-      let count = 0;
-      notifications.data.map(notification => {
-        if (!notification.viewed) {
-          count++;
-        }
+    axios.get('/users/current')
+      .then(res => res.data.id)
+      .then(id => {
+        axios.get(`/notifications/${id}`)
+        .then((notifications) => {
+          setNotifications(notifications.data);
+          setNotificationCount(notifications.data.length);
+          let count = 0;
+          notifications.data.map(notification => {
+            if (!notification.viewed) {
+              count++;
+            }
+          })
+          setUnread(count);
+        })
       })
-      setUnread(count);
-    })
   }, [unread]);
 
   return (

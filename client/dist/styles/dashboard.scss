@@ -5,37 +5,80 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
 
+  @include mobile {
+    grid-template-columns: 1fr;
+    grid-template-rows: 5% 95%
+  }
+
+  @include tablet-l {
+    grid-template-columns: 20% 80%;
+  }
+
+  @include tablet {
+    grid-template-columns: 25% 75%;
+  }
+
+  header {
+    display: none;
+    grid-row: 1;
+
+    @include mobile {
+      display: block;
+    }
+
+    @include mobile-l {
+      display: block;
+    }
+
+    #header {
+      background-color: $secondary;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      color: white;
+      height: 3em;
+      border-bottom: 1px solid $accent;
+
+      .burger div{
+        margin: 5px;
+        height: 3px;
+        width: 25px;
+        background-color: #fff;
+        transition: all 0.3s ease;
+      }
+
+      .burger{
+        padding: .5em 0 0 .5em;
+        cursor: pointer;
+      }
+    }
+  }
+
   #menu {
     display: grid;
     grid-column: 1;
-    padding: 2em;
+    padding: 1em;
     border-right: 1px solid black;
     grid-template-rows: 20% 60% 20%;
     background-color: $secondary;
     color: white;
+    transition: 1s;
+    z-index: 10;
 
-    #homebar {
-      grid-row: 1;
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
+    @include mobile {
+      height: 100vh;
+      top: 3.05em;
+      transform: translateX(-100%);
+      position: absolute;
+      grid-template-rows: 1fr 1fr 1fr;
+    }
 
-      img {
-        grid-row: 1;
-        grid-column-start: 1;
-        grid-column-end: 3;
-        width: 100%;
-      }
-
-      div:nth-of-type(1) {
-        grid-row: 2;
-        grid-column: 1;
-      }
-
-      div:nth-of-type(2) {
-        grid-row: 2;
-        grid-column: 2;
-      }
+    @include mobile-l {
+      height: 100vh;
+      top: 3.05em;
+      transform: translateX(-100%);
+      position: absolute;
+      grid-template-rows: 1fr 1fr 1fr;
     }
 
     #sidebar {
@@ -54,17 +97,32 @@
           color: $accent !important;
           border-color: $accent;
         }
+
+        @include mobile {
+          font-size: 1.6em;
+        }
+
       }
 
     }
 
     button {
       height: fit-content;
-      grid-row: 3
+      grid-row: 3;
+      @include button;
     }
+  }
+
+  .show {
+    transform: translateX(0) !important;
   }
 
   #inner {
     grid-column: 2;
+
+    @include mobile {
+      grid-column: 1;
+      grid-row:2;
+    }
   }
 }

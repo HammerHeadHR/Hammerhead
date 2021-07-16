@@ -1,20 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { UserContext } from '../../App.jsx';
+import axios from 'axios';
 
-const Sidebar = () => {
+const Sidebar = ({setSlide}) => {
 
   const user = useContext(UserContext);
+  const [managementLink, setManagementLink] = useState(null);
+
+  const menuSlide = () => {
+    let element = document.getElementById('menu');
+    element.classList.remove('show');
+    setSlide(false);
+  }
+
+  useEffect(() => {
+    axios.get('/users/current')
+      .then(({ data }) => {
+        console.log(data);
+        if (data.admin) setManagementLink(<Link onClick={menuSlide} to="/dashboard/management">Employee Management</Link>);
+      })
+      .catch(error => console.error(error));
+  }, []);
 
   return (
     <div id="sidebar">
-      {user.user.admin ?
-        <Link to="/dashboard/management">Employee Management</Link>
-        :
-        null
-      }
-        <Link to="/dashboard/data-charts">Data Tables</Link>
-        <Link to="/dashboard/create-chart">Upload Data</Link>
+        {managementLink}
+        <Link onClick={menuSlide} to="/dashboard/data-charts">Data Tables</Link>
+        <Link onClick={menuSlide} to="/dashboard/create-chart">Upload Data</Link>
     </div>
   );
 
