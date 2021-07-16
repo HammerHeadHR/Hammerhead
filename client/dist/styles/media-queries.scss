@@ -14,7 +14,7 @@ $small:      320px;
   }
 }
 
-@mixin landscape{
+@mixin mobile-l{
   @media (max-width: #{$landscape}) and (max-height: #{$mobile}) {
     @content;
   }

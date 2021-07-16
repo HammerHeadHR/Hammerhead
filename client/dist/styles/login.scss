@@ -9,6 +9,14 @@
   box-shadow: 1px 1px 15px 0 $secondary;
   transition: .5s;
 
+  div:nth-of-type(1) {
+    text-align: center;
+  }
+
+  @include mobile-l {
+    padding: 1em;
+  }
+
   h1, h3 {
     text-align: center;
     margin: 0;
@@ -16,6 +24,10 @@
 
   img {
     height: 8em;
+
+    @include mobile-l {
+      height: 6em;
+    }
   }
 
   #form-div {
@@ -24,25 +36,69 @@
     margin: auto;
     text-align: center;
 
-    input, label {
-      display: block;
-    }
+    form {
 
-    input[type="text"], input[type="password"] {
-      margin-bottom: 1em;
-      padding: .2em .5em;
-      font-size: 1.1em;
-      border-radius: 1em;
-      text-align: center;
-
-      &:focus-visible {
-        outline: none;
+      @include mobile-l {
+        display: grid;
       }
-    }
 
-    input[type="submit"] {
-      margin: 1em auto;
-      @include button;
+      label:nth-of-type(1) {
+
+        @include mobile-l {
+          grid-column: 1;
+          grid-row: 1;
+        }
+      }
+
+      input:nth-of-type(1) {
+
+        @include mobile-l {
+          grid-column: 1;
+          grid-row: 2;
+        }
+      }
+
+      label:nth-of-type(2) {
+
+        @include mobile-l {
+          grid-column: 2;
+          grid-row: 1;
+        }
+      }
+
+      input:nth-of-type(2) {
+
+        @include mobile-l {
+          grid-column: 2;
+          grid-row: 2;
+        }
+      }
+
+      input, label {
+        display: block;
+      }
+
+      input[type="text"], input[type="password"] {
+        margin-bottom: 1em;
+        padding: .2em .5em;
+        font-size: 1.1em;
+        border-radius: 1em;
+        text-align: center;
+
+        &:focus-visible {
+          outline: none;
+        }
+      }
+
+      input[type="submit"] {
+        margin: 1em auto;
+        @include button;
+
+        @include mobile-l {
+          grid-column-start: 1;
+          grid-column-end: 3;
+        }
+      }
     }
   }
 }

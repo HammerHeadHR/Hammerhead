@@ -6,6 +6,10 @@
   display: grid;
   grid-template-rows: 1fr 1fr;
 
+  @include mobile {
+    grid-template-rows: 70% 30%;
+  }
+
   img {
     grid-row: 1;
     width: 100%;
@@ -76,7 +80,7 @@
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    background-color: gray;
+    background-color: $primary;
     cursor: pointer;
     z-index: 10;
     position: relative;

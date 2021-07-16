@@ -7,11 +7,22 @@
   grid-template-rows: 1% 64% 35%;
   background-color: $primaryBack;
 
+  @include mobile {
+    margin: 0;
+    width: unset;
+    border-radius: unset;
+  }
+
 
   #bottom-grid {
     grid-row: 3 / 4;
     display: grid;
     grid-template-columns: 50% 50%;
+
+    @include mobile {
+      grid-row: 3;
+      grid-template-columns: 100%;
+    }
 
     #info {
       grid-column: 1 / 2;
@@ -23,6 +34,12 @@
       border: $accent 2px solid;
       border-radius: 10px;
       padding-left: 2em;
+
+      @include mobile {
+        grid-column: 1;
+        width: 90vw;
+        margin-top: 6em;
+      }
 
       h1 {
         border-bottom: $accent solid 1px;
@@ -38,6 +55,14 @@
       border: $accent 2px solid;
       background-color: $secondary;
       border-radius: 10px;
+
+      @include mobile {
+        grid-column: 1;
+        width: 90vw;
+        align-self: unset;
+        justify-self: unset;
+        place-self: center;
+      }
 
       #notesScroll {
         height: 70%;

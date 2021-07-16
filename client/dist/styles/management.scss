@@ -53,6 +53,10 @@
       margin: auto;
       overflow: auto;
       width: 24vw;
+
+      @include mobile {
+        width: 80vw;
+      }
     }
 
     select {
