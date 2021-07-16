@@ -19,9 +19,10 @@ const Share = ({datasetId}) => {
   }, []);
 
   const makeShareList = (id) => {
-    let tempReceivers = [...receivers];
-    tempReceivers.push(id);
-    setReceivers(tempReceivers);
+    // let tempReceivers = [...receivers];
+    // tempReceivers.push(id);
+    // setReceivers(tempReceivers);
+    console.log(e.target.value);
   }
 
   const takeFromShareList = (id) => {
@@ -43,7 +44,8 @@ const Share = ({datasetId}) => {
   if (employees.length) {
     return (
       <div id="share">
-        <div id="employees">
+        <label htmlFor="employees">Share with...</label>
+        <div id="employees" onChange={makeShareList} multiple>
           {employees.map((employee, i) => {return <Employee employee={employee} key={i} share={makeShareList} dontShare={takeFromShareList}/>})}
         </div>
         <button type='button' onClick={handleShare}>Share</button>

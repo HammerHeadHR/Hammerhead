@@ -22,8 +22,8 @@ const GraphKey = ({propertyName, addData, deleteData, addToColorKey, colorKey}) 
 
   return (
     <>
-      <label>{propertyName}</label>
-      <input type="checkbox" name="graph-placement" value="data" onChange={handleChange}></input>
+      <label htmlFor="graph-placement">{propertyName}</label>
+      <input type="checkbox" name="graph-placement" id="graph-placement" value="data" onChange={handleChange}></input>
       {isData ? <input type="color" value={colorKey[propertyName]} onChange={handleColorChange}></input> : null}
     </>
   )
@@ -31,7 +31,7 @@ const GraphKey = ({propertyName, addData, deleteData, addToColorKey, colorKey}) 
 
 
 
-const Graph = ({data, xAxis, keys, colorKey}) => {
+const Graph = ({data, xAxis, keys, colorKey, dataMin, dataMax}) => {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -47,7 +47,12 @@ const Graph = ({data, xAxis, keys, colorKey}) => {
         }}
         >
         <CartesianGrid strokeDasharray="3 3" />
+        {/* {
+        typeof dataMin === 'number' ?
+        <XAxis dataKey={xAxis} type="number" domain={[`dataMin + ${dataMin}, dataMax - ${dataMax}`]}/>
+        : */}
         <XAxis dataKey={xAxis} />
+        {/* } */}
         <YAxis />
         <Tooltip />
         <Legend />
@@ -63,6 +68,10 @@ const DynamicGraphWrapper = ({data}) => {
   const [keys, setKeys] = useState(['']);
   const [dataKeys, setDataKeys] = useState([]);
   const [colorKey, setColorKey] = useState({});
+  const [startData, setStartData] = useState(0);
+  const [endData, setEndData] = useState(0);
+  const [dataMin, setDataMin] = useState(0);
+  const [dataMax, setDataMax] = useState(0);
 
 
   useEffect(() => {
@@ -76,6 +85,20 @@ const DynamicGraphWrapper = ({data}) => {
     setColorKey({[result[1]]: '#843592'})
 
   }, []);
+
+  useEffect(() => {
+    let start = data[0][dataKeys[0]];
+    let end = data[data.length - 1][dataKeys[0]];
+    if (Number(start) !== NaN) {
+      start = Number(start);
+      end = Number(end);
+    }
+    console.log(start, end);
+    setStartData(start);
+    setDataMin(start);
+    setEndData(end);
+    setDataMax(end);
+  }, [dataKeys])
 
 
   const addData = (name) => {
@@ -100,13 +123,59 @@ const DynamicGraphWrapper = ({data}) => {
     setColorKey(tempColorKey);
   }
 
+  const handleDataMin = (e) => {
+    console.log(e.target.value, dataMin);
+    setDataMin(Number(e.target.value));
+  };
+
+  const handleDataMax = (e) => {
+    console.log(e.target.value, dataMax);
+    setDataMax(Number(e.target.value));
+  }
+
   return (
     <div id="graph">
       <div id="graphWrapperDiv">
-        {dataKeys.map((property, i) => { return <GraphKey propertyName={property} key={i} addData={addData} deleteData={deleteData} addToColorKey={addToColorKey} colorKey={colorKey}/>})}
+        <div id="choices">
+          {dataKeys.map((property, i) => { return <GraphKey propertyName={property} key={i} addData={addData} deleteData={deleteData} addToColorKey={addToColorKey} colorKey={colorKey}/>})}
+        </div>
+        {/* {
+        dataMax && typeof dataMax === 'number' ?
+        <>
+        <div className="dataDiv">
+          <label htmlFor="dataMin">X Axis Start</label>
+          <input
+            type="range"
+            name="dataMin"
+            id="dataMin"
+            onInput={handleDataMin}
+            min='0'
+            max='5'
+            defaultValue='0'
+            step="1"
+          ></input>
+        </div>
+
+        <div className="dataDiv">
+        <label htmlFor="dataMax">X Axis End</label>
+          <input
+            type="range"
+            name="dataMax"
+            id="dataMax"
+            onInput={handleDataMax}
+            min='0'
+            defaultValue='5'
+            max='5'
+            step="1"
+          ></input>
+        </div>
+        </>
+        :
+        null
+       } */}
       </div>
       <div id="graphDiv">
-        {dataKeys.length ? <Graph xAxis={xAxis} keys={keys} data={data} colorKey={colorKey}/> : null}
+        {dataKeys.length ? <Graph xAxis={xAxis} keys={keys} data={data} colorKey={colorKey} dataMin={dataMin} dataMax={dataMax}/> : null}
       </div>
     </div>
   )

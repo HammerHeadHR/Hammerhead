@@ -1,6 +1,6 @@
 #import {
   width: 60vw;
-  height: 80vh;
+  height: 90vh;
   display: grid;
   grid-template-rows: 20% 60% 20%;
   margin: 3em auto;
@@ -10,108 +10,155 @@
 
   form {
     grid-row: 1 / 2;
-    padding: 2em;
+
     display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 50% 50%;
 
 
 
-    select {
-      margin: 2em;
-      width: 8em;
-      padding: 0.5em;
-      border: $secondary;
-      border-radius: 10px;
-      grid-row: 2 / 3;
+    label {
+      grid-row: 1 / 2;
+      align-self: end;
+      justify-self: start;
+      margin: 0.5em;
+      margin-left: 2em;
     }
+
+    #selectCategory {
+      grid-column: 3 / 4;
+    }
+
+    #csvNameLabel {
+      grid-column: 2 / 3;
+    }
+
+    .custom-file-upload {
+      grid-row: 2 / 3;
+      grid-column: 1 / 2;
+      justify-self: center;
+      align-self: start;
+      border: 1px solid $primary;
+      background-color: $secondary;
+      color: white;
+      text-align: center;
+      width: 9em;
+      height: 1.5em;
+      border-radius: 15px;
+      padding: 6px 12px;
+      cursor: pointer;
+      z-index: 3;
+
+      &:hover {
+        background-color: $secondaryBack;
+        border: 2px solid $accent;
+      }
+    }
+
 
     input {
       margin: 0.5em;
+      margin-left: 2em;
       grid-row: 2 / 3;
+      place-self: start;
     }
+
+    input[type="file"] {
+      opacity: 0;
+      z-index: 5;
+      position: absolute;
+      grid-column: 1 / 2;
+      justify-self: center;
+      align-self: start;
+    }
+
+
 
     #csvName {
       width: 12em;
-      height: 2em;
+      height: 2.5em;
       border: $primary 2px solid;
       border-radius: 10px;
+      grid-column: 2 / 3;
     }
+
+
+    select {
+      margin: 0.7em;
+      margin-left: 2.3em;
+      width: 12em;
+      height: 2.7em;
+      border: $secondary;
+      border-radius: 10px;
+      grid-column: 3 / 4;
+      grid-row: 2 / 3;
+      place-self: start;
+    }
+
 
     button {
       margin: 1em;
       @include secondaryButton;
       grid-row: 2 / 3;
+      grid-column: 4 / 5;
+      justify-self: center;
+      align-self: start;
     }
   }
 
-  #graph {
-    grid-row: 2 / 3;
-    justify-self: stretch;
-    align-self: stretch;
-    padding: 2em ;
 
-    #graphWrapperDiv {
-      padding: 0 2em 2em 2em;
-
-      label {
-        margin: 1em;
-      }
-
-      input {
-        margin-right: 1.5em;
-      }
-    }
-
-    #graphDiv {
-      width: 90%;
-      height: 100%;
-    }
-  }
 
   #share {
     grid-row: 3 / 4;
-    padding: 0 2em 2em 2em;
     align-self: center;
     justify-self: stretch;
     display: grid;
     grid-template-columns: 50% 50%;
 
+    label {
+      grid-column: 1 / 2;
+      padding-left: 10em;
+      justify-self: start;
+      align-self: center;
+    }
+
 
     #employees {
+      width: 14em;
+      height: 3em;
+      overflow-y: scroll;
+      border: $secondary 1px solid;
+      border-radius: 10px;
+      background: white;
       grid-column: 1 / 2;
       justify-self: center;
       align-self: end;
-      height: 5em;
-      width: 14em;
-      overflow-y: scroll;
-      color: white;
-
 
       #employee {
-        display: grid;
-        grid-template-columns: 70% 30%;
-        width: 100%;
-        height: 2.5em;
+        height: 1.3em;
+        width: 13.5em;
         margin: 0.25em;
-        background-color: $secondaryBack;
-        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
 
         p {
-          grid-column: 1 / 2;
-          place-self: center;
+
+          justify-self: start;
+          align-self: center;
         }
 
         input {
-          grid-column: 2 / 3;
-          place-self: center;
+
+          justify-self: end;
+          align-self: center;
         }
       }
     }
 
     button {
       grid-column: 2 / 3;
-      justify-self: start;
+      justify-self: center;
       align-self: center;
-      margin: 4em;
       @include secondaryButton;
     }
 

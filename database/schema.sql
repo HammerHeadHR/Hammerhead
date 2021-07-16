@@ -57,6 +57,13 @@ ALTER TABLE notifications ADD CONSTRAINT notifications_sender_id_fkey FOREIGN KE
 ALTER TABLE notifications ADD CONSTRAINT notifications_receiver_id_fkey FOREIGN KEY (receiver_id) REFERENCES users(id);
 ALTER TABLE notifications ADD CONSTRAINT notifications_dataset_id_fkey FOREIGN KEY (dataset_id) REFERENCES datasets(id);
 
+CREATE TABLE sessions (
+  id SERIAL NOT NULL PRIMARY KEY,
+  hash VARCHAR(64) UNIQUE,
+  user_id INT UNIQUE
+);
+ALTER TABLE sessions ADD CONSTRAINT session_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id);
+
 INSERT INTO teams (name) VALUES ('Agriculture');
 INSERT INTO teams (name) VALUES ('Crypto');
 INSERT INTO teams (name) VALUES ('Admin');

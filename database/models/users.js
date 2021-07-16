@@ -96,6 +96,18 @@ const getUsers = async () => {
   return dbRes.rows;
 };
 
+const getUser = async (userId) => {
+  const args = [userId]
+  const sql = `
+    SELECT u.id, username, t.name AS team, admin, active
+    FROM users u
+    LEFT JOIN teams t ON u.team_id = t.id
+    WHERE u.id = $1
+  `;
+  const dbRes = await client.query(sql, args);
+  return dbRes.rows[0];
+}
+
 module.exports = {
   addUser,
   updateUsername,
@@ -103,5 +115,6 @@ module.exports = {
   updateTeam,
   updateAdmin,
   deleteUser,
-  getUsers
+  getUsers,
+  getUser
 };

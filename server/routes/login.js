@@ -3,7 +3,7 @@ const router = express.Router();
 const { createHash, compareHash } = require('../hashUtil.js');
 const { login } = require('../../database/models/login.js');
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   let { username, password } = req.body;
 
   try {
@@ -21,7 +21,9 @@ router.post('/', async (req, res) => {
           'admin': row.admin,
           'active': row.active
         };
-        res.status(201).send(data);
+        // res.status(201).send(data);
+        res.locals.user = data;
+        next();
       } else {
         res.status(400).send('Password Invalid');
       }
