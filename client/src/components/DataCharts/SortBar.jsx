@@ -46,8 +46,6 @@ const SortBar = (props) => {
     axios.all([dataRequest, userRequest]).then((responses) => {
       const dataReq = responses[0];
       const userReq = responses[1];
-      console.log('userReq: ', userReq);
-      console.log('dataReq: ', dataReq);
       var users = {};
       for (var i = 0; i < dataReq.data.length; i++) {
         users[dataReq.data[i].owner] = true;
@@ -58,10 +56,8 @@ const SortBar = (props) => {
     }).then((responses) => {
       const dataReq = responses[0];
       const userReq = responses[1];
-      console.log('userReq2: ', userReq.data);
-      console.log('dataReq2: ', dataReq);
       if (userReq.data.admin) {
-        filterResults(dataReq.data);
+        return filterResults(dataReq.data);
       }
       var adminFilteredResults = [];
       for (var i = 0; i < dataReq.data.length; i++) {
