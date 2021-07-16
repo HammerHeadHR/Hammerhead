@@ -2,13 +2,30 @@
   justify-items: center;
   color: black;
   background-color: rgba(0,0,0,0);
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+
+  img {
+    grid-row: 1;
+    width: 100%;
+  }
+
+  div {
+    grid-row: 2;
+  }
 
   h3 {
     text-align: center;
+    color: white;
   }
 
   span {
-    background-color: red;
+    color: white;
+    position: absolute;
+    top: 15%;
+    left: 33%;;
+    font-weight: bold;
   }
 
   #icon {
@@ -22,18 +39,34 @@
   }
 
   #notification-list {
-    width: fit-content;
-    height: 20em;
+    width: 20em;
     border: solid 1px black;
-    background: white;
+    background: $primary;
     overflow-y: scroll;
     padding: .5em;
 
+    a {
+      text-decoration: none;
+    }
+
     .notification {
-      padding: 2em;
+      padding: 1em;
       position: relative;
-      background-color: rgba(0,0,0,0.2);
+      background-color: white;
       border: solid 1px black;
+      color: black;
+      margin-bottom: .5em;
+
+      &:hover {
+        border-color: $accent;
+        color: $accent;
+        background-color: $secondary;
+      }
+
+      p {
+        display: inline;
+      }
+
     }
   }
 
@@ -45,6 +78,12 @@
     border-radius: 50%;
     background-color: gray;
     cursor: pointer;
+    z-index: 10;
+    position: relative;
+
+    @include mobile {
+      justify-self: baseline;
+    }
 
     &:hover {
       background-color: red;
