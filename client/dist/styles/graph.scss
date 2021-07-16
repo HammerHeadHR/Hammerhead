@@ -1,0 +1,49 @@
+#graph {
+  grid-row: 2 / 3;
+  justify-self: stretch;
+  align-self: stretch;
+  padding: 2em;
+
+  #graphWrapperDiv {
+    display: flex;
+    flex-direction: row;
+
+    label {
+      margin: 1em;
+      display: block;
+    }
+    
+    #choices {
+      height: 5em;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      overflow-y: scroll;
+
+      input {
+        margin-right: 1.5em;
+      }
+    }
+
+
+    .dataDiv {
+      justify-self: end;
+      display: flex;
+      flex-direction: column;
+
+      #dataMin {
+        align-self: start;
+      }
+
+      #dataMax {
+        align-self: end;
+      }
+    }
+
+  }
+
+  #graphDiv {
+    width: 90%;
+    height: 100%;
+  }
+}
