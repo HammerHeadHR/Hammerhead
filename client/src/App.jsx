@@ -16,14 +16,8 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            {!authed ?
               <Login setUser={setUser} setAuthed={setAuthed}/>
-              :
-              <Redirect to="/dashboard/data-charts"/>
-            }
           </Route>
-          {/* <Route path="/log-in">
-          </Route> */}
           <Route path="/dashboard">
             <Dashboard user={user} setAuthed={setAuthed}/>
           </Route>

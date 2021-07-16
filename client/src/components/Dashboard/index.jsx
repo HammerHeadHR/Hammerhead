@@ -5,6 +5,7 @@ import EmployeeManagement from '../EmployeeManagement/index.jsx';
 import DataCharts from '../DataCharts/index.jsx';
 import ImportData from '../ImportData/index.jsx';
 import HomeBar from '../HomeBar/index.jsx';
+import ViewChart from '../ViewChart/index.jsx';
 
 import { managers } from '../../../../dummyData/managers.js';
 import { employees } from '../../../../dummyData/employees.js';
@@ -37,6 +38,9 @@ const Dashboard = ({ setAuthed }) => {
             </Route>
             <Route path={`/dashboard/create-chart`}>
               <ImportData data={datapoints}/>
+            </Route>
+            <Route path={`/dashboard/view-chart/:datasetId`}>
+              <ViewChart />
             </Route>
           </div>
         </Switch>

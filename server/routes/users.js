@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { createHash, createRandom32String } = require('../hashUtil.js');
-const { addUser, updateUsername, updateTeam, updateAdmin, updatePassword, deleteUser, getUsers } = require('../../database/models/users.js');
+const { addUser, updateUsername, updateTeam, updateAdmin, updatePassword, deleteUser, getUsers, getUser} = require('../../database/models/users.js');
 
 router.post('/create', async (req, res) => {
   let { username, password, team, admin } = req.body;
@@ -45,7 +45,7 @@ router.put('/password', async (req, res) => {
   let hashed = createHash(password, salt);
 
   try {
-    
+
     let dbRes = await updatePassword(userId, hashed, salt);
 
     if (dbRes.rowCount === 1) {
@@ -112,4 +112,13 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/current', async (req, res) => {
+  try {
+    const user_id = req.body.user_id
+    let dbRes = await getUser(user_id);
+    res.send(dbRes);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+})
 module.exports = router;
