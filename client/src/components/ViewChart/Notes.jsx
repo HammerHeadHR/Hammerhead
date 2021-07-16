@@ -19,8 +19,6 @@ const Notes = ({notes, datasetId, getNotes}) => {
     }
 
 
-    console.log(formData);
-
     axios.post('/notes/', formData)
     .then(() => {
       getNotes(datasetId);

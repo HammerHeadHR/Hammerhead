@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import {shareData} from '../utilFunctions.js';
 import {UserContext} from '../../App.jsx';
+import Employee from '../SharedComponents/Employee.jsx';
 
 const Share = ({datasetId}) => {
 
@@ -19,13 +20,13 @@ const Share = ({datasetId}) => {
   }, []);
 
   const makeShareList = (id) => {
-    // let tempReceivers = [...receivers];
-    // tempReceivers.push(id);
-    // setReceivers(tempReceivers);
-    console.log(e.target.value);
+    let tempReceivers = [...receivers];
+    tempReceivers.push(id);
+    setReceivers(tempReceivers);
   }
 
   const takeFromShareList = (id) => {
+    // change to .filter
     let index = receivers.indexOf(id);
     let tempReceivers = [...receivers];
     tempReceivers.splice(index, 1);
@@ -45,7 +46,7 @@ const Share = ({datasetId}) => {
     return (
       <div id="share">
         <label htmlFor="employees">Share with...</label>
-        <div id="employees" onChange={makeShareList} multiple>
+        <div id="employees">
           {employees.map((employee, i) => {return <Employee employee={employee} key={i} share={makeShareList} dontShare={takeFromShareList}/>})}
         </div>
         <button type='button' onClick={handleShare}>Share</button>
@@ -56,24 +57,5 @@ const Share = ({datasetId}) => {
   }
 };
 
-const Employee = ({employee, share, dontShare}) => {
-  const [checked, setChecked] = useState(false);
-
-  const handleChange = () => {
-    if (checked) {
-      dontShare(employee.id)
-    } else {
-      share(employee.id);
-    }
-    setChecked(!checked);
-  }
-
-  return (
-    <div id="employee">
-      <p>{employee.username}</p>
-      <input type="checkbox" onChange={handleChange}></input>
-    </div>
-  )
-}
 
 export default Share;

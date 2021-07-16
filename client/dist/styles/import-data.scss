@@ -153,15 +153,17 @@
           align-self: center;
         }
       }
-    }
 
-    button {
-      grid-column: 2 / 3;
-      justify-self: center;
-      align-self: center;
-      @include secondaryButton;
+      button {
+        grid-column: 2 / 3;
+        justify-self: center;
+        align-self: center;
+        @include secondaryButton;
+      }
+
     }
 
   }
+
 
 }
