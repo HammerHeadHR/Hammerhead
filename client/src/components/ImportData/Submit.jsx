@@ -49,7 +49,7 @@ const Share = ({datasetId}) => {
         <div id="employees">
           {employees.map((employee, i) => {return <Employee employee={employee} key={i} share={makeShareList} dontShare={takeFromShareList}/>})}
         </div>
-        <button type='button' onClick={handleShare}>Share</button>
+        <button type='button' id="importShareButton" onClick={handleShare}>Share</button>
       </div>
     );
   } else {
