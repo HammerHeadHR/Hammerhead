@@ -19,28 +19,34 @@
       height: 10em;
       place-self: center;
       color: white;
-      background-color: $secondaryBack;
+      background-color: $secondary;
       border: $accent 2px solid;
       border-radius: 10px;
       padding-left: 2em;
+
+      h1 {
+        border-bottom: $accent solid 1px;
+      }
     }
 
     #notes {
       grid-column: 2 / 3;
       width: 28em;
       height: 10em;
-      place-self: center;
+      align-self: center;
+      justify-self: start;
       border: $accent 2px solid;
-      background-color: $secondaryBack;
+      background-color: $secondary;
       border-radius: 10px;
 
       #notesScroll {
-        height: 80%;
+        height: 70%;
         overflow-y: scroll;
 
         .note {
           color: white;
           margin: 1em;
+          border-bottom: $accent solid 1px;
 
           p, h5 {
             margin: 0;
@@ -51,6 +57,8 @@
 
       form {
         margin-left: 5%;
+        background-image: linear-gradient($secondary 95%, rgba(0, 0, 0, 0));
+        z-index: 4;
 
         input {
           width: 15em;
