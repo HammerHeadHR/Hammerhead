@@ -45,7 +45,17 @@
 
       a {
         color: white !important;
+        margin-bottom: 2em;
+        text-decoration: none;
+        border-bottom: 1px solid white;
+        padding-bottom: .3em;
+
+        &:hover {
+          color: $accent !important;
+          border-color: $accent;
+        }
       }
+
     }
 
     button {

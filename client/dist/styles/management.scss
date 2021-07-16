@@ -1,0 +1,116 @@
+#management {
+  align-self: center;
+  color: $accent;
+  display: flex;
+  flex-direction: column;
+  height: 98vh;
+  margin: auto;
+  text-align: center;
+  width: 96%;
+
+  #employee-management {
+    border: 1px solid $accent;
+    height: 70%;
+    overflow: auto;
+
+    #edit-employee {
+      border: 1px solid;
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      width: 32em;
+
+      div {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        width: 90%;
+      }
+    }
+
+    #add-employee {
+      border: 1px solid;
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      width: 30em;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        width: 85%;
+        margin: 1em auto;
+        align-items: center;
+      }
+    }
+
+    #employee-list {
+      border: 1px solid;
+      display: flex;
+      flex-direction: column;
+      height: 56vh;
+      margin: auto;
+      overflow: auto;
+      width: 24vw;
+    }
+
+    select {
+      border: 1px solid $accent;
+      color: white;
+      background: $primary;
+    }
+
+    #employee-list-options {
+      #emp-sort-by {
+        margin-left: 1em;
+      }
+    }
+  }
+
+  #team-management {
+    border: 1px solid $accent;
+    border-radius: 0em;
+    height: 28%;
+    overflow: auto;
+
+    #teams-container {
+      border: 1px solid;
+      display: flex;
+      flex-direction: column;
+      height: 18vh;
+      margin: auto;
+      overflow: auto;
+      width: 30em;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        width: 20em;
+
+        span {
+          align-self: center;
+        }
+      }
+    }
+  }
+
+  h2 {
+    margin: 0.3em auto;
+  }
+
+  button {
+    width: 10em;
+    height: 2em;
+    margin: 0.5em;
+  }
+
+  div {
+    background-color: $secondary;
+    margin: 0.5vh;
+  }
+
+
+
+}

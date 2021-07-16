@@ -6,7 +6,6 @@ const formidable = require('express-formidable');
 const { addDataset, getDataset, updateDataset, deleteDataset, getAllDatasets } = require('../../database/models/datasets.js');
 
 router.post('/', (req, res) => {
-  console.log(req.files, req.fields);
   const results = [];
   let key = Object.keys(req.files)[0];
   let path = req.files[key].path;

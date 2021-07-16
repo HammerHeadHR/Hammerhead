@@ -103,7 +103,6 @@ const SortBar = (props) => {
       url: '/teams'
     };
     axios(options).then((result) => {
-      console.log('teams request: ', result);
       var teams = {};
       for (var i = 0; i < result.data.length; i++) {
         teams[result.data[i].name] = true;
@@ -124,7 +123,7 @@ const SortBar = (props) => {
         <div>
           <form>
             <label>
-              <h4>category: </h4>
+              <h4>Category: </h4>
                 <select value={selectedCategory} onChange={changeCategories}>
                 <option key={'nonecat'} value='none'>None</option>
                   {makeCategories()}
@@ -135,10 +134,9 @@ const SortBar = (props) => {
         <div>
           <form>
             <label>
-              <h4>filter: </h4>
+              <h4>Filter: </h4>
                 <select value={selectedEmployee} onChange={changeEmployee}>
                   <option key={'nonedog'} value='none'>None</option>
-
                   {employees.map((employee) => {
                     return (
                       <option key={employee} value={employee}>{employee}</option>
@@ -150,10 +148,10 @@ const SortBar = (props) => {
           <span>    </span>
           <form>
             <label>
-              <h4>sort by: </h4>
+              <h4>Sort By: </h4>
                 <select value={sortBy} onChange={setSort}>
-                  <option key={'newest'} value='newest'>newest</option>
-                  <option key={'oldest'} value='oldest'>oldest</option>
+                  <option key={'newest'} value='newest'>Newest</option>
+                  <option key={'oldest'} value='oldest'>Oldest</option>
                 </select>
             </label>
           </form>

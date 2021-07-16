@@ -1,19 +1,36 @@
 #container {
-  width: '70%';
-  float: 'right';
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  height: 98vh;
+  margin: auto;
+  text-align: center;
+  width: 75%;
+  justify-content: center;
+  text-shadow: .5px .2px $primary;
+
+
 
   nav {
-    height: 2em;
-    background-color: whitesmoke;
+    height: 2.2em;
+    background-color:$accent;
     display: flex;
+    top: .5em;
     justify-content: space-between;
-    padding: 0px 15px;
-    border-radius: 15px 15px 0 0;
+    font-family: $header;
+    padding: .6em 1em 0 1em;
+    border: 1px solid black;
+    border-bottom: .3em solid $secondary;
+    border-radius: .3em .3em 0 0;
+
 
     h4 {
       display: inline;
       text-align: center;
-      font-size: 1.5em;
+      font-size: 1.2em;
+      color: black;
+      text-decoration: none;
+
     }
 
     div:nth-of-type(2) {
@@ -27,33 +44,64 @@
     select {
       appearance: none;
       border: none;
-      overflow: hidden;
-      background-color: rgba(0, 0, 0, 0);
+      background-color: $accent;
+      font-family: $subheader;
       font-weight: bold;
+      overflow: hidden;
       font-size: 1.2em;
       color: black;
+      text-shadow: .5px .2px $primary;
+
+
+      &:hover {
+        background-color:$secondary;
+        color: $accent;
+
+      }
     }
   }
 
   section {
-    height: 500px;
-    background-color: rgb(211, 225, 227);
-    padding: 20px;
-    border-radius: 0 0 15px 15px;
+    height: 37em;
+    background-color: $secondary;
+    padding: 1em;
+    border-radius: 0 0 5px 5px;
+    overflow: auto;
 
     .result {
-      background-color: white;
-      width: 96%;
+      background-color: $accent;
+      width: 80%;
       margin: 10px auto;
-      border-radius: 15px;
-      height: 80px;
+      border: 2px solid black;
+      border-radius: .3em;
+      height: 5.5em;
+      text-shadow: .5px .2px $primary;
+
+      &:hover {
+        background-color: $secondary;
+        color: $accent;
+        border: 2px solid $accent;
+      }
+
+      h3 {
+        font-size: 1.1em;
+      }
+
+      hr {
+        width: 93%;
+        color: $secondary;
+        top: '15px';
+      }
 
       .interior-div {
         display: flex;
         justify-content: space-between;
-        padding: 0px 15px;
-        height: 35px;
+        margin-top: -.5em;
+        margin-bottom: .6em;
+        padding: 0 1.5em;
+        height: 2em;
       }
     }
   }
 }
+
