@@ -21,11 +21,11 @@ const GraphKey = ({propertyName, addData, deleteData, addToColorKey, colorKey}) 
   }
 
   return (
-    <>
+    <div id="properties">
       <label htmlFor="graph-placement">{propertyName}</label>
       <input type="checkbox" name="graph-placement" id="graph-placement" value="data" onChange={handleChange}></input>
       {isData ? <input type="color" value={colorKey[propertyName]} onChange={handleColorChange}></input> : null}
-    </>
+    </div>
   )
 };
 

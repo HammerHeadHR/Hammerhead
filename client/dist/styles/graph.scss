@@ -14,11 +14,33 @@
     }
 
     #choices {
-      height: 5em;
+      height: 3em;
+      width: 16em;
+      margin-left: 4em;
+      margin-bottom: 0.5em;
+      background-color: $secondary;
+      border: $accent 2px solid;
+      border-radius: 10px;
       display: flex;
       flex-direction: row;
-      flex-wrap: wrap;
-      overflow-y: scroll;
+      overflow-x: scroll;
+
+      #properties {
+        margin: .5;
+        border-bottom: 1px $accent solid;
+        display: flex;
+        flex-direction: row;
+        color: white;
+        align-items: center;
+
+        label {
+          justify-self: start;
+        }
+
+        input {
+          justify-self: end;
+        }
+      }
 
       input {
         margin-right: 1.5em;
@@ -48,5 +70,5 @@
   }
 
 
-  
+
 }
