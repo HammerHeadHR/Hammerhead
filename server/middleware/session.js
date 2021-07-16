@@ -20,10 +20,7 @@ const verifySession = async ( req, res, next) => {
   const sessionCookie = req.cookies['_hh4DcT'];
   const hashedSession = createHash(sessionCookie);
   const storedSessionData = await getSession(hashedSession)
-  console.log('data from sessions table', storedSessionData)
-  // req.session = storedSessionData.user_id;
   req.body.user_id = storedSessionData.user_id;
-  console.log('req.body', req.body);
   if (storedSessionData.user_id) {
     next();
   } else {
@@ -39,12 +36,11 @@ const verifyAdmin = async (req, res, next) => {
     return next();
   } else {
     console.error('user is not Admin');
-    return res.redirect(403,'/login');
+    return res.send(403, 'access denied');
   }
 };
 
 const removeSession = async (req, res, next) => {
-  // const sessionHash = createHash(req.cookies['_hh4DcT']);
   const userId = req.body.user_id;
   const deleteResult = await deleteSession(userId);
   next();
