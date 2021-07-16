@@ -51,12 +51,12 @@ const CSVUpload = ({handleData, handleDatasetId}) => {
 
   return (
     <form>
-      <label>Upload Your CSV File</label>
-      <input id='csvButton' type='file' id='file'></input>
-      <label>Title Your Data</label>
+      <label className="custom-file-upload" htmlFor="file">Upload Your CSV</label>
+      <input type='file' id='file'></input>
+      <label htmlFor="csvName" id="csvNameLabel">Title Your Data</label>
       <input id="csvName" type='text' value={ title } onChange={ handleChange }></input>
-      <label>Select A Category</label>
-      <select onChange={handleTeamChange} value={teamId}>
+      <label htmlFor="selectCategory" id="selectCategory">Select A Category</label>
+      <select onChange={handleTeamChange} value={teamId} id="selectCategory">
         {teams.map((team, i) => { return <Team teamName={team.name} teamId={team.id} key={i}/>})}
       </select>
       <button onClick={ handleSubmit }>Submit</button>
