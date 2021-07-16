@@ -3,13 +3,13 @@
 Hammerhead for Data Tech is a web application that our team built to provide Data Tech a platform for uploading, sharing, and visualizing data sets in charts. The site can be broken down in to three main functionalities: the ability to view charts, the ability to upload charts (.csvs), and an employee management section for admins to manage access. Security was a big priority for Data Tech, so we implemented a custom-built, cookie-based authentication system.
 
 ## Technologies Used
-- React
-  - React Router
-  - Recharts
-- SASS
-- Express
-- Node
-- PostgreSQL
+- [React](https://reactjs.org/)
+  - [React Router](https://reactrouter.com/)
+  - [Recharts](https://recharts.org/en-US/)
+- [SASS](https://sass-lang.com/)
+- [Express](http://expressjs.com/)
+- [Node](https://nodejs.org/en/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 ## The Team
 - Alex Gaillard - [Github](https://github.com/AlexGaillard)
