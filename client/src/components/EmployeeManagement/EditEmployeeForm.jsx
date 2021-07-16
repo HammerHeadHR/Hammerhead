@@ -31,30 +31,39 @@ const EditEmployeeForm = ({ employee, editEmployee, updateEmployee, teams, getEm
   }
 
   return (
-    <div>
-      <label htmlFor="username">Employee Name: </label>
-      <input id="username"type="text" name="username" placeholder={employee.username}/>
-      <button id="update-username" onClick={updateTextField}>Update Username</button>
+    <>
+    <div id="edit-employee">
+      <div>
+        <label htmlFor="username">Employee Name: </label>
+        <input id="username"type="text" name="username" placeholder={employee.username}/>
+        <button id="update-username" onClick={updateTextField}>Update Username</button>
+      </div>
 
-      <label htmlFor="password">New Password: </label>
-      <input id="password" type="password" name="password"/>
-      <button id="update-password" onClick={updateTextField}>Update Password</button>
+      <div>
+        <label htmlFor="password">New Password: </label>
+        <input id="password" type="password" name="password"/>
+        <button id="update-password" onClick={updateTextField}>Update Password</button>
+      </div>
 
-      <label htmlFor="team">New Team: </label>
-      <select name="newTeamSelect" id="teamId" defaultValue={employee.team_id}>
-        {teams.map(team => <option key={team.id} value={team.id}>{team.name}</option> )}
-      </select>
-      <button id="update-teamId" onClick={updateTeam}>Update Team</button>
+      <div>
+        <label htmlFor="team">New Team: </label>
+        <select name="newTeamSelect" id="teamId" defaultValue={employee.team_id}>
+          {teams.map(team => <option key={team.id} value={team.id}>{team.name}</option> )}
+        </select>
+        <button id="update-teamId" onClick={updateTeam}>Update Team</button>
+      </div>
 
-      <label htmlFor="admin">Admin Status: </label>
-      <select id="admin" name="admin" defaultValue={employee.admin ? "true" : "false"}>
-        <option value="true">Admin</option>
-        <option value="false">Non-Admin</option>
-      </select>
-      <button onClick={toggleAdmin}>Update Admin Status</button>
-
-      <button onClick={() => editEmployee(null)}>Cancel</button>
+      <div>
+        <label htmlFor="admin">Admin Status: </label>
+        <select id="admin" name="admin" defaultValue={employee.admin ? "true" : "false"}>
+          <option value="true">Admin</option>
+          <option value="false">Non-Admin</option>
+        </select>
+        <button onClick={toggleAdmin}>Update</button>
+      </div>
     </div>
+      <button onClick={() => editEmployee(null)}>Cancel</button>
+    </>
   );
 
 };
