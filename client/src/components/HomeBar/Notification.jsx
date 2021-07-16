@@ -18,7 +18,7 @@ const Notification = ({ notification, markAsRead }) => {
   }
 
   return (
-    <Link to='/dashboard/data-charts' params={{datasetId: notification.dataset_id}}>
+    <Link to={'/dashboard/view-chart/' + notification.dataset_id } params={{datasetId: notification.dataset_id}}>
       <div className='notification' onMouseEnter={markRead}>
         { renderUnread() }
         <p>{notification.dataset} | Sent by: {notification.sender}</p>

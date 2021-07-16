@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import SortBar from './SortBar.jsx';
 import ViewChart from '../ViewChart/index.jsx';
 
-const DataCharts = ({datasetId}) => {
+const DataCharts = () => {
   const [results, setResults] = useState([{
     title: 'Corn prices over time',
     author: 'Thomas Johnson',
@@ -21,63 +21,53 @@ const DataCharts = ({datasetId}) => {
 
 
 
-
-  const [chartShowing, setChartShowing] = useState(false);
-  const [chartId, setChartId] = useState(null);
+  // const [chartShowing, setChartShowing] = useState(false);
+  // const [chartId, setChartId] = useState(null);
   const generateCharts = () => {
     var numbo = 0;
     return results.map((result) => {
       numbo++;
       return (
-        <div className="result" onClick={() => setId(result.id)}  key={result+numbo}>
-          <div className="interior-div">
-            <h3 key={result.title}>{result.title}</h3>
-            <p>{result.owner}</p>
+        <Link style={{textDecoration: 'none', color: 'black'}} to={`/dashboard/view-chart/${result.id}`} >
+          <div className="result" key={result.id}>
+            <div className="interior-div">
+              <h3 key={result.id + numbo}>{result.title}</h3>
+              <p>{result.owner}</p>
+            </div>
+            <hr></hr>
+            <div className="interior-div">
+              <p>{result.created_at}</p>
+              <p>{result.team}</p>
+            </div>
           </div>
-          <div className="interior-div">
-            <p>{result.created_at}</p>
-            <p>{result.team}</p>
-          </div>
-        </div>
+        </Link>
       );
     })
   };
 
-  if (datasetId !== undefined) {
-    setChartId(datasetId);
-    setChartShowing(true);
-  }
 
-  const setId = (id) => {
-    setChartShowing(prev => !prev);
-    if (!id) {
-      return setChartId(null);
-    }
-    setChartId(id);
-  }
 
   return (
+
     <div id="container">
-    {chartShowing ?
-      <>
-        <button onClick={()=> setId(null)}>back</button>
-        <ViewChart datasetId={chartId}/>
-      </>
-    :
-      <div>
-        <SortBar setResults={setResults} />
-        <section>
-          {generateCharts()}
-        </section>
-      </div>
-    }
+      <SortBar setResults={setResults} />
+      <section>
+        {generateCharts()}
+      </section>
     </div>
+
   );
 };
 
 export default DataCharts;
 
-
+// <div>
+//     {chartShowing ?
+//       <>
+//         <button onClick={()=> setId(null)}>back</button>
+//         <ViewChart datasetId={chartId}/>
+//       </>
+//     :
 
 
 // import React, {useState, useEffect} from 'react';
