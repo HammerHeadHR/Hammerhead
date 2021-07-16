@@ -9,9 +9,25 @@
   width: 96%;
 
   #employee-management {
-    height: 70%;
     border: 1px solid $accent;
+    height: 70%;
     overflow: auto;
+
+    #edit-employee {
+      border: 1px solid;
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      width: 32em;
+
+      div {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        width: 90%;
+      }
+    }
 
     #employee-list {
       border: 1px solid;

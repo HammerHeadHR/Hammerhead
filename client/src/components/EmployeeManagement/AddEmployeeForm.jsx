@@ -3,7 +3,7 @@ import React from 'react';
 const AddEmployeeForm = ({ teams }) => {
 
   return (
-    <div>
+    <div className="employee-form">
       <h3>Add Employee Form</h3>
       <label htmlFor="username">Employee Name:</label>
       <input id="newUserUsername" type="text" name="username"/>
