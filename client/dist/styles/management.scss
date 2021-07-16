@@ -9,9 +9,41 @@
   width: 96%;
 
   #employee-management {
-    height: 70%;
     border: 1px solid $accent;
+    height: 70%;
     overflow: auto;
+
+    #edit-employee {
+      border: 1px solid;
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      width: 32em;
+
+      div {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        width: 90%;
+      }
+    }
+
+    #add-employee {
+      border: 1px solid;
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      width: 30em;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        width: 85%;
+        margin: 1em auto;
+        align-items: center;
+      }
+    }
 
     #employee-list {
       border: 1px solid;
@@ -40,6 +72,7 @@
     border: 1px solid $accent;
     border-radius: 0em;
     height: 28%;
+    overflow: auto;
 
     #teams-container {
       border: 1px solid;
@@ -48,7 +81,7 @@
       height: 18vh;
       margin: auto;
       overflow: auto;
-      width: 24vw;
+      width: 30em;
 
       div {
         display: flex;
@@ -58,11 +91,6 @@
 
         span {
           align-self: center;
-        }
-
-        button {
-          background-color: $accent;
-          color: black;
         }
       }
     }
