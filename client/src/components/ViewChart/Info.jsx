@@ -4,8 +4,8 @@ import React from 'react';
 const Info = ({title, author, team}) => {
   if (title.length && author.length && team.length) {
     return (
-      <div>
-        <h3>{title}</h3>
+      <div id="info">
+        <h1>{title}</h1>
         <p>{author}</p>
         <p>{team}</p>
       </div>

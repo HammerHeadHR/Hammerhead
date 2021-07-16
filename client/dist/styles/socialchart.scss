@@ -1,0 +1,71 @@
+#view-chart {
+  margin: 2em;
+  height: 90vh;
+  width: 70vw;
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: 1% 64% 35%;
+  background-color: $primaryBack;
+
+
+  #bottom-grid {
+    grid-row: 3 / 4;
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    #info {
+      grid-column: 1 / 2;
+      width: 25em;
+      height: 10em;
+      place-self: center;
+      color: white;
+      background-color: $secondaryBack;
+      border: $accent 2px solid;
+      border-radius: 10px;
+      padding-left: 2em;
+    }
+
+    #notes {
+      grid-column: 2 / 3;
+      width: 28em;
+      height: 10em;
+      place-self: center;
+      border: $accent 2px solid;
+      background-color: $secondaryBack;
+      border-radius: 10px;
+
+      #notesScroll {
+        height: 80%;
+        overflow-y: scroll;
+
+        .note {
+          color: white;
+          margin: 1em;
+
+          p, h5 {
+            margin: 0;
+            margin-left: 5%;
+          }
+        }
+      }
+
+      form {
+        margin-left: 5%;
+
+        input {
+          width: 15em;
+          height: 2em;
+          border-radius: 10px;
+          border: $accent 1px solid;
+        }
+
+        button {
+          @include secondaryButton;
+          padding: 0.5em 1em;
+        }
+      }
+
+    }
+  }
+
+}
