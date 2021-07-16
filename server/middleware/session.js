@@ -1,29 +1,53 @@
-const {createHash, compareHash} = require('../hashUtil')
-const {getUserId, setSession, getSession} = require('../../database/models/session')
+const {createHash, compareHash, createRandom32String} = require('../hashUtil')
+const {setSession, getSession, deleteSession} = require('../../database/models/session')
+const {getUser} = require('../../database/models/users')
 
-const createSession = async ( req, res, next) => {
-  const {username} = req.body
-  const session = req.cookies.session
-  const hash = createHash(session)
-  setSession(username, hash)
-  req.session = hash
-  console.log(res.locals.user);
-  const data = res.locals.user
-  res.send(data);
-  res.end()
-  console.log('create session log after res.end')
-  // next()
+const createSession = async (req, res) => {
+  const {username} = req.body;
+  const cookie = createRandom32String();
+  const sessionHash = createHash(cookie);
+  const sessionId = await setSession(username, sessionHash);
+  res.cookie('_hh4DcT', cookie);
+  const data = res.locals.user;
+  console.log('session created');
+  return res.send(data);
 }
 
 const verifySession = async ( req, res, next) => {
-  const session = req.cookies.session
-  console.log(session)
-  const attempted = createHash(session)
-  const storedSessionData = await getSession(attempted)
-  console.log(storedSessionData)
-  // const hash = compareHash(session, storedHash)
-  // const userId = await getUserId(hash)
-  next()
-}
+  if (!req.cookies['_hh4DcT']) {
+    res.redirect(401, '/');
+  }
+  const sessionCookie = req.cookies['_hh4DcT'];
+  const hashedSession = createHash(sessionCookie);
+  const storedSessionData = await getSession(hashedSession)
+  console.log('data from sessions table', storedSessionData)
+  // req.session = storedSessionData.user_id;
+  req.body.user_id = storedSessionData.user_id;
+  console.log('req.body', req.body);
+  if (storedSessionData.user_id) {
+    next();
+  } else {
+    console.error('session does not exist in DB');
+    res.redirect(403, '/');
+  }
+};
 
-module.exports = {createSession, verifySession}
+const verifyAdmin = async (req, res, next) => {
+  const userId = req.body.user_id;
+  const user = await getUser(userId)
+  if (user.admin) {
+    return next();
+  } else {
+    console.error('user is not Admin');
+    return res.redirect(403,'/login');
+  }
+};
+
+const removeSession = async (req, res, next) => {
+  // const sessionHash = createHash(req.cookies['_hh4DcT']);
+  const userId = req.body.user_id;
+  const deleteResult = await deleteSession(userId);
+  next();
+};
+
+module.exports = {createSession, verifySession, verifyAdmin, removeSession}

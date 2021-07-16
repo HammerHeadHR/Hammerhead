@@ -60,7 +60,7 @@ ALTER TABLE notifications ADD CONSTRAINT notifications_dataset_id_fkey FOREIGN K
 CREATE TABLE sessions (
   id SERIAL NOT NULL PRIMARY KEY,
   hash VARCHAR(64) UNIQUE,
-  user_id INT
+  user_id INT UNIQUE
 );
 ALTER TABLE sessions ADD CONSTRAINT session_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id);
 
