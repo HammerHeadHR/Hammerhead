@@ -26,6 +26,10 @@
       display: block;
     }
 
+    @include mobile-l {
+      display: block;
+    }
+
     #header {
       background-color: $secondary;
       position: absolute;
@@ -53,14 +57,23 @@
   #menu {
     display: grid;
     grid-column: 1;
-    padding: 2em;
+    padding: 1em;
     border-right: 1px solid black;
     grid-template-rows: 20% 60% 20%;
     background-color: $secondary;
     color: white;
     transition: 1s;
+    z-index: 10;
 
     @include mobile {
+      height: 100vh;
+      top: 3.05em;
+      transform: translateX(-100%);
+      position: absolute;
+      grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    @include mobile-l {
       height: 100vh;
       top: 3.05em;
       transform: translateX(-100%);
@@ -84,6 +97,11 @@
           color: $accent !important;
           border-color: $accent;
         }
+
+        @include mobile {
+          font-size: 1.6em;
+        }
+
       }
 
     }

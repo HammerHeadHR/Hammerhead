@@ -4,6 +4,10 @@
   align-self: stretch;
   padding: 2em;
 
+  @include mobile {
+    padding: 0;
+  }
+
   #graphWrapperDiv {
     display: flex;
     flex-direction: row;
@@ -12,13 +16,17 @@
       margin: 1em;
       display: block;
     }
-    
+
     #choices {
       height: 5em;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       overflow-y: scroll;
+
+      @include mobile {
+        margin: auto;
+      }
 
       input {
         margin-right: 1.5em;
@@ -45,5 +53,9 @@
   #graphDiv {
     width: 90%;
     height: 100%;
+
+    @include mobile {
+      width: 90vw;
+    }
   }
 }

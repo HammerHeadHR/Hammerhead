@@ -145,7 +145,8 @@ const SortBar = (props) => {
                 </select>
             </label>
           </form>
-          <span>    </span>
+        </div>
+        <div>
           <form>
             <label>
               <h4>Sort By: </h4>
