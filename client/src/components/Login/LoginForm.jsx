@@ -1,7 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
+
 
 const LoginForm = ({ setUser, setAuthed }) => {
+
+  const history = useHistory();
+
 
   const login = (event) => {
     event.preventDefault();
@@ -12,6 +18,7 @@ const LoginForm = ({ setUser, setAuthed }) => {
       .then(response => {
         setUser(response.data);
         setAuthed(true);
+        history.push('/dashboard/data-charts');
       })
       .catch(error => {
         console.error(error);
