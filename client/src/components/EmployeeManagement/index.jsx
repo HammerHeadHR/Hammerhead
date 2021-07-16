@@ -56,7 +56,7 @@ const EmployeeManagement = ({ employees, managers }) => {
 
 
   return (
-    <div>
+    <div id="management">
       <TeamList
         teams={teamList}
         setTeams={setTeamList}

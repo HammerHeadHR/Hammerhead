@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useHistory } from 'react-router-dom';
 import Sidebar from '../Sidebar/index.jsx';
 import EmployeeManagement from '../EmployeeManagement/index.jsx';
 import DataCharts from '../DataCharts/index.jsx';
@@ -12,32 +12,34 @@ import { datapoints } from '../../../../dummyData/bitcoinPrices.js';
 
 const Dashboard = ({ setAuthed }) => {
 
+  const history = useHistory();
+  const match = useRouteMatch();
+
   const logout = () => {
     setAuthed(false);
+    history.push('/');
   }
 
   return (
     <div id="dashboard">
-      <Router>
-        <div id="menu">
-          <HomeBar/>
-          <Sidebar/>
-          <button onClick={logout}>Logout</button>
-        </div>
-        <Switch>
-            <div id="inner">
-              <Route path="/management">
-                <EmployeeManagement />
-              </Route>
-              <Route path="/data-charts">
-                <DataCharts />
-              </Route>
-              <Route path="/create-chart">
-                <ImportData data={datapoints}/>
-              </Route>
-            </div>
-          </Switch>
-      </Router>
+      <div id="menu">
+        <HomeBar/>
+        <Sidebar/>
+        <button onClick={logout}>Logout</button>
+      </div>
+      <Switch>
+          <div id="inner">
+            <Route path={`/dashboard/management`}>
+              <EmployeeManagement />
+            </Route>
+            <Route path={`/dashboard/data-charts`}>
+              <DataCharts />
+            </Route>
+            <Route path={`/dashboard/create-chart`}>
+              <ImportData data={datapoints}/>
+            </Route>
+          </div>
+        </Switch>
     </div>
   );
 

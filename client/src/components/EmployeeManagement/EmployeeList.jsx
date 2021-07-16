@@ -81,8 +81,8 @@ const EmployeeList = ({ employees, setEmployees, getEmployees, teamList }) => {
   }, [employees, sort]);
 
   return (
-    <div>
-      <h3>Employees</h3>
+    <div id="employee-management">
+      <h2 id="employee-heading">Employees</h2>
       {editEmployee ?
         <EditEmployeeForm
           getEmployees={getEmployees}
@@ -97,37 +97,39 @@ const EmployeeList = ({ employees, setEmployees, getEmployees, teamList }) => {
           <AddEmployeeForm teams={teamList}/>
         :
         <>
-          <label htmlFor="team-select">Team Filter</label>
-          <select name="team-select" id="team-select" defaultValue="none" onChange={({ target }) => setTeam(target.value)}>
-            <option value="none">None</option>
-            {teamList.map(team => <option key={team.id} value={team.name}>{team.name}</option> )}
-          </select>
-
-          <label htmlFor="sort-select">Sort By</label>
-          <select name="sort-select" id="sort-select" defaultValue={sort} onChange={({ target }) => setSort(target.value)}>
-            <option value="A -> Z">A -> Z</option>
-            <option value="Z -> A">Z -> A</option>
-            <option value="Active -> Inactive">Active -> Inactive</option>
-            <option value="Inactive -> Active">Inactive -> Active</option>
-          </select>
-
-          {employeesToRender.map(employee => {
-            if (team !== 'none' && employee.team === team) {
-              return <Employee
-              key={employee.id}
-              employee={employee}
-              getEmployees={getEmployees}
-              editEmployee={showEditForm}
-              />
-            } else if (team === 'none') {
-              return <Employee
-              key={employee.id}
-              employee={employee}
-              getEmployees={getEmployees}
-              editEmployee={showEditForm}
-              />
-            }
-          })}
+          <div id="employee-list-options">
+            <label htmlFor="team-select">Team Filter: </label>
+            <select name="team-select" id="team-select" defaultValue="none" onChange={({ target }) => setTeam(target.value)}>
+              <option value="none">None</option>
+              {teamList.map(team => <option key={team.id} value={team.name}>{team.name}</option> )}
+            </select>
+            <label htmlFor="sort-select" id="emp-sort-by">Sort By: </label>
+            <select name="sort-select" id="sort-select" defaultValue={sort} onChange={({ target }) => setSort(target.value)}>
+              <option value="A -> Z">A -> Z</option>
+              <option value="Z -> A">Z -> A</option>
+              <option value="Active -> Inactive">Active -> Inactive</option>
+              <option value="Inactive -> Active">Inactive -> Active</option>
+            </select>
+          </div>
+          <div id="employee-list">
+            {employeesToRender.map(employee => {
+              if (team !== 'none' && employee.team === team) {
+                return <Employee
+                key={employee.id}
+                employee={employee}
+                getEmployees={getEmployees}
+                editEmployee={showEditForm}
+                />
+              } else if (team === 'none') {
+                return <Employee
+                key={employee.id}
+                employee={employee}
+                getEmployees={getEmployees}
+                editEmployee={showEditForm}
+                />
+              }
+            })}
+          </div>
         </>
       }
       {!editEmployee ? <button onClick={addNewEmployee}>Add Employee</button> : null}

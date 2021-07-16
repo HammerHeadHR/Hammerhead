@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import Login from './components/Login/index.jsx';
 import Dashboard from './components/Dashboard/index.jsx';
 import EmployeeManagement from './components/EmployeeManagement/index.jsx';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 
 export const UserContext = React.createContext();
 
@@ -19,8 +19,13 @@ const App = () => {
             {!authed ?
               <Login setUser={setUser} setAuthed={setAuthed}/>
               :
-              <Dashboard user={user} setAuthed={setAuthed}/>
+              <Redirect to="/dashboard/data-charts"/>
             }
+          </Route>
+          {/* <Route path="/log-in">
+          </Route> */}
+          <Route path="/dashboard">
+            <Dashboard user={user} setAuthed={setAuthed}/>
           </Route>
         </Switch>
       </Router>
