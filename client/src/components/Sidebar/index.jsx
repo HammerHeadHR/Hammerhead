@@ -17,7 +17,6 @@ const Sidebar = ({setSlide}) => {
   useEffect(() => {
     axios.get('/users/current')
       .then(({ data }) => {
-        console.log(data);
         if (data.admin) setManagementLink(<Link onClick={menuSlide} to="/dashboard/management">Employee Management</Link>);
       })
       .catch(error => console.error(error));
