@@ -18,6 +18,7 @@ const LoginForm = ({ setUser, setAuthed }) => {
       .then(response => {
         document.getElementById('login').classList.add('hidden')
         setTimeout(() => {
+          console.log(response);
           setUser(response.data);
           setAuthed(true);
           history.push('/dashboard/data-charts');
