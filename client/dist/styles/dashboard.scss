@@ -10,6 +10,14 @@
     grid-template-rows: 5% 95%
   }
 
+  @include tablet-l {
+    grid-template-columns: 20% 80%;
+  }
+
+  @include tablet {
+    grid-template-columns: 25% 75%;
+  }
+
   header {
     display: none;
     grid-row: 1;
@@ -24,7 +32,7 @@
       top: 0;
       width: 100%;
       color: white;
-      height: 2.5em;
+      height: 3em;
       border-bottom: 1px solid $accent;
 
       .burger div{
@@ -54,7 +62,7 @@
 
     @include mobile {
       height: 100vh;
-      top: 2.55em;
+      top: 3.05em;
       transform: translateX(-100%);
       position: absolute;
       grid-template-rows: 1fr 1fr 1fr;
