@@ -1,6 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import axios from 'axios';
+import {UserContext} from '../../App.jsx';
 
-const Notes = ({notes, datasetId}) => {
+const Notes = ({notes, datasetId, getNotes}) => {
+  let user = useContext(UserContext);
+
   const [newNote, setNewNote] = useState('');
 
   const handleChange = (e) => {
@@ -10,16 +14,19 @@ const Notes = ({notes, datasetId}) => {
   const handleSubmit = () => {
     const formData = new FormData();
     formData.append('datasetId', datasetId);
-    formData.append('ownerId', ownerId);
+    formData.append('ownerId', user.user.id);
     formData.append('body', newNote);
+    console.log(formData);
 
     axios.post('/notes/', formData)
-    .then(() => console.log('Note Submitted'));
+    .then(() => {
+      getNotes(datasetId);
+    });
   }
 
   return (
-    <div>
-      <div>
+    <div id="notes">
+      <div id="notesScroll">
         {notes.map((note, i) => { return <Note note={note} key={i}/>})}
       </div>
       <form>
@@ -32,9 +39,9 @@ const Notes = ({notes, datasetId}) => {
 
 const Note = ({note}) => {
   return (
-    <div>
-      <h5>{note.body}</h5>
-      <p>{note.owner}</p>
+    <div className="note">
+      <p>{note.body}</p>
+      <h5>{note.owner}</h5>
     </div>
   )
 }

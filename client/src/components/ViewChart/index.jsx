@@ -32,12 +32,21 @@ const ViewChart = () => {
     })
   }, [datasetId]);
 
+  const getNotes = (id) => {
+    axios.get(`/notes/${id}`)
+    .then(chartNotes => {
+      setNotes(chartNotes.data);
+    })
+  };
+
   return (
-  <>
+  <div id="view-chart">
     {data.length ? <DynamicGraphWrapper data={data}/> : null}
-    <Info author={author} team={team} title={title}/>
-    {notes.length ? <Notes notes={notes} datasetId={datasetId}/> : null}
-  </>
+    <div id="bottom-grid">
+      <Info author={author} team={team} title={title}/>
+      {notes.length ? <Notes notes={notes} datasetId={datasetId} getNotes={getNotes}/> : null}
+    </div>
+  </div>
   )
 }
 
