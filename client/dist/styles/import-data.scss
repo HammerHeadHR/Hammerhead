@@ -142,20 +142,20 @@
         flex-direction: row;
 
         p {
-
           justify-self: start;
           align-self: center;
         }
 
         input {
-
           justify-self: end;
           align-self: center;
         }
       }
-    }
 
-    button {
+
+    }
+    
+    #importShareButton {
       grid-column: 2 / 3;
       justify-self: center;
       align-self: center;
@@ -163,5 +163,6 @@
     }
 
   }
+
 
 }

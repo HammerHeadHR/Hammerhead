@@ -12,11 +12,12 @@ const Notes = ({notes, datasetId, getNotes}) => {
   }
 
   const handleSubmit = () => {
-    const formData = new FormData();
-    formData.append('datasetId', datasetId);
-    formData.append('ownerId', user.user.id);
-    formData.append('body', newNote);
-    console.log(formData);
+    const formData = {
+      datasetId: datasetId,
+      ownerId: user.user.id,
+      body: newNote
+    }
+
 
     axios.post('/notes/', formData)
     .then(() => {

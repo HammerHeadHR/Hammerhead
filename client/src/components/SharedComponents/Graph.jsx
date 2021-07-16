@@ -21,11 +21,11 @@ const GraphKey = ({propertyName, addData, deleteData, addToColorKey, colorKey}) 
   }
 
   return (
-    <>
+    <div id="properties">
       <label htmlFor="graph-placement">{propertyName}</label>
       <input type="checkbox" name="graph-placement" id="graph-placement" value="data" onChange={handleChange}></input>
       {isData ? <input type="color" value={colorKey[propertyName]} onChange={handleColorChange}></input> : null}
-    </>
+    </div>
   )
 };
 
@@ -93,7 +93,7 @@ const DynamicGraphWrapper = ({data}) => {
       start = Number(start);
       end = Number(end);
     }
-    console.log(start, end);
+
     setStartData(start);
     setDataMin(start);
     setEndData(end);
@@ -123,15 +123,15 @@ const DynamicGraphWrapper = ({data}) => {
     setColorKey(tempColorKey);
   }
 
-  const handleDataMin = (e) => {
-    console.log(e.target.value, dataMin);
-    setDataMin(Number(e.target.value));
-  };
+  // const handleDataMin = (e) => {
+  //   console.log(e.target.value, dataMin);
+  //   setDataMin(Number(e.target.value));
+  // };
 
-  const handleDataMax = (e) => {
-    console.log(e.target.value, dataMax);
-    setDataMax(Number(e.target.value));
-  }
+  // const handleDataMax = (e) => {
+  //   console.log(e.target.value, dataMax);
+  //   setDataMax(Number(e.target.value));
+  // }
 
   return (
     <div id="graph">
