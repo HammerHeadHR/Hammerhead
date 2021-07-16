@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { createHash, createRandom32String } = require('../hashUtil.js');
 const { addUser, updateUsername, updateTeam, updateAdmin, updatePassword, deleteUser, getUsers, getUser} = require('../../database/models/users.js');
+const {createSession, verifySession, verifyAdmin, removeSession} = require('../middleware/session');
 
-router.post('/create', async (req, res) => {
+router.post('/create', verifyAdmin, async (req, res) => {
   let { username, password, team, admin } = req.body;
-
   let salt = createRandom32String();
   let hashed = createHash(password, salt);
 
@@ -22,7 +22,7 @@ router.post('/create', async (req, res) => {
   }
 });
 
-router.put('/username', async (req, res) => {
+router.put('/username', verifyAdmin, async (req, res) => {
   let { userId, username } = req.body;
 
   try {
@@ -38,7 +38,7 @@ router.put('/username', async (req, res) => {
   }
 });
 
-router.put('/password', async (req, res) => {
+router.put('/password', verifyAdmin, async (req, res) => {
   let { userId, password } = req.body;
 
   let salt = createRandom32String();
@@ -58,7 +58,17 @@ router.put('/password', async (req, res) => {
   }
 });
 
-router.put('/team', async (req, res) => {
+router.get('/current', async (req, res) => {
+  try {
+    const user_id = req.body.user_id
+    let dbRes = await getUser(user_id);
+    res.send(dbRes);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.put('/team', verifyAdmin, async (req, res) => {
   let { userId, teamId } = req.body;
 
   try {
@@ -73,7 +83,7 @@ router.put('/team', async (req, res) => {
   }
 });
 
-router.put('/admin', async (req, res) => {
+router.put('/admin', verifyAdmin, async (req, res) => {
   let { userId, admin } = req.body;
 
   try {
@@ -88,7 +98,7 @@ router.put('/admin', async (req, res) => {
   }
 });
 
-router.put('/remove', async (req, res) => {
+router.put('/remove', verifyAdmin, async (req, res) => {
   let { userId } = req.body;
   try {
     let dbRes = await deleteUser(userId);

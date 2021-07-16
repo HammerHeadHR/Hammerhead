@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { addTeam, getTeams, updateTeam } = require('../../database/models/teams.js');
+const { verifyAdmin } = require('../middleware/session')
 
-router.post('/', async (req, res) => {
+router.post('/', verifyAdmin, async (req, res) => {
   let { name } = req.body;
   try {
     let dbRes = await addTeam(name);
@@ -26,7 +27,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.put('/', async (req, res) => {
+router.put('/', verifyAdmin, async (req, res) => {
   let { teamId, name } = req.body;
   try {
     let dbRes = await updateTeam(teamId, name);

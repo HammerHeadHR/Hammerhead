@@ -14,7 +14,6 @@ const noteRoutes = require('./routes/notes.js');
 const notificationRoutes = require('./routes/notifications.js');
 const loginRoutes = require('./routes/login.js');
 const logoutRoutes = require('./routes/logout.js');
-const currentUser = require('./routes/current-user.js');
 const {sessionKey} = require('../config.js')
 const {createSession, verifySession, verifyAdmin, removeSession} = require('./middleware/session')
 const { deleteSession } = require('../database/models/session');
@@ -26,17 +25,15 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
 app.use('/login', loginRoutes, createSession);
-// app.use('/login', createSession, loginRoutes);
-app.use(verifySession);
 
-app.use('/current-user', currentUser);
+app.use(verifySession);
 
 app.use('/datasets', formidable());
 app.use('/datasets', datasetRoutes);
 
-app.use('/users', verifyAdmin, userRoutes);
+app.use('/users', userRoutes);
 
-app.use('/teams', verifyAdmin, teamRoutes);
+app.use('/teams', teamRoutes);
 
 app.use('/notes', noteRoutes);
 
