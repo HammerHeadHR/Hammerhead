@@ -72,6 +72,7 @@
     border: 1px solid $accent;
     border-radius: 0em;
     height: 28%;
+    overflow: auto;
 
     #teams-container {
       border: 1px solid;
@@ -90,11 +91,6 @@
 
         span {
           align-self: center;
-        }
-
-        button {
-          background-color: $accent;
-          color: black;
         }
       }
     }
