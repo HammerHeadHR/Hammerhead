@@ -6,6 +6,10 @@ const Alert = ({ count, unread, notifications, markAsRead}) => {
   const [opened, setOpened] = useState(false);
 
   const getUnread = () => {
+    if (unread > 0) {
+      const audioEl = document.getElementsByClassName("audio-element")[0]
+      audioEl.play()
+    }
     return unread > 0
       ? <span>{unread}</span>
       : null;
