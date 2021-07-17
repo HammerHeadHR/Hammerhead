@@ -7,7 +7,7 @@ const createSession = async (req, res) => {
   const cookie = createRandom32String();
   const sessionHash = createHash(cookie);
   const sessionId = await setSession(username, sessionHash);
-  res.cookie('_hh4DcT', cookie);
+  res.cookie('_hh4DcT', cookie, {expire: 360000 + Date.now()});
   const data = res.locals.user;
   console.log('session created');
   return res.send(data);
