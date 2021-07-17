@@ -14,18 +14,22 @@ const createSession = async (req, res) => {
 }
 
 const verifySession = async ( req, res, next) => {
-  if (!req.cookies['_hh4DcT']) {
-    res.redirect(401, '/');
-  }
-  const sessionCookie = req.cookies['_hh4DcT'];
-  const hashedSession = createHash(sessionCookie);
-  const storedSessionData = await getSession(hashedSession)
-  req.body.user_id = storedSessionData.user_id;
-  if (storedSessionData.user_id) {
-    next();
-  } else {
-    console.error('verifySession middleware: session does not exist in DB');
-    res.redirect(403, '/');
+  try {
+    if (!req.cookies['_hh4DcT']) {
+      return res.redirect(401, '/');
+    }
+    const sessionCookie = req.cookies['_hh4DcT'];
+    const hashedSession = createHash(sessionCookie);
+    const storedSessionData = await getSession(hashedSession)
+    if (storedSessionData) {
+      req.body.user_id = storedSessionData.user_id;
+      next();
+    } else {
+      console.error('verifySession middleware: session does not exist in DB');
+      res.redirect(403, '/');
+    }
+  } catch (error) {
+    console.error('error in verifySession catch: ', error);
   }
 };
 

@@ -15,7 +15,7 @@ const notificationRoutes = require('./routes/notifications.js');
 const loginRoutes = require('./routes/login.js');
 const logoutRoutes = require('./routes/logout.js');
 const {sessionKey} = require('../config.js')
-const {createSession, verifySession, verifyAdmin, removeSession} = require('./middleware/session')
+const {createSession, verifySession, removeSession} = require('./middleware/session')
 const { deleteSession } = require('../database/models/session');
 
 app.use(express.static('client/dist'));
