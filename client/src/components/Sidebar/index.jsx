@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { UserContext } from '../../App.jsx';
 import axios from 'axios';
 
 const Sidebar = ({setSlide}) => {
 
-  const user = useContext(UserContext);
   const [managementLink, setManagementLink] = useState(null);
 
   const menuSlide = () => {
