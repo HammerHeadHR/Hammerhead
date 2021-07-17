@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 
 
-const LoginForm = ({ setUser, setAuthed }) => {
+const LoginForm = ({ setUser }) => {
 
   const history = useHistory();
 
@@ -19,7 +19,6 @@ const LoginForm = ({ setUser, setAuthed }) => {
         document.getElementById('login').classList.add('hidden')
         setTimeout(() => {
           setUser(response.data);
-          setAuthed(true);
           history.push('/dashboard/data-charts');
         }, 600);
       })

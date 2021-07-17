@@ -14,7 +14,7 @@ import { managers } from '../../../../dummyData/managers.js';
 import { employees } from '../../../../dummyData/employees.js';
 import { datapoints } from '../../../../dummyData/bitcoinPrices.js';
 
-const Dashboard = ({ setAuthed }) => {
+const Dashboard = () => {
 
   const history = useHistory();
   const match = useRouteMatch();
@@ -22,7 +22,6 @@ const Dashboard = ({ setAuthed }) => {
 
   const logout = () => {
     axios.post('/logout');
-    setAuthed(false);
     history.push('/');
   }
 
