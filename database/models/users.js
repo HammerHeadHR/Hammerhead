@@ -89,12 +89,11 @@ const deleteUser = async (userId) => {
 
 const getUsers = async () => {
   const sql = `
-  SELECT users.active, users.admin, users.id, users.username, users.team_id, teams.name
+  SELECT users.active, users.admin, users.id, users.username, users.team_id, teams.name as team
   FROM users
   LEFT JOIN teams
   ON users.team_id = teams.id;
   `;
-
   let dbRes = await client.query(sql);
   return dbRes.rows;
 };
