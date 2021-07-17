@@ -8,18 +8,17 @@ export const UserContext = React.createContext();
 
 const App = () => {
 
-  const [authed, setAuthed] = useState(false);
   const [user, setUser] = useState(null);
 
   return (
-    <UserContext.Provider value={{ user, authed }}>
+    <UserContext.Provider value={{ user }}>
       <Router>
         <Switch>
           <Route exact path="/">
-              <Login setUser={setUser} setAuthed={setAuthed}/>
+              <Login setUser={setUser}/>
           </Route>
           <Route path="/dashboard">
-            <Dashboard user={user} setAuthed={setAuthed}/>
+            <Dashboard user={user}/>
           </Route>
         </Switch>
       </Router>
