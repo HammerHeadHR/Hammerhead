@@ -24,7 +24,7 @@ const verifySession = async ( req, res, next) => {
   if (storedSessionData.user_id) {
     next();
   } else {
-    console.error('session does not exist in DB');
+    console.error('verifySession middleware: session does not exist in DB');
     res.redirect(403, '/');
   }
 };
@@ -35,7 +35,7 @@ const verifyAdmin = async (req, res, next) => {
   if (user.admin) {
     return next();
   } else {
-    console.error('user is not Admin');
+    console.error('verifyAdmin middleware: user is not Admin');
     return res.send(403, 'access denied');
   }
 };

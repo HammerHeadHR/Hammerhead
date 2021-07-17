@@ -19,7 +19,6 @@ router.post('/', async (req, res, next) => {
           'username': row.username,
           'team': row.team
         };
-        // res.status(201).send(data);
         res.locals.user = data;
         next();
       } else {
