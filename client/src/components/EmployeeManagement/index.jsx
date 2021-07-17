@@ -11,6 +11,7 @@ const EmployeeManagement = ({ employees, managers }) => {
   const getEmployees = () => {
     axios.get('/users/')
       .then(({ data }) => {
+        console.log(data);
         setEmployeeList(data);
         getTeams();
       })
