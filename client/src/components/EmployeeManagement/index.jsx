@@ -11,6 +11,7 @@ const EmployeeManagement = ({ employees, managers }) => {
   const getEmployees = () => {
     axios.get('/users/')
       .then(({ data }) => {
+        console.log('user list: ', data);
         setEmployeeList(data);
         getTeams();
       })
@@ -29,31 +30,9 @@ const EmployeeManagement = ({ employees, managers }) => {
     });
   }
 
-  // put team name at employee.team instead of just having team id @ employee.team_id
-  const addTeamNames = () => {
-    setEmployeeList(prev => {
-      return prev.map(employee => {
-        for (let i = 0; i < teamList.length; i++) {
-          const team = teamList[i];
-          if (employee.team_id === team.id) {
-            employee.team = team.name;
-            break;
-          }
-        }
-        return employee;
-      });
-    });
-  }
-
   useEffect(() => {
     getEmployees();
   }, []);
-
-  useEffect(() => {
-    addTeamNames();
-  }, [teamList]);
-
-
 
   return (
     <div id="management">

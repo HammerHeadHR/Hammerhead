@@ -7,25 +7,29 @@ const createSession = async (req, res) => {
   const cookie = createRandom32String();
   const sessionHash = createHash(cookie);
   const sessionId = await setSession(username, sessionHash);
-  res.cookie('_hh4DcT', cookie);
+  res.cookie('_hh4DcT', cookie, {expire: 360000 + Date.now()});
   const data = res.locals.user;
   console.log('session created');
   return res.send(data);
 }
 
 const verifySession = async ( req, res, next) => {
-  if (!req.cookies['_hh4DcT']) {
-    res.redirect(401, '/');
-  }
-  const sessionCookie = req.cookies['_hh4DcT'];
-  const hashedSession = createHash(sessionCookie);
-  const storedSessionData = await getSession(hashedSession)
-  req.body.user_id = storedSessionData.user_id;
-  if (storedSessionData.user_id) {
-    next();
-  } else {
-    console.error('session does not exist in DB');
-    res.redirect(403, '/');
+  try {
+    if (!req.cookies['_hh4DcT']) {
+      return res.redirect(401, '/');
+    }
+    const sessionCookie = req.cookies['_hh4DcT'];
+    const hashedSession = createHash(sessionCookie);
+    const storedSessionData = await getSession(hashedSession)
+    if (storedSessionData) {
+      req.body.user_id = storedSessionData.user_id;
+      next();
+    } else {
+      console.error('verifySession middleware: session does not exist in DB');
+      res.redirect(403, '/');
+    }
+  } catch (error) {
+    console.error('error in verifySession catch: ', error);
   }
 };
 
@@ -35,7 +39,7 @@ const verifyAdmin = async (req, res, next) => {
   if (user.admin) {
     return next();
   } else {
-    console.error('user is not Admin');
+    console.error('verifyAdmin middleware: user is not Admin');
     return res.send(403, 'access denied');
   }
 };

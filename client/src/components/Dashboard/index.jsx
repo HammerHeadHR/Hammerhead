@@ -8,19 +8,20 @@ import ImportData from '../ImportData/index.jsx';
 import HomeBar from '../HomeBar/index.jsx';
 import start from '../../../dist/img/ring.wav';
 import ViewChart from '../ViewChart/index.jsx';
+import axios from 'axios';
 
 import { managers } from '../../../../dummyData/managers.js';
 import { employees } from '../../../../dummyData/employees.js';
 import { datapoints } from '../../../../dummyData/bitcoinPrices.js';
 
-const Dashboard = ({ setAuthed }) => {
+const Dashboard = () => {
 
   const history = useHistory();
   const match = useRouteMatch();
   const [slide, setSlide] = useState(false);
 
   const logout = () => {
-    setAuthed(false);
+    axios.post('/logout');
     history.push('/');
   }
 
