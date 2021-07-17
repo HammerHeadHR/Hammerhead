@@ -18,8 +18,7 @@ router.post('/', async (req, res, next) => {
           'id': row.id,
           'username': row.username,
           'team': row.team,
-          'admin': row.admin,
-          'active': row.active
+          'admin': row.admin
         };
         // res.status(201).send(data);
         res.locals.user = data;
