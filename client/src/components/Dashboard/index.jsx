@@ -8,6 +8,7 @@ import ImportData from '../ImportData/index.jsx';
 import HomeBar from '../HomeBar/index.jsx';
 import start from '../../../dist/img/ring.wav';
 import ViewChart from '../ViewChart/index.jsx';
+import axios from 'axios';
 
 import { managers } from '../../../../dummyData/managers.js';
 import { employees } from '../../../../dummyData/employees.js';
@@ -20,6 +21,7 @@ const Dashboard = ({ setAuthed }) => {
   const [slide, setSlide] = useState(false);
 
   const logout = () => {
+    axios.post('/logout');
     setAuthed(false);
     history.push('/');
   }
