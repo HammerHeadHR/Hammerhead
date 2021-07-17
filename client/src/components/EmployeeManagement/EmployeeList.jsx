@@ -29,7 +29,6 @@ const EmployeeList = ({ employees, setEmployees, getEmployees, teamList }) => {
     if (employeeUsername && employeePassword) {
       axios.post('/users/create', newEmployee)
       .then(response => {
-        console.log('employee added: ', newEmployee);
         getEmployees();
         setAddEmployee(false);
       })
