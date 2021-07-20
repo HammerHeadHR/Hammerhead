@@ -2,7 +2,7 @@
 
 <img src="https://user-images.githubusercontent.com/50185022/126042637-f3bae407-ae38-417c-8012-250451cbd294.png" alt="hammerhead logo">
 
-Hammerhead is a web application built to provide a platform for uploading, sharing, and visualizing data sets in chart format. The site is seperated into three main functionalities: the ability to view and share charts, the ability to upload data sets (.csv) to be rendered as charts, and an admin section to manage access. The app also makes use of a custom-built, cookie-based authentication system for added security.
+Hammerhead is a web application built to provide a platform for uploading, sharing, and visualizing data sets in chart format. The site is separated into three main functionalities: the ability to view and share charts, the ability to upload data sets (.csv) to be rendered as charts, and an admin section to manage access. The app also makes use of a custom-built, cookie-based authentication system for added security.
 
 ## Technologies Used
 - [React](https://reactjs.org/)
