@@ -23,8 +23,8 @@ Hammerhead is a web application built to provide a platform for uploading, shari
 
 ## Image Gallery
 ### The login screen
-- Only admins can create accounts for Hammerhead. This can be done from the admin screen inside the app.
-- User session data is secured with a custom built cookie system.
+- Only admins can create accounts for Hammerhead. This can be done from the admin interface inside the app.
+- User session data is secured with a custom-built cookie system.
 
 ![Screen Shot 2021-07-16 at 7 24 35 PM (2)](https://user-images.githubusercontent.com/51707305/126017521-9b5d115a-ca2d-4508-bd68-a9ed7e3c7ada.png)
 ### The Dashboard
@@ -35,7 +35,7 @@ Hammerhead is a web application built to provide a platform for uploading, shari
 ![Screen Shot 2021-07-16 at 7 24 58 PM 2](https://user-images.githubusercontent.com/51707305/126017550-e56e1580-81d0-4d2a-b5a4-ac56fb780ca0.png)
 ### Rendering charts
 - Hammerhead uses the Rechart library to dynamically render data sets uploaded and stored in a Postgres database.
-- Users can leave also notes appended to a chart for others to see.
+- Users can also leave notes appended to a chart for others to see.
 
 ![Screen Shot 2021-07-16 at 7 25 12 PM 2](https://user-images.githubusercontent.com/51707305/126017594-f23bd641-9a74-4228-9562-092b4235a258.png)
 ### Uploading charts
@@ -45,7 +45,7 @@ Hammerhead is a web application built to provide a platform for uploading, shari
 
 ![Screen Shot 2021-07-16 at 7 25 31 PM 2](https://user-images.githubusercontent.com/51707305/126017577-51992360-428c-4b80-9fd9-eb12386a01d8.png)
 ### Managing Access
-- This section is only visible to admins, and allows the creation and modification of both teams and employees.
+- This section is only visible to admins, and allows the creation and modification of teams and employees.
 - Even though non-admins should never be able to see this page, there is an extra check behind the scenes in the server for every interaction allowed on this page to make sure the user has admin access before making any changes.
 
 ![Screen Shot 2021-07-16 at 7 25 20 PM 2](https://user-images.githubusercontent.com/51707305/126017565-fd4ce792-9e5d-4fb9-9aa0-91440a8a3526.png)
